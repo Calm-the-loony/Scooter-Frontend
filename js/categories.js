@@ -59,7 +59,6 @@ function toggleFavorite(button) {
 }
 
 
-//шапка
 
 //шапка
 let prevScrollPos = window.pageYOffset;
@@ -589,12 +588,18 @@ function showModal() {
     window.location.href = 'tel:+9614277510';
   }
   
+  
 
-//карточка
-
+// Обработка кликов на карточках товаров
 document.addEventListener("DOMContentLoaded", function() {
     document.querySelectorAll('.product-card').forEach(card => {
-        card.addEventListener('click', function() {
+        card.addEventListener('click', function(event) {
+            // Проверяем, если клик был по кнопке добавления в корзину или избранное
+            if (event.target.closest('.add-to-favorites') || event.target.closest('.add-to-cart')) {
+                return; // Не открываем карточку
+            }
+
+            // Создаем объект с информацией о товаре
             const product = {
                 image: this.querySelector('img').src,
                 name: this.querySelector('.name').innerText || "Название не указано",
@@ -608,15 +613,23 @@ document.addEventListener("DOMContentLoaded", function() {
                 additional: (this.querySelector('.product-info .extra')?.innerText.split(': ')[1]) || "Доп. комплект не указан",
                 description: (this.querySelector('.product-info .description')?.innerText.split(': ')[1]) || null // Получаем описание
             };
+
+            // Сохраняем информацию о товаре в localStorage
             localStorage.setItem('selectedProduct', JSON.stringify(product));
+
+            // Перенаправляем на страницу товара
             window.location.href = 'product.html';
         });
     });
 });
 
+// Обработка страницы товара
 document.addEventListener("DOMContentLoaded", function() {
+    // Получаем информацию о товаре из localStorage
     const product = JSON.parse(localStorage.getItem('selectedProduct'));
+
     if (product) {
+        // Заполняем информацию на странице товара
         document.getElementById('product-image').src = product.image || "";
         document.getElementById('product-name').innerText = product.name || "Без названия";
         document.getElementById('product-price').innerText = product.price || "Цена не указана";
@@ -668,7 +681,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
-
 //в наличии
 document.querySelectorAll('.product-card').forEach(function(card) {
     let stockBar = card.querySelector('.stock-bar');
@@ -683,51 +695,75 @@ document.querySelectorAll('.product-card').forEach(function(card) {
 });
 
 
-// document.addEventListener("DOMContentLoaded", function() {
-//     getUserCity();
-//   });
-  
-//   function getUserCity() {
-//     fetch('http://ip-api.com/json/?lang=ru')
-//       .then(response => response.json())
-//       .then(data => {
-//         const city = data.city || "Неизвестно";
-//         document.getElementById("city-name").textContent = city;
-//       })
-//       .catch(error => {
-//         console.error("Ошибка получения города:", error);
-//         document.getElementById("city-name").textContent = "Неизвестно";
-//       });
-//   }
-  
-//   function openCityModal() {
-//     document.getElementById("city-modal").style.display = "block";
-//   }
-  
-//   function closeCityModal() {
-//     document.getElementById("city-modal").style.display = "none";
-//   }
-  
-//   function filterCities() {
-//     const filter = document.getElementById("city-input").value.toLowerCase();
-//     const cityList = document.getElementById("city-list");
-//     const li = cityList.getElementsByTagName("li");
-  
-//     for (let i = 0; i < li.length; i++) {
-//       const txtValue = li[i].textContent || li[i].innerText;
-//       li[i].style.display = txtValue.toLowerCase().includes(filter) ? "" : "none";
-//     }
-//   }
-  
-//   function selectCity(city) {
-//     document.getElementById("city-name").textContent = city;
-//     closeCityModal();
-//   }
-  
-//   function enterCityManually() {
-//     const manualCity = prompt("Введите название вашего города:");
-//     if (manualCity) {
-//       selectCity(manualCity);
-//     }
-//   }
-  
+
+// Фильтры
+function filterProducts() {
+    const minPrice = parseFloat(document.getElementById('price-filter-min').value) || 0;
+    const maxPrice = parseFloat(document.getElementById('price-filter-max').value) || Infinity;
+
+    // Получаем все карточки товаров
+    const productCards = document.querySelectorAll('.product-card');
+
+    productCards.forEach(card => {
+        const priceText = card.querySelector('.original-prices').innerText.replace('₽', '').trim();
+        const price = parseFloat(priceText) || 0;
+
+        if (price >= minPrice && price <= maxPrice) {
+            card.style.display = 'block'; // Показываем карточку
+        } else {
+            card.style.display = 'none'; // Скрываем карточку
+        }
+    });
+}
+
+// Функция сброса фильтрации по цене
+function resetPriceFilter() {
+    document.getElementById('price-filter-min').value = '';
+    document.getElementById('price-filter-max').value = '';
+    filterProducts(); // Применяем фильтр после сброса
+}
+
+// Функция сортировки товаров
+function sortProducts() {
+    const sortOption = document.getElementById('sorting').value;
+    const container = document.getElementById('cards-container');
+    const productCards = Array.from(container.querySelectorAll('.product-card'));
+
+    // Проверка наличия элементов
+    if (!container) {
+        console.error('Контейнер для карточек товаров не найден.');
+        return;
+    }
+
+    // Сортируем карточки в зависимости от выбранного критерия
+    productCards.sort((a, b) => {
+        const priceA = parseFloat(a.querySelector('.original-prices').innerText.replace('₽', '').trim()) || 0;
+        const priceB = parseFloat(b.querySelector('.original-prices').innerText.replace('₽', '').trim()) || 0;
+        const availabilityA = a.dataset.stock || 0;
+        const availabilityB = b.dataset.stock || 0;
+
+        switch (sortOption) {
+            case 'price-asc':
+                return priceA - priceB; // По возрастанию
+            case 'price-desc':
+                return priceB - priceA; // По убыванию
+            case 'availability':
+                return availabilityB - availabilityA; // По наличию
+            default:
+                return 0; // По умолчанию
+        }
+    });
+
+    // Удаляем все карточки из контейнера
+    container.innerHTML = '';
+
+    // Добавляем карточки обратно в контейнер в отсортированном порядке
+    productCards.forEach(card => container.appendChild(card));
+}
+
+// Инициализация обработчиков событий при загрузке страницы
+document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById('sorting').addEventListener('change', sortProducts);
+    document.querySelector('button[onclick="filterProducts()"]').addEventListener('click', filterProducts);
+    document.querySelector('button[onclick="resetPriceFilter()"]').addEventListener('click', resetPriceFilter);
+});

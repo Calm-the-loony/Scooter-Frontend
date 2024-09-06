@@ -132,6 +132,7 @@
     </div>
   </div>
 
+
   <div id="scooter-modal" class="modal">
     <div class="modal-contents">
         <span class="close" id="scooter-modal-close">&times;</span>
@@ -174,65 +175,59 @@
 
 
 <script>
-function setupScooterModal() {
-  const scooterButton = document.getElementById('scooter-button');
-  const scooterModal = document.getElementById('scooter-modal');
-  const scooterModalClose = document.getElementById('scooter-modal-close');
-  const addScooterButton = document.getElementById('add-scooter');
-  const loginButton = document.getElementById('login-button');
-
-  scooterButton.addEventListener('click', () => {
-    scooterModal.style.display = 'block';
-  });
-
-  scooterModalClose.addEventListener('click', () => {
-    scooterModal.style.display = 'none';
-  });
-
-  window.addEventListener('click', (event) => {
-    if (event.target === scooterModal) {
-      scooterModal.style.display = 'none';
+    function setupScooterModal() {
+      const scooterButton = document.getElementById('scooter-button');
+      const scooterModal = document.getElementById('scooter-modal');
+      const scooterModalClose = document.getElementById('scooter-modal-close');
+      const addScooterButton = document.getElementById('add-scooter');
+      const loginButton = document.getElementById('login-button');
+    
+      // Открываем модальное окно при клике на кнопку "Добавить скутер"
+      scooterButton.addEventListener('click', () => {
+        scooterModal.style.display = 'block';
+      });
+    
+      // Закрываем модальное окно при клике на крестик
+      scooterModalClose.addEventListener('click', () => {
+        scooterModal.style.display = 'none';
+      });
+    
+      // Закрываем модальное окно при клике вне его области
+      window.addEventListener('click', (event) => {
+        if (event.target === scooterModal) {
+          scooterModal.style.display = 'none';
+        }
+      });
+    
+      // Обработчик для добавления скутера
+      addScooterButton.addEventListener('click', () => {
+        const type = document.getElementById('scooter-type').value;
+        const manufacturer = document.getElementById('scooter-manufacturer').value;
+        const model = document.getElementById('scooter-model').value;
+    
+        // Обновляем данные на странице
+        document.getElementById('scooter-type-display').textContent = `Тип: ${type}`;
+        document.getElementById('scooter-manufacturer-display').textContent = `Производитель: ${manufacturer}`;
+        document.getElementById('scooter-model-display').textContent = `Модель: ${model}`;
+        document.getElementById('scooter-image').src = `image/scooter_${type}_${manufacturer}_${model}.png`;
+    
+        // Отображаем блок scooter-details
+        document.getElementById('scooter-details').style.display = 'block';
+    
+        // Закрываем модальное окно
+        scooterModal.style.display = 'none';
+      });
+    
+      // Обработчик для кнопки логина
+      loginButton.addEventListener('click', () => {
+        alert('Перенаправление на страницу авторизации');
+      });
     }
-  });
-
-  addScooterButton.addEventListener('click', () => {
-    const type = document.getElementById('scooter-type').value;
-    const manufacturer = document.getElementById('scooter-manufacturer').value;
-    const model = document.getElementById('scooter-model').value;
-    alert(`Добавлен скутер: Тип - ${type}, Производитель - ${manufacturer}, Модель - ${model}`);
-    scooterModal.style.display = 'none';
-  });
-
-  loginButton.addEventListener('click', () => {
-    // Перенаправление на страницу авторизации или открытие модального окна авторизации
-    alert('Перенаправление на страницу авторизации');
-  });
-}
-
-// Вызываем функцию setupScooterModal после загрузки контента страницы
-document.addEventListener('DOMContentLoaded', setupScooterModal);
-
-addScooterButton.addEventListener('click', () => {
-  const type = document.getElementById('scooter-type').value;
-  const manufacturer = document.getElementById('scooter-manufacturer').value;
-  const model = document.getElementById('scooter-model').value;
-
-  // Обновляем данные в блоке scooter-details
-  document.getElementById('scooter-type-display').textContent = `Тип: ${type}`;
-  document.getElementById('scooter-manufacturer-display').textContent = `Производитель: ${manufacturer}`;
-  document.getElementById('scooter-model-display').textContent = `Модель: ${model}`;
-  document.getElementById('scooter-image').src = `image/scooter_${type}_${manufacturer}_${model}.png`;
-
-  // Отображаем блок scooter-details
-  document.getElementById('scooter-details').style.display = 'block';
-
-  // Закрываем модальное окно
-  scooterModal.style.display = 'none';
-});
-
-
-</script>
-
+    
+    // Вызываем функцию setupScooterModal после загрузки контента страницы
+    document.addEventListener('DOMContentLoaded', setupScooterModal);
+    </script>
+    
 
 
 <section class="parts-search">
@@ -858,22 +853,21 @@ addScooterButton.addEventListener('click', () => {
   <section class="dual-banner-container">
     <div class="dual-banner">
       <div class="dual-banner-item">
-        <a href="https://www.ozon.ru/seller/scooter24-462340/products/?miniapp=seller_462340">
-          <img src="image/шапка-мп-14.png" alt="Banner 1">
+          <img src="image/banner3-1.png" alt="Banner 3">
           <div class="dual-banner-text">
-            <p class="dual-banner-title">Оформить заказ</p>
-            <p>на площадке Ozon</p>
-            <p class="dual-banner-description">Жми <span class="arrow">→</span></p>
+            <p class="dual-banner-title">Позвоните нам</p>
+            <p>И мы поможем подобрать</p>
+            <p>комплект для ремонта</p>
+            <p>для всех клиентов</p>
           </div>
         </a>
       </div>
       <div class="dual-banner-item">
-        <a href="https://market.yandex.ru/business--scooter-24/35256421">
-          <img src="image/шапка-мп-13.png" alt="Banner 2">
+          <img src="image/banner4-1.png" alt="Banner 4">
           <div class="dual-banner-text">
-            <p class="dual-banner-title">Оформить заказ</p>
-            <p>на площадке Я.Маркет</p>
-            <p class="dual-banner-description">Жми <span class="arrow">→</span></p>
+            <p class="dual-banner-title">Напишите нам</p>
+            <p>мы подберем вам запчасти</p>
+            <p>и решим ваши проблемы</p>
           </div>
         </a>
       </div>

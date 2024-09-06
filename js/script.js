@@ -517,8 +517,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-//Пример JavaScript для доступа к данным карточки:
-
+// Обработка клика по карточке товара
 document.querySelectorAll('.product-card').forEach(function(card) {
     card.addEventListener('click', function() {
         let category = card.getAttribute('data-category');
@@ -539,18 +538,24 @@ document.querySelectorAll('.product-card').forEach(function(card) {
     });
 });
 
-//в наличии
+// Добавление элемента 'В наличии' после .stock-bar
 document.querySelectorAll('.product-card').forEach(function(card) {
     let stockBar = card.querySelector('.stock-bar');
 
-    // Создаем элемент .stock-label
-    let stockLabel = document.createElement('div');
-    stockLabel.className = 'stock-label';
-    stockLabel.textContent = 'В наличии';
+    // Проверяем, существует ли .stock-bar в карточке
+    if (stockBar) {
+        // Создаем элемент .stock-label
+        let stockLabel = document.createElement('div');
+        stockLabel.className = 'stock-label';
+        stockLabel.textContent = 'В наличии';
 
-    // Вставляем .stock-label сразу после .stock-bar
-    stockBar.insertAdjacentElement('afterend', stockLabel);
+        // Вставляем .stock-label сразу после .stock-bar
+        stockBar.insertAdjacentElement('afterend', stockLabel);
+    } else {
+        console.warn('Элемент .stock-bar не найден в одной из карточек');
+    }
 });
+
 
 
 // //геолокация
