@@ -1,0 +1,938 @@
+p<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Двигатель</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.css"/>
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick-theme.css"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap">
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.min.js"></script>
+</head>
+<body onscroll="scrollHandler(event)">
+  
+    <header class="header" id="header">
+        <div id="parallelogram">
+          <img src="image/Дизайн.png" alt="Логотип" class="logo-image">
+        </div>
+      
+        <div class="menu-icon" onclick="toggleMenu()" id="menu-toggle-button">&#9776;</div> 
+        <div class="action-container"> 
+          <div class="search-bar">
+            <input type="text" id="text-to-find" placeholder="Поиск...">
+            <img src="image/free-icon-loupe-2482343.png" class="search-icon" onclick="FindOnPage('text-to-find')" alt="Поиск">
+          </div>
+            
+          <div class="user-actions">
+            <button id="favorite-button">
+              <img src="image/favorite.png" alt="Избранное">
+            </button>
+            <button id="scooter-button"><img src="image/scooter.png" alt="Модель скутера"></button>
+            <button id="cart-button">
+              <img src="image/cart.png" alt="Корзина">
+              <span id="cart-count">0</span>
+            </button>
+            <button id="account-button"><img src="image/free-icon-user-2603906.png" alt="Личный кабинет"></button>
+          </div>
+        </div>
+      
+        <div id="location-container">
+          <span id="current-city" class="location-text">Ваш город: <span id="city-name">...</span></span>
+          <button id="change-city-button" onclick="openCityModal()">Сменить</button>
+        </div>
+        
+        <div class="submenu">
+          <ul>
+            <li><a href="Salesroom.html">Самовывоз</a></li>
+            <li><a onclick="showModal()">Контакты</a></li>
+            <li><a href="delivery.html">Доставка</a></li>
+            <li><a href="#">Запчасти</a></li>
+            <li><a href="accessories.html">Расходники</a></li>
+          </ul>
+        </div>
+      
+        <div class="contact-number">
+          <a href="tel:+1234567890">+7(973)345-53-14</a>
+        </div>
+      </header>
+      
+
+ <!-- Модальное окно для выбора города -->
+ <div id="city-modal" class="city-modal">
+    <div class="city-modal-content">
+      <span class="close" onclick="closeCityModal()">&times;</span>
+      <h2>Выберите ваш город</h2>
+      <input type="text" id="city-input" placeholder="Введите название города" oninput="filterCities()">
+      <ul id="city-list">
+        <li onclick="selectCity('Москва')">Москва</li>
+        <li onclick="selectCity('Санкт-Петербург')">Санкт-Петербург</li>
+        <li onclick="selectCity('Новосибирск')">Новосибирск</li>
+        <li onclick="selectCity('Екатеринбург')">Екатеринбург</li>
+        <li onclick="selectCity('Казань')">Казань</li>
+        <li onclick="selectCity('Нижний Новгород')">Нижний Новгород</li>
+        <li onclick="selectCity('Челябинск')">Челябинск</li>
+        <li onclick="selectCity('Самара')">Самара</li>
+        <li onclick="selectCity('Ростов-на-Дону')">Ростов-на-Дону</li>
+        <li onclick="selectCity('Уфа')">Уфа</li>
+        <li onclick="selectCity('Красноярск')">Красноярск</li>
+        <li onclick="selectCity('Воронеж')">Воронеж</li>
+        <li onclick="selectCity('Пермь')">Пермь</li>
+        <li onclick="selectCity('Волгоград')">Волгоград</li>
+      </ul>
+      <button id="manual-city-button" onclick="enterCityManually()">Ввести город вручную</button>
+    </div>
+  </div>
+  
+    <div id="favorites-modal" class="modal">
+        <div class="modal-contents">
+          <span class="close" id="favorites-close">&times;</span>
+          <h2>Избранное</h2>
+          <table id="favorite-list">
+            <thead>
+              <tr>
+                <th>Изображение</th>
+                <th>Название товара</th>
+                <th>Цена за штуку</th>
+                <th>Наличие на складе</th>
+                <th>Действия</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    
+      <div id="cart-modal" class="modal">
+          <div class="modal-contents">
+            <span class="close" onclick="toggleCartModal()">&times;</span>
+            <h2>Корзина</h2>
+            <table id="cart-list">
+              <thead>
+                <tr>
+                  <th>Изображение</th>
+                  <th>Название</th>
+                  <th>Цена</th>
+                  <th>Количество</th>
+                  <th>Действия</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+            <div class="cart-total">
+              <p>Итого: <span id="total-price">0.00 ₽</span></p>
+              <button class="buy-button" onclick="buyItems()">Купить</button>
+            </div>
+          </div>
+        </div>
+    
+        <div id="scooter-modal" class="modal">
+          <div class="modal-contents">
+              <span class="close" id="scooter-modal-close">&times;</span>
+              <h2>Выберите модель скутера</h2>
+              <form id="scooter-form">
+                  <label for="scooter-type">Тип скутера:</label>
+                  <select id="scooter-type">
+                      <option value="electric">Электрический</option>
+                      <option value="gas">Бензиновый</option>
+                  </select>
+                  <br>
+                  <label for="scooter-manufacturer">Производитель:</label>
+                  <select id="scooter-manufacturer">
+                      <option value="yamaha">Yamaha</option>
+                      <option value="honda">Honda</option>
+                      <option value="vespa">Vespa</option>
+                  </select>
+                  <br>
+                  <label for="scooter-model">Модель:</label>
+                  <select id="scooter-model">
+                      <option value="model1">Модель 1</option>
+                      <option value="model2">Модель 2</option>
+                      <option value="model3">Модель 3</option>
+                  </select>
+                  <br>
+                  <button type="button" id="add-scooter">Добавить</button>
+              </form>
+              <div id="scooter-details" style="display: none;">
+                  <h3>Выбранная модель скутера:</h3>
+                  <p id="scooter-type-display"></p>
+                  <p id="scooter-manufacturer-display"></p>
+                  <p id="scooter-model-display"></p>
+                  <img id="scooter-image" src="image/scooter.png" alt="Фото скутера">
+              </div>
+              <p>Имея учетную запись клиента, вы можете навсегда сохранить несколько автомобилей и изменить их в любое время.</p>
+              <button id="login-button">Авторизация</button>
+          </div>
+      </div>    
+
+      <script>
+        function setupScooterModal() {
+            const scooterButton = document.getElementById('scooter-button');
+            const scooterModal = document.getElementById('scooter-modal');
+            const scooterModalClose = document.getElementById('scooter-modal-close');
+            const addScooterButton = document.getElementById('add-scooter');
+            const loginButton = document.getElementById('login-button');
+          
+            scooterButton.addEventListener('click', () => {
+              scooterModal.style.display = 'block';
+            });
+          
+            scooterModalClose.addEventListener('click', () => {
+              scooterModal.style.display = 'none';
+            });
+          
+            window.addEventListener('click', (event) => {
+              if (event.target === scooterModal) {
+                scooterModal.style.display = 'none';
+              }
+            });
+          
+            addScooterButton.addEventListener('click', () => {
+              const type = document.getElementById('scooter-type').value;
+              const manufacturer = document.getElementById('scooter-manufacturer').value;
+              const model = document.getElementById('scooter-model').value;
+              alert(`Добавлен скутер: Тип - ${type}, Производитель - ${manufacturer}, Модель - ${model}`);
+              scooterModal.style.display = 'none';
+            });
+          
+            loginButton.addEventListener('click', () => {
+              // Перенаправление на страницу авторизации или открытие модального окна авторизации
+              alert('Перенаправление на страницу авторизации');
+            });
+          }
+          
+          // Вызываем функцию setupScooterModal после загрузки контента страницы
+          document.addEventListener('DOMContentLoaded', setupScooterModal);
+          
+          addScooterButton.addEventListener('click', () => {
+            const type = document.getElementById('scooter-type').value;
+            const manufacturer = document.getElementById('scooter-manufacturer').value;
+            const model = document.getElementById('scooter-model').value;
+        
+            // Обновляем данные в блоке scooter-details
+            document.getElementById('scooter-type-display').textContent = `Тип: ${type}`;
+            document.getElementById('scooter-manufacturer-display').textContent = `Производитель: ${manufacturer}`;
+            document.getElementById('scooter-model-display').textContent = `Модель: ${model}`;
+            document.getElementById('scooter-image').src = `image/scooter_${type}_${manufacturer}_${model}.png`;
+        
+            // Отображаем блок scooter-details
+            document.getElementById('scooter-details').style.display = 'block';
+        
+            // Закрываем модальное окно
+            scooterModal.style.display = 'none';
+        });
+          </script>
+          
+
+          <main class="containers">
+            <aside class="sidebar">
+                <nav class="categories-nav">
+                    <h2>Категории</h2>
+                    <ul>
+                      <li><a href="engine.html">Двигатель</a></li>
+                      <li><a href="suspension.html">Подвеска</a></li>
+                      <li><a href="fuel-system.html">Топливная система</a></li>
+                      <li><a href="brake-system.html">Тормозная система</a></li>
+                      <li><a href="transmission.html">Трансмиссия</a></li>
+                      <li><a href="electrics.html">Электрика</a></li>
+                      <li><a href="gaskets-seals.html">Прокладки и сальники</a></li>
+                      <li><a href="mufflers.html">Глушители</a></li>
+                      <li><a href="accessories.html">Расходники</a></li>
+                      <li><a href="tuning.html">Тюнинг</a></li>
+                      <li><a href="body-parts.html">Кузовные элементы</a></li>
+                      <li><a href="uncategorized.html">Разное</a></li>
+                  </ul>
+                </nav>
+                <div class="filter-container">
+                  <h2>Фильтры</h2>
+                  <div class="filter">
+                      <label for="price-filter">Цена:</label>
+                      <input type="number" id="price-filter-min" placeholder="Мин">
+                      <input type="number" id="price-filter-max" placeholder="Макс">
+                      <button onclick="filterProducts()">Фильтровать</button>
+                      <button onclick="resetPriceFilter()">Сбросить цену</button>
+                  </div>
+                  <div class="filter">
+                      <label for="sorting">Сортировать по:</label>
+                      <select id="sorting" onchange="sortProducts()">
+                          <option value="default">По умолчанию</option>
+                          <option value="price-asc">Цена: по возрастанию</option>
+                          <option value="price-desc">Цена: по убыванию</option>
+                          <option value="availability">Наличие на складе</option>
+                      </select>
+                  </div>
+              </div>
+            </aside>
+            <section class="main-content">
+                <div class="breadcrumbs">
+                    <a href="index.html">Главная</a> &raquo; <span>Двигатель</span>
+                </div>
+                <h2>Двигатель</h2>
+                <hr class="dashed-line">
+                <!-- <div class="sorting">
+                    <label for="sort">Сортировка:</label>
+                    <select id="sort" name="sort" onchange="sortProducts()">
+                        <option value="default">Исходная сортировка</option>
+                        <option value="popularity">По популярности</option>
+                        <option value="price-asc">По возрастанию цены</option>
+                        <option value="price-desc">По убыванию цены</option>
+                    </select>
+                </div> -->
+                <section class="cards-container" id="cards-container">
+                  <div class="product-card" data-id="1" data-stock="23">
+                    <img src="image/product/171_engine.jpg" alt="Коленвал на китайский скутер 125/150 кубов">
+                    <div class="details">
+                        <p class="category">Двигатель</p>
+                        <p class="name ellipsis">Коленвал на китайский скутер 125/150 кубов (152QMI/157QMJ) 150cc</p>
+                        <div class="price">
+                            <div class="original-price-wrapper no-discount">
+                                <span class="original-prices">2521,00 ₽</span>
+                            </div>
+                            <button class="add-to-cart" onclick="toggleCart(this)"><i class="fas fa-shopping-cart"></i></button>
+                            <div class="stock-bar" title="В наличии много"></div>
+                        </div>
+                        <button class="add-to-favorites" onclick="toggleFavorite(this)"><i class="fas fa-heart"></i></button>
+                    </div>
+                    <div class="product-info" style="display: none;">
+                        <p class="article">Артикул: SCOT1267234561302</p>
+                        <p class="extra">>Доп. комплект: Плотная упаковка, Запчасть на скутер</p>
+                        <p class="weight">Вес: 1 kg</p> <!-- Добавляем блок для веса -->
+                        <p class="dimensions">Габариты: 10 × 20 × 10 cm</p>
+                        <p class="tags">Метки: 1 год</p>
+                    </div>
+                </div>
+                
+                <div class="product-card" data-id="2" data-stock="23">
+                    <img src="image/product/172_engine2.jpg" alt="Коленвал на китайский скутер 50 кубов">
+                    <div class="details">
+                        <p class="category">Двигатель</p>
+                        <p class="name ellipsis">Коленвал на китайский скутер 50 кубов (139QMB) 80cc</p>
+                        <div class="price">
+                            <div class="original-price-wrapper no-discount">
+                                <span class="original-prices">2219,00 ₽</span>
+                            </div>
+                            <button class="add-to-cart" onclick="toggleCart(this)"><i class="fas fa-shopping-cart"></i></button>
+                            <div class="stock-bar" title="В наличии много"></div>
+                        </div>
+                        <button class="add-to-favorites" onclick="toggleFavorite(this)"><i class="fas fa-heart"></i></button>
+                    </div>
+                    <div class="product-info" style="display: none;">
+                        <p class="article">Артикул: SCOT1267234561304</p>
+                        <p class="extra">>Доп. комплект: Плотная упаковка, Запчас <p class="weight">Вес: 1 kg</p> <!-- Добавляем блок для веса -->
+                        <p class="dimensions">Габариты: 10 × 20 × 10 cm</p> <p class="dimensions">Габариты: 10 × 20 × 10 cm</p>
+                        <p class="tags">Метки: 1 год</p>
+                    </div>
+                </div>
+                
+                <div class="product-card" data-id="3" data-stock="23">
+                    <img src="image/product/173_engine3.jpg" alt="Коленвал на китайский скутер Стелс / Венто">
+                    <div class="details">
+                        <p class="category">Двигатель</p>
+                        <p class="name ellipsis">Коленвал на китайский скутер Стелс / Венто 50 кубов (12 мм палец)(1e40qmb) Stels 50cc / Vento</p>
+                        <div class="price">
+                            <div class="original-price-wrapper no-discount">
+                                <span class="original-prices">2167,00 ₽</span>
+                            </div>
+                            <button class="add-to-cart" onclick="toggleCart(this)"><i class="fas fa-shopping-cart"></i></button>
+                            <div class="stock-bar" title="В наличии много"></div>
+                        </div>
+                        <button class="add-to-favorites" onclick="toggleFavorite(this)"><i class="fas fa-heart"></i></button>
+                    </div>
+                    <div class="product-info" style="display: none;">
+                        <p class="article">Артикул: SCOT1267234561304</p>
+                        <p class="extra">>Доп. комплект: Плотная упаковка, Запчасть на скутер</p>
+                        <p class="weight">Вес: 1 kg</p> <!-- Добавляем блок для веса -->
+                        <p class="dimensions">Габариты: 10 × 20 × 10 cm</p>
+                        <p class="tags">Метки: 1 год</p>
+                    </div>
+                </div>
+                
+                <div class="product-card" data-id="4" data-stock="23">
+                    <img src="image/product/174_engine4.jpg" alt="Коленвал на скутер Сузуки Адрес / Сепия">
+                    <div class="details">
+                        <p class="category">Двигатель</p>
+                        <p class="name ellipsis">Коленвал на скутер Сузуки Адрес / Сепия 50 кубов (v50g) Suzuki Address / Sepia 50cc</p>
+                        <div class="price">
+                            <div class="original-price-wrapper no-discount">
+                                <span class="original-prices">2766,00 ₽</span>
+                            </div>
+                            <button class="add-to-cart" onclick="toggleCart(this)"><i class="fas fa-shopping-cart"></i></button>
+                            <div class="stock-bar" title="В наличии много"></div>
+                        </div>
+                        <button class="add-to-favorites" onclick="toggleFavorite(this)"><i class="fas fa-heart"></i></button>
+                    </div>
+                    <div class="product-info" style="display: none;">
+                        <p class="article">Артикул: SCOT1267234561306</p>
+                        <p class="extra">>Доп. комплект: Плотная упаковка, Запчасть на скутер</p>
+                        <p class="weight">Вес: 1 kg</p> <!-- Добавляем блок для веса -->
+                        <p class="dimensions">Габариты: 10 × 20 × 10 cm</p>
+                        <p class="tags">Метки: 1 год</p>
+                    </div>
+                </div>
+                
+                <div class="product-card" data-id="5" data-stock="23">
+                  <img src="image/product/175_engine5.jpg" alt="Коленвал на скутер Сузуки Летс / Верде 50 кубов (Morini)">
+                  <div class="details">
+                      <p class="category">Двигатель</p>
+                      <p class="name ellipsis">Коленвал на скутер Сузуки Летс / Верде 50 кубов (Morini) Suzuki Lets / Verde 50cc</p>
+                      <div class="price">
+                          <div class="original-price-wrapper no-discount">
+                              <span class="original-prices">3179,00 ₽</span>
+                          </div>
+                          <button class="add-to-cart" onclick="toggleCart(this)"><i class="fas fa-shopping-cart"></i></button>
+                          <div class="stock-bar" title="В наличии много"></div>
+                      </div>
+                      <button class="add-to-favorites" onclick="toggleFavorite(this)"><i class="fas fa-heart"></i></button>
+                  </div>
+                  <div class="product-info" style="display: none;">
+                      <p class="article">Артикул: SCOT1267234561307</p>
+                      <p class="extra">>Доп. комплект: Плотная упаковка, Запчасть на скутер</p>
+                      <p class="weight">Вес: 1 kg</p>
+                      <p class="dimensions">Габариты: 10 × 20 × 10 cm</p>
+                      <p class="tags">Метки: 1 год</p>
+                  </div>
+              </div>
+              
+              <div class="product-card" data-id="6" data-stock="23">
+                  <img src="image/product/176_engine6.jpg" alt="Коленвал на скутер Хонда Дио 50 кубов (32.5мм)">
+                  <div class="details">
+                      <p class="category">Двигатель</p>
+                      <p class="name ellipsis">Коленвал на скутер Хонда Дио 50 кубов (32.5мм)(Af-34/35) Honda Dio ZX 50cc</p>
+                      <div class="price">
+                          <div class="original-price-wrapper no-discount">
+                              <span class="original-prices">3118,00 ₽</span>
+                          </div>
+                          <button class="add-to-cart" onclick="toggleCart(this)"><i class="fas fa-shopping-cart"></i></button>
+                          <div class="stock-bar" title="В наличии много"></div>
+                      </div>
+                      <button class="add-to-favorites" onclick="toggleFavorite(this)"><i class="fas fa-heart"></i></button>
+                  </div>
+                  <div class="product-info" style="display: none;">
+                      <p class="article">Артикул: SCOT1267234561308</p>
+                      <p class="extra">>Доп. комплект: Плотная упаковка, Запчасть на скутер</p>
+                      <p class="weight">Вес: 1 kg</p>
+                      <p class="dimensions">Габариты: 10 × 20 × 10 cm</p>
+                      <p class="tags">Метки: 1 год</p>
+                  </div>
+              </div>
+              
+              <div class="product-card" data-id="7" data-stock="23">
+                  <img src="image/product/177_engine7.jpg" alt="Коленвал на скутер Хонда Лид 90 кубов (Hf-05)">
+                  <div class="details">
+                      <p class="category">Двигатель</p>
+                      <p class="name ellipsis">Коленвал на скутер Хонда Лид 90 кубов (Hf-05) Honda Lead 90cc</p>
+                      <div class="price">
+                          <div class="original-price-wrapper no-discount">
+                              <span class="original-prices">3110,00 ₽</span>
+                          </div>
+                          <button class="add-to-cart" onclick="toggleCart(this)"><i class="fas fa-shopping-cart"></i></button>
+                          <div class="stock-bar" title="В наличии много"></div>
+                      </div>
+                      <button class="add-to-favorites" onclick="toggleFavorite(this)"><i class="fas fa-heart"></i></button>
+                  </div>
+                  <div class="product-info" style="display: none;">
+                      <p class="article">Артикул: SCOT1267234561313</p>
+                      <p class="extra">>Доп. комплект: Плотная упаковка, Запчасть на скутер</p>
+                      <p class="weight">Вес: 1 kg</p>
+                      <p class="dimensions">Габариты: 10 × 20 × 10 cm</p>
+                      <p class="tags">Метки: 1 год</п>
+                  </div>
+              </div>
+              
+              <div class="product-card" data-id="8" data-stock="23">
+                  <img src="image/product/178_engine9.jpg" alt="Коленвал на скутер Ямаха Аксис 90 кубов">
+                  <div class="details">
+                      <p class="category">Двигатель</p>
+                      <p class="name ellipsis">Коленвал на скутер Ямаха Аксис 90 кубов (Ямаха Аксис)(3WF) Yamaha Axis 90cc</p>
+                      <div class="price">
+                          <div class="original-price-wrapper no-discount">
+                              <span class="original-prices">2679,00 ₽</span>
+                          </div>
+                          <button class="add-to-cart" onclick="toggleCart(this)"><i class="fas fa-shopping-cart"></i></button>
+                          <div class="stock-bar" title="В наличии много"></div>
+                      </div>
+                      <button class="add-to-favorites" onclick="toggleFavorite(this)"><i class="fas fa-heart"></i></button>
+                  </div>
+                  <div class="product-info" style="display: none;">
+                      <p class="article">Артикул: SCOT1267234561314</p>
+                      <p class="extra">>Доп. комплект: Плотная упаковка, Запчасть на скутер</p>
+                      <p class="weight">Вес: 1 kg</п>
+                      <p class="dimensions">Габариты: 10 × 20 × 10 cm</п>
+                      <p class="tags">Метки: 1 год</п>
+                  </div>
+              </div>
+              
+              <div class="product-card" data-id="9" data-stock="23">
+                <img src="image/product/179_engine10.jpg" alt="Коленвал на скутер Ямаха Джог/Априо/Аерокс 50 кубов">
+                <div class="details">
+                    <p class="category">Двигатель</p>
+                    <p class="name ellipsis">Коленвал на скутер Ямаха Джог/Априо/Аерокс 50 кубов (3kj/5bm/Minarelli) Yamaha Jog / Aprio 50cc</p>
+                    <div class="price">
+                        <div class="original-price-wrapper no-discount">
+                            <span class="original-prices">1899,00 ₽</span>
+                        </div>
+                        <button class="add-to-cart" onclick="toggleCart(this)"><i class="fas fa-shopping-cart"></i></button>
+                        <div class="stock-bar" title="В наличии много"></div>
+                    </div>
+                    <button class="add-to-favorites" onclick="toggleFavorite(this)"><i class="fas fa-heart"></i></button>
+                </div>
+                <div class="product-info" style="display: none;">
+                    <p class="article">Артикул: SCOT1267234561315</p>
+                    <p class="extra">Плотная упаковка, Запчасть на скутер</p>
+                    <p class="weight">Вес: 1 kg</p> <!-- Добавляем блок для веса -->
+                    <p class="dimensions">Габариты: 10 × 20 × 10 cm</p>
+                    <p class="tags">Метки: 1 год</p>
+                </div>
+            </div>
+            
+            <div class="product-card" data-id="10" data-stock="23">
+                <img src="image/product/180_engine11.jpg" alt="Набор прокладок на китайский скутер 50 кубов (139QMB) 100 кубов">
+                <div class="details">
+                    <p class="category">Двигатель</p>
+                    <p class="name ellipsis">Набор прокладок на китайский скутер 50 кубов (139QMB) 100 кубов (100cc)</p>
+                    <div class="price">
+                        <div class="original-price-wrapper no-discount">
+                            <span class="original-prices">398,00 ₽</span>
+                        </div>
+                        <button class="add-to-cart" onclick="toggleCart(this)"><i class="fas fa-shopping-cart"></i></button>
+                        <div class="stock-bar" title="В наличии много"></div>
+                    </div>
+                    <button class="add-to-favorites" onclick="toggleFavorite(this)"><i class="fas fa-heart"></i></button>
+                </div>
+                <div class="product-info" style="display: none;">
+                    <p class="article">Артикул: SCOT1267234561316</p>
+                    <p class="extra">>Доп. комплект: Плотная упаковка, Запчасть на скутер</p>
+                    <p class="dimensions">Габариты: 20 × 10 cm</p>
+                    <p class="tags">Метки: 1 год</p>
+                </div>
+            </div>
+            
+            <div class="product-card" data-id="11" data-stock="23">
+                <img src="image/product/181_engine12.jpg" alt="Набор прокладок на китайский скутер 50 кубов (139QMB) 80 кубов">
+                <div class="details">
+                    <p class="category">Двигатель</p>
+                    <p class="name ellipsis">Набор прокладок на китайский скутер 50 кубов (139QMB) 80 кубов (80cc)</p>
+                    <div class="price">
+                        <div class="original-price-wrapper no-discount">
+                            <span class="original-prices">398,00 ₽</span>
+                        </div>
+                        <button class="add-to-cart" onclick="toggleCart(this)"><i class="fas fa-shopping-cart"></i></button>
+                        <div class="stock-bar" title="В наличии много"></div>
+                    </div>
+                    <button class="add-to-favorites" onclick="toggleFavorite(this)"><i class="fas fa-heart"></i></button>
+                </div>
+                <div class="product-info" style="display: none;">
+                    <p class="article">Артикул: SCOT1267234561317</p>
+                    <p class="extra">>Доп. комплект: Плотная упаковка, Запчасть на скутер</p>
+                    <p class="dimensions">Габариты: 20 × 10 cm</p>
+                    <p class="tags">Метки: 1 год</p>
+                </div>
+            </div>
+            
+            <div class="product-card" data-id="12" data-stock="22">
+                <img src="image/product/182_engine13.jpg" alt="Набор прокладок на скутер Сузуки Адрес 100 кубов (V100)">
+                <div class="details">
+                    <p class="category">Двигатель</p>
+                    <p class="name ellipsis">Набор прокладок на скутер Сузуки Адрес 100 кубов (V100) Suzuki Address 100cc</p>
+                    <div class="price">
+                        <div class="original-price-wrapper no-discount">
+                            <span class="original-prices">419,00 ₽</span>
+                        </div>
+                        <button class="add-to-cart" onclick="toggleCart(this)"><i class="fas fa-shopping-cart"></i></button>
+                        <div class="stock-bar" title="В наличии много"></div>
+                    </div>
+                    <button class="add-to-favorites" onclick="toggleFavorite(this)"><i class="fas fa-heart"></i></button>
+                </div>
+                <div class="product-info" style="display: none;">
+                    <p class="article">Артикул: SCOT1267234561318</p>
+                    <p class="extra">>Доп. комплект: Плотная упаковка, Запчасть на скутер</p>
+                    <p class="dimensions">Габариты: 20 × 10 cm</p>
+                    <p class="tags">Метки: 1 год</p>
+                </div>
+            </div>
+            
+            <div class="product-card" data-id="13" data-stock="23">
+              <img src="image/product/183_engine14.jpg" alt="Набор прокладок на скутер Хонда Дио / Такт 50 кубов (Af-18/27/31/51)">
+              <div class="details">
+                  <p class="category">Двигатель</p>
+                  <p class="name ellipsis">Набор прокладок на скутер Хонда Дио / Такт 50 кубов (Af-18/27/31/51) Honda Dio / Tact 50cc</p>
+                  <div class="price">
+                      <div class="original-price-wrapper no-discount">
+                          <span class="original-prices">398,00 ₽</span>
+                      </div>
+                      <button class="add-to-cart" onclick="toggleCart(this)"><i class="fas fa-shopping-cart"></i></button>
+                      <div class="stock-bar" title="В наличии много"></div>
+                  </div>
+                  <button class="add-to-favorites" onclick="toggleFavorite(this)"><i class="fas fa-heart"></i></button>
+              </div>
+              <div class="product-info" style="display: none;">
+                  <p class="article">Артикул: SCOT1267234561321</p>
+                  <p class="extra">Доп. комплект: Плотная упаковка, Запчасть на скутер</p>
+                  <p class="dimensions">Габариты: 20 × 10 cm</p>
+                  <p class="tags">Метки: 1 год</p>
+              </div>
+          </div>
+          
+          <div class="product-card" data-id="14" data-stock="23">
+              <img src="image/product/184_engine15.jpg" alt="Набор прокладок на скутер Хонда Лид 90 кубов (Hf-05)">
+              <div class="details">
+                  <p class="category">Двигатель</p>
+                  <p class="name ellipsis">Набор прокладок на скутер Хонда Лид 90 кубов (Hf-05) Honda Lead 90cc</p>
+                  <div class="price">
+                      <div class="original-price-wrapper no-discount">
+                          <span class="original-prices">429,00 ₽</span>
+                      </div>
+                      <button class="add-to-cart" onclick="toggleCart(this)"><i class="fas fa-shopping-cart"></i></button>
+                      <div class="stock-bar" title="В наличии много"></div>
+                  </div>
+                  <button class="add-to-favorites" onclick="toggleFavorite(this)"><i class="fas fa-heart"></i></button>
+              </div>
+              <div class="product-info" style="display: none;">
+                  <p class="article">Артикул: SCOT1267234561322</p>
+                  <p class="extra">Доп. комплект: Плотная упаковка, Запчасть на скутер</p>
+                  <p class="dimensions">Габариты: 20 × 10 cm</p>
+                  <p class="tags">Метки: 1 год</p>
+              </div>
+          </div>
+          
+          <div class="product-card" data-id="15" data-stock="23">
+              <img src="image/product/185_engine16.jpg" alt="Набор прокладок на скутер Хонда Такт 50 кубов (Af-16)">
+              <div class="details">
+                  <p class="category">Двигатель</p>
+                  <p class="name ellipsis">Набор прокладок на скутер Хонда Такт 50 кубов (Af-16) Honda Tact 50cc</p>
+                  <div class="price">
+                      <div class="original-price-wrapper no-discount">
+                          <span class="original-prices">398,00 ₽</span>
+                      </div>
+                      <button class="add-to-cart" onclick="toggleCart(this)"><i class="fas fa-shopping-cart"></i></button>
+                      <div class="stock-bar" title="В наличии много"></div>
+                  </div>
+                  <button class="add-to-favorites" onclick="toggleFavorite(this)"><i class="fas fa-heart"></i></button>
+              </div>
+              <div class="product-info" style="display: none;">
+                  <p class="article">Артикул: SCOT1267234561323</p>
+                  <p class="extra">Доп. комплект: Плотная упаковка, Запчасть на скутер</p>
+                  <p class="dimensions">Габариты: 20 × 10 cm</p>
+                  <p class="tags">Метки: 1 год</p>
+              </div>
+          </div>
+          
+          <div class="product-card" data-id="16" data-stock="20">
+              <img src="image/product/186_engine17.jpg" alt="Набор прокладок на скутер Ямаха Бвс / Гранд Аксис 100 кубов (4VP)">
+              <div class="details">
+                  <p class="category">Двигатель</p>
+                  <p class="name ellipsis">Набор прокладок на скутер Ямаха Бвс / Гранд Аксис 100 кубов (4VP) Yamaha BWS / Grand Axis 100cc</p>
+                  <div class="price">
+                      <div class="original-price-wrapper no-discount">
+                          <span class="original-prices">449,00 ₽</span>
+                      </div>
+                      <button class="add-to-cart" onclick="toggleCart(this)"><i class="fas fa-shopping-cart"></i></button>
+                      <div class="stock-bar" title="В наличии много"></div>
+                  </div>
+                  <button class="add-to-favorites" onclick="toggleFavorite(this)"><i class="fas fa-heart"></i></button>
+              </div>
+              <div class="product-info" style="display: none;">
+                  <p class="article">Артикул: SCOT1267234561324</p>
+                  <p class="extra">Доп. комплект: Плотная упаковка, Запчасть на скутер</p>
+                  <p class="dimensions">Габариты: 20 × 10 cm</p>
+                  <p class="tags">Метки: 1 год</p>
+              </div>
+          </div>
+          
+          <div class="product-card" data-id="17" data-stock="23">
+              <img src="image/product/187_engine18.jpg" alt="Набор сальников на китайский скутер 50 кубов (139QMB)">
+              <div class="details">
+                  <p class="category">Двигатель</p>
+                  <p class="name ellipsis">Набор сальников на китайский скутер 50 кубов (139QMB) 50/80/100 кубов</p>
+                  <div class="price">
+                      <div class="original-price-wrapper no-discount">
+                          <span class="original-prices">398,00 ₽</span>
+                      </div>
+                      <button class="add-to-cart" onclick="toggleCart(this)"><i class="fas fa-shopping-cart"></i></button>
+                      <div class="stock-bar" title="В наличии много"></div>
+                  </div>
+                  <button class="add-to-favorites" onclick="toggleFavorite(this)"><i class="fas fa-heart"></i></button>
+              </div>
+              <div class="product-info" style="display: none;">
+                  <p class="article">Артикул: SCOT1267234561336</p>
+                  <p class="extra">Доп. комплект: Плотная упаковка, Запчасть на скутер</p>
+                  <p class="dimensions">Габариты: 10 × 10 cm</p>
+                  <p class="tags">Метки: 1 год</p>
+              </div>
+          </div>
+          <div class="product-card" data-id="18" data-stock="23">
+            <img src="image/product/188_engine19.jpg" alt="Продукт 18">
+            <div class="details">
+                <p class="category">Двигатель</p>
+                <p class="name ellipsis">Набор сальников на скутер Сузуки Адрес / Сепия 50 кубов (v50g) Suzuki Address / Sepia 50cc</p>
+                <div class="price">
+                    <div class="original-price-wrapper no-discount">
+                        <span class="original-prices">398,00 ₽</span>
+                    </div>
+                    <button class="add-to-cart" onclick="toggleCart(this)"><i class="fas fa-shopping-cart"></i></button>
+                    <div class="stock-bar" title="В наличии много"></div>
+                </div>
+                <button class="add-to-favorites" onclick="toggleFavorite(this)"><i class="fas fa-heart"></i></button>
+            </div>
+            <div class="product-info" style="display: none;">
+                <p class="article">Артикул: SCOT1267234561328</p>
+                <p class="extra">Доп. комплект: Плотная упаковка, Запчасть на скутер</p>
+                <p class="dimensions">Габариты: 10 × 10 cm</p>
+                <p class="tags">Метки: 1 год</p>
+            </div>
+        </div>
+        
+        <div class="product-card" data-id="19" data-stock="23">
+          <img src="image/product/189_engine20.jpg" alt="Продукт 19">
+          <div class="details">
+              <p class="category">Двигатель</p>
+              <p class="name ellipsis">Набор сальников на скутер Сузуки Летс / Верде 50 кубов (Morini) Suzuki Lets / Verde 50cc</p>
+              <div class="price">
+                  <div class="original-price-wrapper no-discount">
+                      <span class="original-prices">398,00 ₽</span>
+                  </div>
+                  <button class="add-to-cart" onclick="toggleCart(this)"><i class="fas fa-shopping-cart"></i></button>
+                  <div class="stock-bar" title="В наличии много"></div>
+              </div>
+              <button class="add-to-favorites" onclick="toggleFavorite(this)"><i class="fas fa-heart"></i></button>
+          </div>
+          <div class="product-info" style="display: none;">
+              <p class="article">Артикул: SCOT1267234561329</p>
+              <p class="extra">Доп. комплект: Плотная упаковка, Запчасть на скутер</p>
+              <p class="dimensions">Габариты: 10 × 10 cm</p>
+              <p class="tags">Метки: 1 год</p>
+          </div>
+      </div>
+      
+      <div class="product-card" data-id="20" data-stock="22">
+        <img src="image/product/190_engine21.jpg" alt="Продукт 20">
+        <div class="details">
+            <p class="category">Двигатель</p>
+            <p class="name ellipsis">Набор сальников на скутер Хонда Дио / Такт / Лид 50 кубов (Af-18/27/34) Honda Dio / Tact / Lead 50cc</p>
+            <div class="price">
+                <div class="original-price-wrapper no-discount">
+                    <span class="original-prices">398,00 ₽</span>
+                </div>
+                <button class="add-to-cart" onclick="toggleCart(this)"><i class="fas fa-shopping-cart"></i></button>
+                <div class="stock-bar" title="В наличии много"></div>
+            </div>
+            <button class="add-to-favorites" onclick="toggleFavorite(this)"><i class="fas fa-heart"></i></button>
+        </div>
+        <div class="product-info" style="display: none;">
+            <p class="article">Артикул: SCOT1267234561330</p>
+            <p class="extra">Доп. комплект: Плотная упаковка, Запчасть на скутер</p>
+            <p class="dimensions">Габариты: 10 × 10 cm</p>
+            <p class="tags">Метки: 1 год</p>
+        </div>
+    </div>
+    
+    <div class="product-card" data-id="21" data-stock="23">
+      <img src="image/product/191_engine22.jpg" alt="Продукт 21">
+      <div class="details">
+          <p class="category">Двигатель</p>
+          <p class="name ellipsis">Набор сальников на скутер Хонда Лид 50 кубов (Af-48) Honda Lead 50cc</p>
+          <div class="price">
+              <div class="original-price-wrapper no-discount">
+                  <span class="original-prices">398,00 ₽</span>
+              </div>
+              <button class="add-to-cart" onclick="toggleCart(this)"><i class="fas fa-shopping-cart"></i></button>
+              <div class="stock-bar" title="В наличии много"></div>
+          </div>
+          <button class="add-to-favorites" onclick="toggleFavorite(this)"><i class="fas fa-heart"></i></button>
+      </div>
+      <div class="product-info" style="display: none;">
+          <p class="article">Артикул: SCOT1267234561331</p>
+          <p class="extra">Доп. комплект: Плотная упаковка, Запчасть на скутер</p>
+          <p class="dimensions">Габариты: 10 × 10 cm</p>
+          <p class="tags">Метки: 1 год</p>
+      </div>
+  </div>
+  
+  <div class="product-card" data-id="22" data-stock="23">
+    <img src="image/product/192_engine23.jpg" alt="Продукт 22">
+    <div class="details">
+        <p class="category">Двигатель</p>
+        <p class="name ellipsis">Набор сальников на скутер Хонда Лид 90 кубов (Hf-05) Honda Lead 90cc</p>
+        <div class="price">
+            <div class="original-price-wrapper no-discount">
+                <span class="original-prices">398,00 ₽</span>
+            </div>
+            <button class="add-to-cart" onclick="toggleCart(this)"><i class="fas fa-shopping-cart"></i></button>
+            <div class="stock-bar" title="В наличии много"></div>
+        </div>
+        <button class="add-to-favorites" onclick="toggleFavorite(this)"><i class="fas fa-heart"></i></button>
+    </div>
+    <div class="product-info" style="display: none;">
+        <p class="article">Артикул: SCOT1267234561332</p>
+        <p class="extra">Доп. комплект: Плотная упаковка, Запчасть на скутер</p>
+        <p class="dimensions">Габариты: 10 × 10 cm</p>
+        <p class="tags">Метки: 1 год</p>
+    </div>
+</div>
+
+<div class="product-card" data-id="23" data-stock="23">
+  <img src="image/product/193_engine24.jpg" alt="Продукт 23">
+  <div class="details">
+      <p class="category">Двигатель</p>
+      <p class="name ellipsis">Набор сальников на скутер Хонда Такт 50 кубов (Af-16/18)(Тонкий вал) Honda Tact 50cc</p>
+      <div class="price">
+          <div class="original-price-wrapper no-discount">
+              <span class="original-prices">398,00 ₽</span>
+          </div>
+          <button class="add-to-cart" onclick="toggleCart(this)"><i class="fas fa-shopping-cart"></i></button>
+          <div class="stock-bar" title="В наличии много"></div>
+      </div>
+      <button class="add-to-favorites" onclick="toggleFavorite(this)"><i class="fas fa-heart"></i></button>
+  </div>
+  <div class="product-info" style="display: none;">
+      <p class="article">Артикул: SCOT1267234561333</p>
+      <p class="extra">Доп. комплект: Плотная упаковка, Запчасть на скутер</p>
+      <p class="dimensions">Габариты: 10 × 10 cm</p>
+      <p class="tags">Метки: 1 год</п>
+  </div>
+</div>
+
+<div class="product-card" data-id="24" data-stock="23">
+  <img src="image/product/194_engine25.jpg" alt="Продукт 24">
+  <div class="details">
+      <p class="category">Двигатель, Топливная система</p>
+      <p class="name ellipsis">Патрубок карбюратора на скутер Ямаха Джог / Априо 50 кубов (Ямаха Джог/Аксис)(5bm) Yamaha Jog / Axis / Aprio 5BM 50cc</p>
+      <div class="price">
+          <div class="original-price-wrapper no-discount">
+              <span class="original-prices">479,00 ₽</span>
+          </div>
+          <button class="add-to-cart" onclick="toggleCart(this)"><i class="fas fa-shopping-cart"></i></button>
+          <div class="stock-bar" title="В наличии много"></div>
+      </div>
+      <button class="add-to-favorites" onclick="toggleFavorite(this)"><i class="fas fa-heart"></i></button>
+  </div>
+  <div class="product-info" style="display: none;">
+      <p class="article">Артикул: SCOT1267234561345</p>
+      <p class="extra">Доп. комплект: Плотная упаковка, Запчасть на скутер</p>
+      <p class="dimensions">Габариты: 5 × 5 × 5 cm</p>
+      <п class="tags">Метки: 1 год</п>
+  </div>
+</div>
+
+                  <!-- было 24_Karb5 вместо 194_engine25.jpg -->
+                  <div class="product-card" data-id="25" data-stock="23">
+                    <img src="image/product/195_engine26.jpg" alt="Продукт 25">
+                    <div class="details">
+                        <p class="category">Двигатель</p>
+                        <p class="name ellipsis">Сепаратор 12*16*14 (Верхний) на китайский скутер Стелс 50 кубов (1e40qmb) Stels 50cc</p>
+                        <div class="price">
+                            <div class="original-price-wrapper no-discount">
+                                <span class="original-prices">341,00 ₽</span>
+                            </div>
+                            <button class="add-to-cart" onclick="toggleCart(this)"><i class="fas fa-shopping-cart"></i></button>
+                            <div class="stock-bar" title="В наличии много"></div>
+                        </div>
+                        <button class="add-to-favorites" onclick="toggleFavorite(this)"><i class="fas fa-heart"></i></button>
+                    </div>
+                    <div class="product-info" style="display: none;">
+                        <p class="article">Артикул: SCOT1267234561339</p>
+                        <p class="extra">Доп. комплект: Плотная упаковка, Запчасть на скутер</p>
+                        <p class="dimensions">Габариты: 1 × 5 × 5 cm</p>
+                        <p class="tags">Метки: 1 год</p>
+                    </div>
+                </div>
+                
+                <div class="product-card" data-id="26" data-stock="23">
+                  <img src="image/product/196_engine27.jpg" alt="Продукт 26">
+                  <div class="details">
+                      <p class="category">Двигатель</p>
+                      <p class="name ellipsis">Сепаратор 12*17*14 (Верхний) на скутер Хонда Дио / Такт 50 кубов (Af-18/27/31/34/51) Honda Dio / Giorno</p>
+                      <div class="price">
+                          <div class="original-price-wrapper no-discount">
+                              <span class="original-prices">341,00 ₽</span>
+                          </div>
+                          <button class="add-to-cart" onclick="toggleCart(this)"><i class="fas fa-shopping-cart"></i></button>
+                          <div class="stock-bar" title="В наличии много"></div>
+                      </div>
+                      <button class="add-to-favorites" onclick="toggleFavorite(this)"><i class="fas fa-heart"></i></button>
+                  </div>
+                  <div class="product-info" style="display: none;">
+                      <p class="article">Артикул: SCOT1267234561340</p>
+                      <p class="extra">Доп. комплект: Плотная упаковка, Запчасть на скутер</p>
+                      <p class="dimensions">Габариты: 1 × 5 × 5 cm</p>
+                      <p class="tags">Метки: 1 год</p>
+                  </div>
+              </div>
+              
+                </section>
+                
+        </main>
+        <div class="pagination" id="pagination">
+          <button id="prev-page" class="disabled">← Предыдущая</button>
+          <span id="page-info">Отображение 1–12 из 26</span>
+          <button id="next-page">Следующая →</button>
+      </div>
+      
+
+        
+<footer class="footer">
+    <div class="footer-section">
+      <h4 class="yellow-text">НОВОСТНАЯ РАССЫЛКА</h4>
+      <p>Получайте последние новости, специальные предложения и купоны через <br>электронную почту! Вы можете отменить подписку в любое время.</p>
+      <form action="#" class="subscribe-form">
+        <input type="email" placeholder="Your email">
+        <button type="submit" class="subscribe-button">Подписаться</button>
+      </form>  
+      <h4 class="yellow-text">КОД КУПОНА</h4>
+      <p>Проверьте <span class="highlights">все текущие коды купонов</span> на странице.</p>
+    </div>
+    <div>
+      <hr class="divider">
+    </div>
+    <div class="footer-section">
+      <h3 class="yellow-text">FAQ</h3>
+      <h4 onclick="showModal()">Контакты</h4> <!-- Либо ссылка на сторонний источник -->
+      <h4><a href="pay.html">Способы оплаты</a></h4>
+      <h4><a href="delivery.html">Доставка</a></h4>
+      <h4><a href="return.html">Возвраты</a></h4>
+      <h4><a href="Salesroom.html">Торговое помещение</a></h4>
+  </div>    
+    <div>
+      <hr class="divider">
+    </div>
+    <div class="footer-section">
+      <h3 class="yellow-text">INFO</h3>
+      <h4><a href="legal.html">Официальное уведомление</a></h4>
+      <h4><a href="dataprotection.html">Защита данных</a></h4>
+      <h4><a href="revocation.html">Право отзыва</a></h4>
+      <h4><a href="jobs.html">Работа</a></h4>
+      <h4><a href="techtips.html">Технические советы и руководства</a></h4>
+      <h4><a href="brands.html">Бренды</a></h4>
+      <h3 class="yellow-text">Social</h3>
+      <div class="social-icons">
+        <a href="https://telegram.example.com" class="social-icon">
+            <i class="fab fa-telegram"></i>
+        </a>
+        <a href="https://whatsapp.example.com" class="social-icon">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+        <a href="https://www.wildberries.ru/brands/scooters" class="social-icon">
+          <img src="image/Wb.png" alt="Wb" class="social-image">
+      </a>
+      <a href="https://www.ozon.ru/seller/scooter24-462340/products/?miniapp=seller_462340" class="social-icon">
+          <img src="image/ozon.png" alt="Ozon" class="social-image">
+      </a>
+    </div>
+    </div>    
+    <div class="modal" id="myModal">
+        <div class="modal-content">
+          <span class="close" onclick="closeModal()">&times;</span>
+          <button class="whatsapp-btn" onclick="redirectToWhatsApp()">WhatsApp</button>
+          <button class="telegram-btn" onclick="redirectToTelegram()">Telegram</button>
+          <button class="phone-btn" onclick="makePhoneCall()">Звонок</button>
+        </div>
+      </div>
+  </footer>
+
+
+  <script src="js/categories.js"></script>
+  <script src="js/geo.js"></script>
+</body>
+</html>
