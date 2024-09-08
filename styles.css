@@ -170,7 +170,7 @@ body {
   font-size: 14.5px;
   color: #ffffff;
   margin-top: 40px;
-  margin-right: 350px;
+  margin-left: 250px;
   transition: opacity 0.5s ease; /* Плавное появление/скрытие */
 }
 
@@ -564,18 +564,19 @@ align-items: center;
 .submenu {
   display: none;
   position: absolute;
-  margin-left: 600px;
+  left: 60%;
+  transform: translateX(-50%); 
   width: auto;
   padding: 17px;
   top: 40px;
   z-index: 1000;
-  transition: opacity 0.5s ease; 
-  }
+  transition: opacity 0.5s ease;
+}
 
 .submenu ul {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between; 
   list-style-type: none;
   padding: 0;
 }
@@ -598,6 +599,7 @@ align-items: center;
   border-radius: 5px;
   transition: all 0.3s ease;
 }
+
 .submenu ul li:not(:last-child)::after {
   content: '';
   position: absolute;
@@ -605,9 +607,10 @@ align-items: center;
   width: 1px;
   background-color: #4b4a4a;
   top: -10px;
-  right: 2px;
+  right: -5px; /* Исправляем положение разделителя */
   transform: rotate(20deg);
 }
+
 
 
 /* Иконка меню */
@@ -813,7 +816,7 @@ align-items: center;
 
 .product-card {
   width: 280px;
-  height: 430px;
+  height: 455px;
   margin-right: 20px;
   text-align: left;
   position: relative;
@@ -824,22 +827,23 @@ align-items: center;
 }
 
 .product-card img {
-  width: 220px;
-  height: 220px;
+  width: 90%;
+  height: auto;
   object-fit: cover;
   display: block; 
   margin-top: 25px;
-  margin-left: 20px;
+  margin-left: auto; /* Выровнять по центру */
+  margin-right: auto; /* Выровнять по центру */
   border: 2px solid #ddd; /* Обводка для изображения */
 }
 
 .discount {
   position: absolute;
-  top: 10px;
+  top: 4px;
   right: 10px;
   background-color: #45EFDA;
   color: rgb(0, 0, 0);
-  padding: 4px 8px;
+  padding: 3px 6px;
   border-radius: 5px;
 }
 

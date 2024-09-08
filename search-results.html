@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Личный кабинет</title>
+  <title>Результат поиска</title>
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.css"/>
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick-theme.css"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap">
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.min.js"></script>
 </head>
 <body onscroll="scrollHandler(event)">
@@ -19,6 +19,8 @@
     <div id="parallelogram">
       <img src="image/Дизайн.png" alt="Логотип" class="logo-image">
     </div>
+  
+    <!-- <div class="menu-icon" onclick="toggleMenu()" id="menu-toggle-button">&#9776;</div>  -->
     <div class="action-container"> 
       <div class="search-bar">
         <input type="text" id="text-to-find" placeholder="Поиск...">
@@ -226,61 +228,9 @@
         
           </script>
           
-          <div class="lcab-container">
-            <div class="lcab-wrapper">
-                <h1 class="lcab-header">Личный кабинет</h1>
+
         
-                <div class="lcab-form-container">
-                    <!-- Регистрация -->
-                    <form id="lcab-registration-form" class="lcab-form" action="register.php" method="post">
-                        <h2 class="lcab-subheader">Регистрация</h2>
-                        <label for="reg_name" class="lcab-label">ФИО:</label>
-                        <input type="text" id="reg_name" name="name" class="lcab-input" required>
-        
-                        <label for="reg_dob" class="lcab-label">Дата рождения:</label>
-                        <input type="date" id="reg_dob" name="dob" class="lcab-input" required>
-        
-                        <label for="reg_address" class="lcab-label">Адрес:</label>
-                        <input type="text" id="reg_address" name="address" class="lcab-input" required>
-        
-                        <label for="reg_email" class="lcab-label">Email:</label>
-                        <input type="email" id="reg_email" name="email" class="lcab-input" required>
-        
-                        <label for="reg_password" class="lcab-label">Пароль:</label>
-                        <input type="password" id="reg_password" name="password" class="lcab-input" required>
-        
-                        <button type="submit" class="lcab-button">Зарегистрироваться</button>
-                        
-                        <!-- Регистрация через Google -->
-                        <div class="lcab-google">
-                            <span>или</span>
-                            <button type="button" class="lcab-google-btn">Зарегистрироваться через Google</button>
-                        </div>
-                    </form>
-        
-                    <!-- Авторизация -->
-                    <form id="lcab-login-form" class="lcab-form" action="login.php" method="post">
-                        <h2 class="lcab-subheader">Авторизация</h2>
-                        <label for="login_email" class="lcab-label">Email:</label>
-                        <input type="email" id="login_email" name="email" class="lcab-input" required>
-        
-                        <label for="login_password" class="lcab-label">Пароль:</label>
-                        <input type="password" id="login_password" name="password" class="lcab-input" required>
-        
-                        <button type="submit" class="lcab-button">Войти</button>
-        
-                        <!-- Забыл пароль -->
-                        <div class="lcab-forgot-password">
-                            <a href="forgot_password.php">Забыли пароль?</a>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <div class="lcab-return-home">
-                <a href="index.html" class="lcab-return-home-btn">На главную</a>
-            </div>
-        </div>
-        
+
 <footer class="footer">
     <div class="footer-section">
       <h4 class="yellow-text">НОВОСТНАЯ РАССЫЛКА</h4>
@@ -345,4 +295,3 @@
   <script src="js/geo.js"></script>
 </body>
 </html>
-

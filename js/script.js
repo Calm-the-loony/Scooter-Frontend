@@ -1,60 +1,29 @@
-//поиск
-var lastResFind = ""; // последний удачный результат
-var copy_page = ""; // копия страницы в исходном виде
+function performSearch() {
+    const query = document.getElementById('search-input').value.trim().toLowerCase(); // Получаем запрос пользователя
+    const productCards = document.querySelectorAll('.product-card'); // Получаем все карточки товаров
 
-function TrimStr(s) {
-    s = s.replace(/^\s+/g, '');
-    return s.replace(/\s+$/g, '');
-}
-
-function FindOnPage(inputId) {
-    var obj = window.document.getElementById(inputId);
-    var textToFind;
-
-    if (obj) {
-        textToFind = TrimStr(obj.value); // обрезаем пробелы
-    } else {
-        alert("Введенная фраза не найдена");
-        return;
-    }
-    if (textToFind == "") {
-        alert("Вы ничего не ввели");
+    if (query === "") {
+        alert("Введите запрос для поиска!");
         return;
     }
 
-    if (copy_page.length > 0) {
-        document.body.innerHTML = copy_page;
-    } else {
-        copy_page = document.body.innerHTML;
-    }
-
-    var pattern = new RegExp(textToFind, "gi");
-
-    if (!pattern.test(copy_page)) {
-        alert("Ничего не найдено, проверьте правильность ввода!");
-        return;
-    }
-
-    // Подсветка найденного текста
-    document.body.innerHTML = copy_page.replace(pattern, function(match) {
-        return "<a class='highlighted' name='highlighted' href='#highlighted'>" + match + "</a>";
+    // Проходим по каждой карточке и проверяем её содержимое
+    productCards.forEach(card => {
+        // Получаем текстовое содержимое карточки: название, артикул, описание
+        const productName = card.querySelector('.name').innerText.toLowerCase();
+        const productArticle = card.querySelector('.article') ? card.querySelector('.article').innerText.toLowerCase() : '';
+        const productExtra = card.querySelector('.extra') ? card.querySelector('.extra').innerText.toLowerCase() : '';
+        
+        // Проверяем, содержит ли карточка запрос пользователя
+        if (productName.includes(query) || productArticle.includes(query) || productExtra.includes(query)) {
+            card.style.display = "block"; // Если совпадение найдено, показываем карточку
+        } else {
+            card.style.display = "none"; // Если совпадений нет, скрываем карточку
+        }
     });
-
-    lastResFind = textToFind;
-
-    // Прокрутка к первому найденному элементу
-    var firstMatch = document.querySelector('a.highlighted');
-    if (firstMatch) {
-        firstMatch.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
 }
 
 
-  //меню
-//   function toggleMenu() {
-//     var submenu = document.querySelector('.submenu');
-//     submenu.style.display = (submenu.style.display === 'block') ? 'none' : 'block';
-// }
 
 //избранное на карточке
 function toggleFavorite(button) {
@@ -137,7 +106,6 @@ function makePhoneCall() {
   window.location.href = 'tel:+9614277510';
 }
 
-
 //шапка
 let prevScrollPos = window.pageYOffset;
 let isMenuOpen = false;
@@ -151,24 +119,30 @@ function scrollHandler() {
     const changeCityButton = document.getElementById('change-city-button');
 
     if (currentScrollPos < 100) {
+        // Разворачиваем шапку
         header.style.height = "100px"; 
         header.classList.remove('collapsed');
         header.classList.add('expanded');
         actionContainer.style.marginLeft = "0"; 
-        if (isMenuOpen) {
-            submenu.style.display = 'block';
-            setTimeout(() => submenu.style.opacity = "1", 0);
-        }
+
+        // Показать подменю, если оно открыто
+        submenu.style.display = 'block';
+        submenu.style.opacity = "1"; // Стабильное отображение меню
+
         locationText.classList.remove('hidden'); 
         changeCityButton.classList.remove('hidden-button'); 
     } else {
+        // Сворачиваем шапку
         header.style.height = "50px"; 
         header.classList.remove('expanded');
         header.classList.add('collapsed');
+
+        // Скрываем подменю
         submenu.style.opacity = '0'; 
         setTimeout(() => submenu.style.display = 'none', 500); 
-        actionContainer.style.marginLeft = "-7px";
-        isMenuOpen = false; 
+
+        actionContainer.style.marginLeft = "-7px"; // Смещаем контейнер при сворачивании
+
         locationText.classList.add('hidden'); 
         changeCityButton.classList.add('hidden-button'); 
     }
@@ -182,29 +156,48 @@ function toggleMenu() {
     const locationElements = document.querySelectorAll('.location-text');
 
     if (!isMenuOpen && window.pageYOffset < 100) {
+        // Разворачиваем шапку и показываем подменю
         header.style.height = '100px';
         header.classList.add('expanded');
         header.classList.remove('collapsed');
         submenu.style.display = 'block';
-        setTimeout(() => submenu.style.opacity = "1", 0);
+        submenu.style.opacity = "1"; // Стабильное появление
         isMenuOpen = true;
+
+        // Показываем элементы геолокации
         locationElements.forEach(el => el.classList.remove('hidden'));
     } else {
+        // Сворачиваем шапку и скрываем подменю
         header.style.height = '50px';
         header.classList.add('collapsed');
         header.classList.remove('expanded');
         submenu.style.opacity = '0';
         setTimeout(() => submenu.style.display = 'none', 500);
         isMenuOpen = false;
+
+        // Скрываем элементы геолокации
         locationElements.forEach(el => el.classList.add('hidden'));
     }
 }
+
+// Обработка события прокрутки
 window.addEventListener('scroll', function() {
-    var container = document.querySelector('.action-container');
+    const container = document.querySelector('.action-container');
     container.style.left = '259px'; // Обновляем значение left
     container.style.transform = 'skew(-20deg)'; // Обновляем трансформацию
-  });
-  window.onscroll = scrollHandler;
+});
+
+// Привязываем обработчик события скролла
+window.onscroll = function () {
+    scrollHandler();
+
+    // Обновляем меню независимо от текущей позиции прокрутки
+    if (window.pageYOffset < 100) {
+        const submenu = document.querySelector('.submenu');
+        submenu.style.display = 'block'; 
+        submenu.style.opacity = "1"; // Убеждаемся, что текст отображается стабильно
+    }
+};
 
 
 //избранное и корзина
