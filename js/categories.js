@@ -47,11 +47,11 @@ function FindOnPage(inputId) { //ищет текст на странице, в �
 }
 
 
-  //меню
-  function toggleMenu() {
-    var submenu = document.querySelector('.submenu');
-    submenu.style.display = (submenu.style.display === 'block') ? 'none' : 'block';
-}
+//   //меню
+//   function toggleMenu() {
+//     var submenu = document.querySelector('.submenu');
+//     submenu.style.display = (submenu.style.display === 'block') ? 'none' : 'block';
+// }
 
 //избранное на карточке
 function toggleFavorite(button) {
@@ -703,6 +703,40 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 
+document.addEventListener("DOMContentLoaded", function() {
+    const accordionHeaders = document.querySelectorAll('.accordion-header');
+    const product = JSON.parse(localStorage.getItem('selectedProduct'));
+
+    if (product) {
+        document.getElementById('product-weight').innerText = product.weight ? `Вес: ${product.weight}` : "Вес: Не указан";
+        document.getElementById('product-dimensions').innerText = product.dimensions || "Габариты не указаны";
+
+        const descriptionContent = document.getElementById('description-content');
+        const descriptionHeader = document.getElementById('description-header');
+        
+        if (product.description && product.description.trim()) {
+            descriptionContent.querySelector('#product-description').innerText = product.description;
+            descriptionHeader.style.display = 'flex'; // Отображаем описание
+        } else {
+            descriptionHeader.style.display = 'none'; // Скрываем, если описания нет
+        }
+    }
+
+    accordionHeaders.forEach(header => {
+        header.addEventListener('click', function() {
+            const content = this.nextElementSibling;
+            const icon = this.querySelector('i');
+            
+            // Сворачиваем/разворачиваем блок
+            content.classList.toggle('active');
+            this.classList.toggle('active');
+            
+            // Поворачиваем стрелочку
+            icon.classList.toggle('fa-chevron-down');
+            icon.classList.toggle('fa-chevron-up');
+        });
+    });
+});
 
 
 //в наличии
