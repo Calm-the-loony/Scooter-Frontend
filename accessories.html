@@ -86,86 +86,87 @@
 </div>
 </div>
   
-    <div id="favorites-modal" class="modal">
-        <div class="modal-contents">
-          <span class="close" id="favorites-close">&times;</span>
-          <h2>Избранное</h2>
-          <table id="favorite-list">
-            <thead>
-              <tr>
-                <th>Изображение</th>
-                <th>Название товара</th>
-                <th>Цена за штуку</th>
-                <th>Наличие на складе</th>
-                <th>Действия</th>
-              </tr>
-            </thead>
-            <tbody></tbody>
-          </table>
-        </div>
+<div id="favorites-modal" class="modal">
+  <div class="modal-contents">
+    <span class="close" id="favorites-close">&times;</span>
+    <h2>Избранное</h2>
+    <table id="favorite-list">
+      <thead>
+        <tr>
+          <th>Изображение</th>
+          <th>Название товара</th>
+          <th>Цена за штуку</th>
+          <th>Наличие на складе</th>
+          <th>Действия</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</div>
+
+<div id="cart-modal" class="modal">
+    <div class="modal-contents">
+      <span class="close" id="cart-close">&times;</span>
+      <h2>Корзина</h2>
+      <table id="cart-list">
+        <thead>
+          <tr>
+            <th>Изображение</th>
+            <th>Название</th>
+            <th>Цена</th>
+            <th>Количество</th>
+            <th>Действия</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <div class="cart-total">
+        <p>Итого: <span id="total-price">0.00 ₽</span></p>
+        <button class="buy-button" onclick="buyItems()">Купить</button>
       </div>
-    
-      <div id="cart-modal" class="modal">
-        <div class="modal-contents">
-          <span class="close" onclick="toggleCartModal()">&times;</span>
-          <h2>Корзина</h2>
-          <table id="cart-list">
-            <thead>
-              <tr>
-                <th>Изображение</th>
-                <th>Название</th>
-                <th>Цена</th>
-                <th>Количество</th>
-                <th>Действия</th>
-              </tr>
-            </thead>
-            <tbody></tbody>
-          </table>
-          <div class="cart-total">
-            <p>Итого: <span id="total-price">0.00 ₽</span></p>
-            <button class="buy-button" onclick="buyItems()">Купить</button>
-          </div>
+    </div>
+  </div>
+
+
+  <div id="scooter-modal" class="modal">
+    <div class="modal-contents">
+        <span class="close" id="scooter-modal-close">&times;</span>
+        <h2>Выберите модель скутера</h2>
+        <form id="scooter-form">
+            <label for="scooter-type">Тип скутера:</label>
+            <select id="scooter-type">
+                <option value="electric">Электрический</option>
+                <option value="gas">Бензиновый</option>
+            </select>
+            <br>
+            <label for="scooter-manufacturer">Производитель:</label>
+            <select id="scooter-manufacturer">
+                <option value="yamaha">Yamaha</option>
+                <option value="honda">Honda</option>
+                <option value="vespa">Vespa</option>
+            </select>
+            <br>
+            <label for="scooter-model">Модель:</label>
+            <select id="scooter-model">
+                <option value="model1">Модель 1</option>
+                <option value="model2">Модель 2</option>
+                <option value="model3">Модель 3</option>
+            </select>
+            <br>
+            <button type="button" id="add-scooter">Добавить</button>
+        </form>
+        <div id="scooter-details" style="display: none;">
+            <h3>Выбранная модель скутера:</h3>
+            <p id="scooter-type-display"></p>
+            <p id="scooter-manufacturer-display"></p>
+            <p id="scooter-model-display"></p>
+            <img id="scooter-image" src="image/scooter.png" alt="Фото скутера">
         </div>
-      </div>
-    
-        <div id="scooter-modal" class="modal">
-          <div class="modal-contents">
-              <span class="close" id="scooter-modal-close">&times;</span>
-              <h2>Выберите модель скутера</h2>
-              <form id="scooter-form">
-                  <label for="scooter-type">Тип скутера:</label>
-                  <select id="scooter-type">
-                      <option value="electric">Электрический</option>
-                      <option value="gas">Бензиновый</option>
-                  </select>
-                  <br>
-                  <label for="scooter-manufacturer">Производитель:</label>
-                  <select id="scooter-manufacturer">
-                      <option value="yamaha">Yamaha</option>
-                      <option value="honda">Honda</option>
-                      <option value="vespa">Vespa</option>
-                  </select>
-                  <br>
-                  <label for="scooter-model">Модель:</label>
-                  <select id="scooter-model">
-                      <option value="model1">Модель 1</option>
-                      <option value="model2">Модель 2</option>
-                      <option value="model3">Модель 3</option>
-                  </select>
-                  <br>
-                  <button type="button" id="add-scooter">Добавить</button>
-              </form>
-              <div id="scooter-details" style="display: none;">
-                  <h3>Выбранная модель скутера:</h3>
-                  <p id="scooter-type-display"></p>
-                  <p id="scooter-manufacturer-display"></p>
-                  <p id="scooter-model-display"></p>
-                  <img id="scooter-image" src="image/scooter.png" alt="Фото скутера">
-              </div>
-              <p>Имея учетную запись клиента, вы можете навсегда сохранить несколько автомобилей и изменить их в любое время.</p>
-              <button id="login-button">Авторизация</button>
-          </div>
-      </div>    
+        <p>Имея учетную запись клиента, вы можете навсегда сохранить несколько автомобилей и изменить их в любое время.</p>
+        <button id="login-button"><a href="account.html" >Авторизация</a> </button>
+    </div>
+</div>
 
       <script>
         function setupScooterModal() {
@@ -278,6 +279,50 @@
                         <option value="price-desc">По убыванию цены</option>
                     </select>
                 </div> -->
+
+                <section id="scooter-selection" class="scooter-selection">
+                  <h2 class="section-title">Добавьте свой скутер</h2>
+                  <form id="scooter-form" class="scooter-form">
+                      <div class="form-group">
+                          <label for="scooter-type">Тип скутера:</label>
+                          <select id="scooter-type" name="type" class="form-control">
+                              <option value="">Выберите тип</option>
+                              <option value="scooter">Скутер</option>
+                              <option value="moped">Мопед</option>
+                              <option value="motorcycle">Мотоцикл</option>
+                              <!-- Добавьте другие типы скутеров -->
+                          </select>
+                      </div>
+              
+                      <div class="form-group">
+                          <label for="scooter-brand">Выберите бренд:</label>
+                          <select id="scooter-brand" name="brand" class="form-control">
+                              <option value="">Выберите бренд</option>
+                              <option value="honda">Honda</option>
+                              <option value="yamaha">Yamaha</option>
+                              <option value="suzuki">Suzuki</option>
+                              <option value="piaggio">Piaggio</option>
+                              <option value="vespa">Vespa</option>
+                              <!-- Добавьте другие бренды -->
+                          </select>
+                      </div>
+              
+                      <div class="form-group">
+                          <label for="scooter-model">Выберите модель:</label>
+                          <select id="scooter-model" name="model" class="form-control">
+                              <option value="">Выберите модель</option>
+                              <!-- Модели будут добавляться динамически -->
+                          </select>
+                      </div>
+              
+                      <button type="button" id="filter-products" class="btn btn-primary">Фильтровать товары</button>
+                  </form>
+              </section>
+              
+              
+              
+            
+              
                 <section class="cards-container" id="cards-container">
                   <div class="product-card" data-id="22" data-stock="23">
                     <img src="image/product/168_zerkalo.jpg" alt="Product 22">

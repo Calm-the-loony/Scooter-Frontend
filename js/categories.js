@@ -60,100 +60,6 @@ function toggleFavorite(button) {
 
 
 
-//шапка
-let prevScrollPos = window.pageYOffset;
-let isMenuOpen = false;
-
-function scrollHandler() {
-    const currentScrollPos = window.pageYOffset;
-    const header = document.getElementById("header");
-    const actionContainer = document.querySelector(".action-container");
-    const submenu = document.querySelector('.submenu');
-    const locationText = document.querySelector('.location-text');
-    const changeCityButton = document.getElementById('change-city-button');
-
-    if (currentScrollPos < 100) {
-        // Разворачиваем шапку
-        header.style.height = "100px"; 
-        header.classList.remove('collapsed');
-        header.classList.add('expanded');
-        actionContainer.style.marginLeft = "0"; 
-
-        // Показать подменю, если оно открыто
-        submenu.style.display = 'block';
-        submenu.style.opacity = "1"; // Стабильное отображение меню
-
-        locationText.classList.remove('hidden'); 
-        changeCityButton.classList.remove('hidden-button'); 
-    } else {
-        // Сворачиваем шапку
-        header.style.height = "50px"; 
-        header.classList.remove('expanded');
-        header.classList.add('collapsed');
-
-        // Скрываем подменю
-        submenu.style.opacity = '0'; 
-        setTimeout(() => submenu.style.display = 'none', 500); 
-
-        actionContainer.style.marginLeft = "-7px"; // Смещаем контейнер при сворачивании
-
-        locationText.classList.add('hidden'); 
-        changeCityButton.classList.add('hidden-button'); 
-    }
-    
-    prevScrollPos = currentScrollPos;
-}
-
-function toggleMenu() {
-    const header = document.querySelector('.header');
-    const submenu = document.querySelector('.submenu');
-    const locationElements = document.querySelectorAll('.location-text');
-
-    if (!isMenuOpen && window.pageYOffset < 100) {
-        // Разворачиваем шапку и показываем подменю
-        header.style.height = '100px';
-        header.classList.add('expanded');
-        header.classList.remove('collapsed');
-        submenu.style.display = 'block';
-        submenu.style.opacity = "1"; // Стабильное появление
-        isMenuOpen = true;
-
-        // Показываем элементы геолокации
-        locationElements.forEach(el => el.classList.remove('hidden'));
-    } else {
-        // Сворачиваем шапку и скрываем подменю
-        header.style.height = '50px';
-        header.classList.add('collapsed');
-        header.classList.remove('expanded');
-        submenu.style.opacity = '0';
-        setTimeout(() => submenu.style.display = 'none', 500);
-        isMenuOpen = false;
-
-        // Скрываем элементы геолокации
-        locationElements.forEach(el => el.classList.add('hidden'));
-    }
-}
-
-// Обработка события прокрутки
-window.addEventListener('scroll', function() {
-    const container = document.querySelector('.action-container');
-    container.style.left = '259px'; // Обновляем значение left
-    container.style.transform = 'skew(-20deg)'; // Обновляем трансформацию
-});
-
-// Привязываем обработчик события скролла
-window.onscroll = function () {
-    scrollHandler();
-
-    // Обновляем меню независимо от текущей позиции прокрутки
-    if (window.pageYOffset < 100) {
-        const submenu = document.querySelector('.submenu');
-        submenu.style.display = 'block'; 
-        submenu.style.opacity = "1"; // Убеждаемся, что текст отображается стабильно
-    }
-};
-
-
 
 
 //избранное и корзина
@@ -620,7 +526,7 @@ document.addEventListener("DOMContentLoaded", function() {
         card.addEventListener('click', function(event) {
             // Проверяем, если клик был по кнопке добавления в корзину или избранное
             if (event.target.closest('.add-to-favorites') || event.target.closest('.add-to-cart')) {
-                return; // Не открываем карточку
+                return; // Не открываем карточку товара
             }
 
             // Создаем объект с информацией о товаре
@@ -635,7 +541,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 dimensions: (this.querySelector('.product-info .dimensions')?.innerText.split(': ')[1]) || "Габариты не указаны",
                 weight: (this.querySelector('.product-info .weight')?.innerText.split(': ')[1]) || null,
                 additional: (this.querySelector('.product-info .extra')?.innerText.split(': ')[1]) || "Доп. комплект не указан",
-                description: (this.querySelector('.product-info .description')?.innerText.split(': ')[1]) || null // Получаем описание
+                description: (this.querySelector('.product-info .description')?.innerText.split(': ')[1]) || null
             };
 
             // Сохраняем информацию о товаре в localStorage
@@ -662,26 +568,18 @@ document.addEventListener("DOMContentLoaded", function() {
         document.getElementById('product-category').innerText = product.category || "Категория не указана";
         document.getElementById('product-tags').innerText = product.tags || "Метки не указаны";
 
-        // Условие для отображения описания
-        const descriptionTab = document.getElementById('description-tab');
-        const descriptionContent = document.getElementById('description-content');
-        
-        if (product.description) {
-            descriptionTab.style.display = 'block';
-            descriptionContent.innerText = product.description;
-        } else {
-            descriptionTab.style.display = 'none';
-        }
+        // Отображаем доп. комплект
+        document.getElementById('product-additional').innerText = `Доп. комплект: ${product.additional || "Доп. комплект не указан"}`;
 
-        // Отображаем вес только если он указан
+        // Отображаем вес (если указан)
         if (product.weight) {
             document.getElementById('product-weight').innerText = `Вес: ${product.weight}`;
         } else {
             document.getElementById('product-weight').style.display = 'none';
         }
 
+        // Отображаем габариты
         document.getElementById('product-dimensions').innerText = product.dimensions || "Габариты не указаны";
-        document.getElementById('product-additional').innerText = product.additional || "Доп. комплект не указан";
     }
 
     // Обработка переключения вкладок
@@ -702,18 +600,21 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById('details-content').classList.add('active');
 });
 
-
+// Обработка аккордеона
 document.addEventListener("DOMContentLoaded", function() {
     const accordionHeaders = document.querySelectorAll('.accordion-header');
     const product = JSON.parse(localStorage.getItem('selectedProduct'));
 
     if (product) {
+        // Отображаем вес
         document.getElementById('product-weight').innerText = product.weight ? `Вес: ${product.weight}` : "Вес: Не указан";
+        // Отображаем габариты
         document.getElementById('product-dimensions').innerText = product.dimensions || "Габариты не указаны";
 
         const descriptionContent = document.getElementById('description-content');
         const descriptionHeader = document.getElementById('description-header');
         
+        // Условие для отображения описания
         if (product.description && product.description.trim()) {
             descriptionContent.querySelector('#product-description').innerText = product.description;
             descriptionHeader.style.display = 'flex'; // Отображаем описание
@@ -739,6 +640,7 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 
+
 //в наличии
 document.querySelectorAll('.product-card').forEach(function(card) {
     let stockBar = card.querySelector('.stock-bar');
@@ -746,7 +648,7 @@ document.querySelectorAll('.product-card').forEach(function(card) {
     // Создаем элемент .stock-label
     let stockLabel = document.createElement('div');
     stockLabel.className = 'stock-label';
-    stockLabel.textContent = 'В наличии';
+    stockLabel.textContent = 'Много';
 
     // Вставляем .stock-label сразу после .stock-bar
     stockBar.insertAdjacentElement('afterend', stockLabel);
@@ -825,3 +727,138 @@ document.addEventListener("DOMContentLoaded", function() {
     document.querySelector('button[onclick="filterProducts()"]').addEventListener('click', filterProducts);
     document.querySelector('button[onclick="resetPriceFilter()"]').addEventListener('click', resetPriceFilter);
 });
+
+/* <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+      
+
+      $(document).ready(function() {
+          const allProducts = [
+              { id: 1, category: 'Тормозная Система', name: 'Товар 1', image: 'image/product/167_amor160.png', price: '446 ₽' },
+              { id: 2, category: 'Аксессуары', name: 'Товар 2', image: 'image/product/168_zerkalo.jpg', price: '996 ₽' },
+              { id: 3, category: 'Тормозная Система', name: 'Товар 3', image: 'image/product/203_tormoz.jpg', price: '1193 ₽' },
+              { id: 4, category: 'Прокладки и сальники', name: 'Товар 4', image: 'image/product/192_engine23.jpg', price: '398 ₽' },
+              { id: 5, category: 'Прокладки и сальники', name: 'Товар 5', image: 'image/product/184_engine15.jpg', price: '429 ₽' },
+              { id: 6, category: 'Двигатель', name: 'Товар 6', image: 'image/product/179_engine10.jpg', price: '1899 ₽' },
+              { id: 7, category: 'Топливная Система', name: 'Товар 7', image: 'image/product/194_engine25.jpg', price: '479 ₽' },
+              { id: 8, category: 'Топливная Система', name: 'Товар 8', image: 'image/product/197_Karb.jpg', price: '2210 ₽' },
+          ];
+      
+          const productIds = [1, 3, 4, 5, 7, 8]; // Массив ID товаров для отображения
+          const count = 4; // Количество товаров для отображения
+      
+          function getRandomProductsByIds(ids, count) {
+              const filteredProducts = allProducts.filter(product => ids.includes(product.id));
+              const shuffled = filteredProducts.sort(() => 0.5 - Math.random());
+              return shuffled.slice(0, count);
+          }
+      
+          function renderCarousel(products) {
+              const carouselHtml = products.map(product => `
+                  <div class="product-card" data-id="${product.id}">
+                      <img src="${product.image}" alt="${product.name}">
+                      <div class="details">
+                          <p class="category">${product.category}</p>
+                          <p class="name ellipsis">${product.name}</p>
+                          <div class="price">
+                              <span class="discounted-price">${product.price}</span>
+                          </div>
+                          <button class="add-to-cart" onclick="toggleCart(this)"><i class="fas fa-shopping-cart"></i></button>
+                          <button class="add-to-favorites" onclick="toggleFavorite(this)"><i class="fas fa-heart"></i></button>
+                      </div>
+                  </div>
+              `).join('');
+      
+              $('.carousel').html(carouselHtml);
+      
+              // Инициализация карусели
+              $('.carousel').slick({
+                  infinite: true,
+                  slidesToShow: 4,
+                  slidesToScroll: 2,
+                  arrows: true,
+                  prevArrow: '<button class="slick-prev slick-arrow" aria-label="Previous" type="button">←</button>',
+                  nextArrow: '<button class="slick-next slick-arrow" aria-label="Next" type="button">→</button>',
+                  draggable: true,
+                  swipeToSlide: true,
+                  touchThreshold: 10,
+                  autoplay: true,
+                  autoplaySpeed: 3000,
+                  pauseOnHover: true,
+              });
+          }
+      
+          const randomProducts = getRandomProductsByIds(productIds, count);
+          renderCarousel(randomProducts);
+      }); */
+      
+      document.addEventListener('DOMContentLoaded', function () {
+        const typeSelect = document.getElementById('scooter-type');
+        const brandSelect = document.getElementById('scooter-brand');
+        const modelSelect = document.getElementById('scooter-model');
+        const addToGarageButton = document.getElementById('add-to-garage');
+    
+        // Пример данных моделей для разных типов и брендов
+        const scooterModels = {
+            type1: {
+                brand1: ['Model A', 'Model B'],
+                brand2: ['Model C', 'Model D'],
+            },
+            type2: {
+                brand1: ['Model E', 'Model F'],
+                brand2: ['Model G', 'Model H'],
+            },
+        };
+    
+        // Обновление моделей в зависимости от выбранного типа и бренда
+        function updateModels() {
+            const type = typeSelect.value;
+            const brand = brandSelect.value;
+            modelSelect.innerHTML = '<option value="">Выберите модель</option>';
+    
+            if (type && brand && scooterModels[type] && scooterModels[type][brand]) {
+                scooterModels[type][brand].forEach(model => {
+                    const option = document.createElement('option');
+                    option.value = model;
+                    option.textContent = model;
+                    modelSelect.appendChild(option);
+                });
+            }
+        }
+    
+        // Обработчики изменений
+        typeSelect.addEventListener('change', updateModels);
+        brandSelect.addEventListener('change', updateModels);
+    
+        // Функция фильтрации товаров
+        function filterProducts() {
+            const type = typeSelect.value;
+            const brand = brandSelect.value;
+            const model = modelSelect.value;
+    
+            // Ваш код для фильтрации товаров
+            // Например, можно скрыть/показать товары в зависимости от выбранных параметров
+            const products = document.querySelectorAll('.product');
+            products.forEach(product => {
+                const productType = product.dataset.type;
+                const productBrand = product.dataset.brand;
+                const productModel = product.dataset.model;
+    
+                if ((type === '' || productType === type) &&
+                    (brand === '' || productBrand === brand) &&
+                    (model === '' || productModel === model)) {
+                    product.style.display = '';
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+        }
+    
+        // Обработчик кнопки добавления в гараж
+        addToGarageButton.addEventListener('click', function () {
+            filterProducts();
+        });
+    });
+    

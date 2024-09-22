@@ -102,7 +102,7 @@ body {
 /* Серый контейнер */
 .action-container {
   position: absolute;
-  left: 268px;
+  left: 258px;
   top: 0;
   width: 60%;
   height: 50px;
@@ -122,6 +122,7 @@ body {
   align-items: center;
   gap: 15px;
 }
+
 
 
 .action-container .content {
@@ -165,32 +166,59 @@ body {
   text-decoration: underline;
 }
 
+
+
+
 /*геолокация*/
+/* Основные стили для контейнера геолокации */
+
+
+#header {
+  transition: height 0.5s ease;
+}
+
+/* Сабменю */
+.submenu {
+  transition: opacity 0.5s ease, visibility 0.5s ease, transform 0.5s ease;
+  opacity: 0; /* Изначально скрыто */
+  visibility: hidden;
+  transform: translateY(-20px); /* Поднимаем элемент, когда он скрыт */
+}
+
+/* Видимое сабменю */
+.submenu.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0); /* Возвращаем элемент в исходное положение */
+}
+
+/* Геолокация */
 #location-container {
   font-size: 14.5px;
   color: #ffffff;
   margin-top: 40px;
   margin-left: 250px;
-  transition: opacity 0.5s ease; /* Плавное появление/скрытие */
+  transition: opacity 0.5s ease, transform 0.5s ease; /* Плавное появление/скрытие */
+  position: relative;
 }
 
+/* Скрытие с плавной анимацией */
 .hidden {
   opacity: 0;
-  pointer-events: none; /* Отключаем события мыши для скрытых элементов */
-  transition: opacity 0.3s ease-in-out;
+  pointer-events: none;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  transform: translateY(-20px); /* Поднимаем элемент при скрытии */
 }
 
-.hidden-button {
-  opacity: 0;
-  pointer-events: auto; /* Включаем кликабельность для кнопки */
-  transition: opacity 0.3s ease-in-out;
+/* Видимость с плавной анимацией */
+.visible {
+  opacity: 1;
+  pointer-events: auto;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  transform: translateY(0); /* Возвращаем элемент в исходное положение */
 }
 
-.hidden-button span {
-  visibility: hidden;
-}
-
-
+/* Стили для кнопки */
 #change-city-button {
   background-color: #45EFDA;
   color: #000000;
@@ -198,8 +226,10 @@ body {
   border-radius: 5px;
   padding: 3px 4px;
   cursor: pointer;
+  font-size: 15px;
 }
 
+/* Стили для модального окна */
 .city-modal {
   display: none; /* Скрываем модальное окно по умолчанию */
   position: fixed;
@@ -209,7 +239,7 @@ body {
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgba(0,0,0,0.4); /* Прозрачный черный фон */
+  background-color: rgba(0, 0, 0, 0.4); /* Прозрачный черный фон */
 }
 
 .city-modal-content {
@@ -264,20 +294,6 @@ body {
   background-color: #333;
 }
 
-.close {
-  color: #000000;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.close:hover,
-.close:focus {
-  color: #000;
-  text-decoration: none;
-  cursor: pointer;
-}
 
 
   
@@ -293,6 +309,18 @@ body {
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.4);
 } */
+
+@media (max-width: 768px) {
+  .modal-contents {
+    max-width: 90%;
+    padding: 15px;
+  }
+
+  .table th, .table td {
+    font-size: 14px;
+    padding: 8px;
+  }
+}
 
 .modal-contents {
   background-color: #fff;
@@ -428,6 +456,13 @@ body {
   cursor: pointer;
   border-radius: 5px;
 }
+#login-button a {
+  display: block; /* Ссылка занимает всю кнопку */
+  width: 100%;
+  height: 100%;
+  text-decoration: none; /* Убираем подчеркивание */
+  color: inherit;
+}
 
 #add-scooter:hover, #login-button:hover {
   background-color: #45EFDA;
@@ -464,12 +499,14 @@ td img {
   margin-left: auto;
   margin-right: auto;
 }
+/*размер кнопок +- в модальном окне*/
 .quantity-change {
-padding: 11px 11px !important;
-margin-right: 10px;
-margin-left: 10px;
-align-items: center;
-}
+  padding: 6px 6px !important;
+  margin-right: 10px;
+  margin-left: 10px;
+  align-items: center;
+  }
+  
 
 .cart-total {
   margin-top: 20px;
@@ -557,23 +594,26 @@ align-items: center;
 
 /* .tabs */
 .submenu {
-  display: none;
-  position: absolute;
-  left: 60%; /* Относительное позиционирование по горизонтали */
-  transform: translateX(-50%); /* Центрирование по горизонтали */
-  width: auto;
-  padding: 17px;
-  top: 40px;
-  z-index: 1000;
+  opacity: 0;
   transition: opacity 0.5s ease;
+  height: auto;
+  pointer-events: none;
+  margin-left: 50px;
+  margin-top: 40px; /* Опускаем подменю, чтобы оно не пересекалось с поисковой строкой */
+}
+
+.submenu.visible {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .submenu ul {
   display: flex;
   flex-direction: row;
-  justify-content: space-between; /* Равномерное распределение элементов */
+  justify-content: space-between; 
   list-style-type: none;
   padding: 0;
+  margin: 0; /* Сброс отступов */
 }
 
 .submenu ul li {
@@ -602,10 +642,19 @@ align-items: center;
   width: 1px;
   background-color: #4b4a4a;
   top: -10px;
-  right: -5px; /* Исправляем положение разделителя */
+  right: -5px;
   transform: rotate(20deg);
 }
 
+/* Контейнер действий */
+.action-container {
+  transition: margin-left 0.3s ease; /* Плавное смещение */
+}
+
+/* При сворачивании */
+.header.collapsed .action-container {
+  margin-left: -6px; /* Смещаем контейнер на 5 пикселей влево */
+}
 
 /* Иконка меню */
 .menu-icon {
@@ -1350,7 +1399,7 @@ footer {
 
 button {
   margin: 10px 0; 
-  padding: 15px 20px;
+  padding: 15px 30px;
   font-size: 16px;
   cursor: pointer;
   border: none;
@@ -1362,23 +1411,23 @@ button:hover {
   transform: scale(1.05);
 }
 
-.whatsapp-btn, .telegram-btn, .phone-btn {
-  width: 200px;
-}
 
 .whatsapp-btn {
-  background-color: #12ea61e6;
+  background-color: #25D366;
   color: white;
+  width: 150px;
 }
 
 .telegram-btn {
-  background-color: #13b8ea;
+  background-color: #0088cc;
   color: white;
+  width: 150px;
 }
 
 .phone-btn {
   background-color: #007bff;
   color: white;
+  width: 150px;
 }
 
 .legal a {
@@ -1744,16 +1793,17 @@ margin-right: 50px;
 
 
 .stock-label {
-  font-family:  'Merriweather', sans-serif; 
-  font-size: 11px; 
+  font-size: 11.5px; 
+  text-transform: uppercase;
   color: #28a745; 
-  padding: 10px; 
+  padding: 1px; 
   display: block; 
   position: absolute; 
-  bottom: 0; 
-  right: 0; 
-  text-align: right; 
+  bottom: 15px; /* Расположение внизу карточки */
+  right: 17px; /* Привязка к правому краю */
+  text-align: right; /* Выравнивание текста по правому краю */
 }
+
 
 
 .product-image {
@@ -2291,7 +2341,7 @@ margin-right: 50px;
   height: auto; /* Сохраняем пропорции */
   object-fit: cover;
   margin-top: 20px;
-  border: 2px solid #ddd;
+  /* border: 2px solid #ddd; */
   display: block; /* Обеспечиваем корректное выравнивание */
   margin-left: auto; /* Выровнять по центру */
   margin-right: auto; /* Выровнять по центру */
@@ -2360,7 +2410,25 @@ margin-right: 50px;
   align-items: center;
   margin-bottom: 10px;
 }
+.discounted-price {
+  font-weight: bold;
+  font-size: 20px; /* Увеличенный размер шрифта для цены */
+  color: red;
+}
 
+.original-price-wrapper {
+  background-color: #f0f0f0;
+  padding: 2px 5px;
+  border-radius: 5px;
+  margin-left: 10px;
+}
+
+.original-price {
+  text-decoration: line-through;
+  color: #000000;
+  margin-left: 18px;
+  font-size: 17px;
+} 
 .original-price-wrapper {
   background-color: #45EFDA;
   padding: 2px 5px;
@@ -2371,6 +2439,11 @@ margin-right: 50px;
 .no-discount .original-prices {
   text-decoration: none; 
   color: #000000; 
+}
+
+/* Для карточек без скидки */
+.product-card:not([data-id="1"]) .no-discount .original-prices {
+  text-decoration: none; 
 }
 .discount {
   position: absolute;
@@ -2402,7 +2475,7 @@ margin-right: 50px;
   background-color: #333;
   color: white;
   border: none;
-  padding: 5px 7px;
+  padding: 6px 5px;
   border-radius: 5px;
   cursor: pointer;
   margin-left: auto;
@@ -2410,7 +2483,7 @@ margin-right: 50px;
 
 .add-to-favorites {
   position: absolute;
-  top: 15px;
+  top: 5px;
   right: -15px;
   background-color: transparent;
   border: none;
@@ -2425,31 +2498,31 @@ margin-right: 50px;
 /* Установка стилей для кнопок вкладок */
 .tabs {
   display: flex; /* Располагает кнопки в один ряд */
-  gap: 10px; /* Промежуток между кнопками */
+  gap: 10px; 
   justify-content: flex-start; /* Располагает кнопки с начала строки */
 
 }
 
 .tabs .tab {
   flex-grow: 1; /* Позволяет кнопкам занимать равное пространство */
-  max-width: 150px; /* Ограничение максимальной ширины кнопок */
-  padding: 5px 10px; /* Уменьшенные внутренние отступы */
-  text-align: center; /* Центрирование текста внутри кнопки */
-  background-color: #f1f1f1; /* Цвет фона вкладки */
+  max-width: 150px;
+  padding: 5px 10px; 
+  text-align: center;
+  background-color: #f1f1f1;
   border: 1px solid #ccc;
   border-radius: 4px;
   cursor: pointer;
 }
 
 .tabs .tab.active {
-  background-color: #ddd; /* Цвет активной вкладки */
+  background-color: #ddd; 
 }
 
 /* Установка стилей для контента вкладок */
 .tab-content {
-  max-width: 90%; /* Ограничение ширины вкладок, чтобы они не выходили за границы страницы */
-  word-wrap: break-word; /* Перенос длинных слов */
-  overflow-wrap: break-word; /* Дополнительная поддержка переноса длинных слов */
+  max-width: 90%; 
+  word-wrap: break-word;
+  overflow-wrap: break-word;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -2457,3 +2530,128 @@ margin-right: 50px;
   margin-top: 30px;
 }
 
+
+/*featured-products*/
+
+.featured-productss {
+  text-align: center;
+  margin-top: 80px;
+  width: 1200px;
+  margin-left: 70px;
+  position: relative;
+  right: 70px; 
+}
+.a {
+  margin-top: 360px;
+  margin-right: 960px;
+  white-space: nowrap; /* Запрещает перенос строк внутри элемента */
+  font-size: 22px;
+}
+.as {
+  margin-top: 60px;
+  margin-right: 1100px;
+  white-space: nowrap; 
+  font-size: 22px;
+}
+
+.red-lines {
+  width: 145px;
+  height: 2px;
+  background-color: red;
+  margin: 0 100px 20px 0px;
+}
+
+/* Стили для карусели */
+.carousel {
+  display: flex;
+  overflow: hidden; 
+  width: 1200px; 
+  margin: 0 auto; 
+}
+.product-cardc {
+  width: 240px;
+  height: 400px;
+  margin-right: 20px;
+  text-align: left;
+  position: relative;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 7px;
+  flex: 0 0 auto; 
+}
+
+.product-cardc img {
+  width: 80%;
+  height: auto;
+  object-fit: cover;
+  display: block; 
+  margin-top: 25px;
+  margin-left: auto; 
+  margin-right: auto; 
+  border: 2px solid #ddd;
+}
+
+
+/* Основные стили для секции выбора скутера */
+.scooter-selection {
+  background-color: #f9f9f9;
+  padding: 15px; 
+  border-radius: 6px; 
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); 
+  margin: 15px 0; 
+  margin-top: 45px; 
+}
+
+.section-title {
+  font-size: 20px; 
+  font-weight: bold;
+  margin-bottom: 10px; 
+  color: #333;
+}
+
+.scooter-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group {
+  margin-bottom: 10px; 
+}
+
+.form-group label {
+  display: block;
+  font-size: 14px; 
+  margin-bottom: 4px; 
+  color: #555;
+}
+
+.form-control {
+  width: 40%;
+  padding: 8px;
+  font-size: 14px; 
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.form-control:focus {
+  border-color: #45EFDA;
+  outline: none;
+}
+
+.btn, .btn-primary {
+  display: inline-block;
+  padding: 8px 3px; 
+  font-size: 14px; 
+  color: #000000; 
+  background-color: #45EFDA; 
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s, box-shadow 0.3s; 
+}
+
+.btn-primary:hover, .btn:hover {
+  background-color: #36c7c2; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
+}

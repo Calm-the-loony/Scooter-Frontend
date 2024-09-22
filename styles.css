@@ -5,10 +5,27 @@
 }
 
 body {
-  font-family: 'Merriweather', serif;
+  font-family: 'Barlow', sans-serif;
   height: 2000px; /* Для прокрутки контента */
 }
 
+@font-face {
+  font-family: 'SB';
+  src: url('/custom/module/public/streetbuzz/assets/fonts/sb/sb.woff2?5d0a37d4') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Barlow';
+  src: url('/custom/module/public/streetbuzz/assets/fonts/barlow-v5-latin/barlow-v5-latin-regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  font-family: 'Barlow', sans-serif;
+}
 /*шапка*/
 /* Специфические стили для кнопок в .user-actions */
 .user-actions button {
@@ -103,10 +120,10 @@ body {
 /* Серый контейнер */
 .action-container {
   position: absolute;
-  left: 268px;
+  left: 258px;
   top: 0;
   width: 60%;
-  height: 50px;
+  height: 55px;
   padding: 10px;
   display: flex;
   align-items: center;
@@ -165,32 +182,58 @@ body {
   text-decoration: underline;
 }
 
-/*геолокация*/
-#location-container {
-  font-size: 14.5px;
-  color: #ffffff;
-  margin-top: 40px;
-  margin-left: 250px;
-  transition: opacity 0.5s ease; /* Плавное появление/скрытие */
+/* Основные стили для контейнера геолокации */
+
+
+#header {
+  transition: height 0.5s ease;
 }
 
+/* Сабменю */
+.submenu {
+  transition: opacity 0.5s ease, visibility 0.5s ease, transform 0.5s ease;
+  opacity: 0; /* Изначально скрыто */
+  visibility: hidden;
+  transform: translateY(-20px); /* Поднимаем элемент, когда он скрыт */
+}
+
+/* Видимое сабменю */
+.submenu.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0); /* Возвращаем элемент в исходное положение */
+}
+
+/* Геолокация */
+#location-container {
+  font-size: 13px;
+  font-weight: 700; 
+  text-align: center;
+  text-transform: uppercase; /* Делаем все буквы заглавными */
+  color: #ffffff;
+  margin-top: 48px;
+  margin-left: 250px;
+  transition: opacity 0.5s ease, transform 0.5s ease; /* Плавное появление/скрытие */
+  position: relative;
+}
+
+/* Скрытие с плавной анимацией */
 .hidden {
   opacity: 0;
-  pointer-events: none; /* Отключаем события мыши для скрытых элементов */
-  transition: opacity 0.3s ease-in-out;
+  pointer-events: none;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  transform: translateY(-20px); /* Поднимаем элемент при скрытии */
 }
 
-.hidden-button {
-  opacity: 0;
-  pointer-events: auto; /* Включаем кликабельность для кнопки */
-  transition: opacity 0.3s ease-in-out;
+/* Видимость с плавной анимацией */
+.visible {
+  opacity: 1;
+  pointer-events: auto;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  transform: translateY(0); /* Возвращаем элемент в исходное положение */
 }
 
-.hidden-button span {
-  visibility: hidden;
-}
-
-
+/* Стили для кнопки */
 #change-city-button {
   background-color: #45EFDA;
   color: #000000;
@@ -198,9 +241,10 @@ body {
   border-radius: 5px;
   padding: 3px 4px;
   cursor: pointer;
-  font-size: 15px
+  font-size: 15px;
 }
 
+/* Стили для модального окна */
 .city-modal {
   display: none; /* Скрываем модальное окно по умолчанию */
   position: fixed;
@@ -210,7 +254,7 @@ body {
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgba(0,0,0,0.4); /* Прозрачный черный фон */
+  background-color: rgba(0, 0, 0, 0.4); /* Прозрачный черный фон */
 }
 
 .city-modal-content {
@@ -265,6 +309,7 @@ body {
   background-color: #333;
 }
 
+
 /* .close {
   color: #000000;
   float: right;
@@ -295,16 +340,26 @@ body {
 } */
  
 
+@media (max-width: 768px) {
+  .modal-contents {
+    max-width: 90%;
+    padding: 15px;
+  }
 
+  .table th, .table td {
+    font-size: 14px;
+    padding: 8px;
+  }
+}
 
 .modal-contents {
   background-color: #fff;
-  margin: 15% auto; /* Центрирует модальное окно вертикально и горизонтально */
+  margin: 15% auto; 
   padding: 20px;
   border: 1px solid #888;
-  width: 80%; /* Установите ширину, подходящую для вашего дизайна */
-  max-height: 80%; /* Установите максимальную высоту */
-  overflow-y: auto; /* Вертикальная прокрутка, если содержимое превышает высоту */
+  width: 80%; 
+  max-height: 80%; 
+  overflow-y: auto; 
 }
 
 .modal-contents h2{
@@ -325,6 +380,7 @@ body {
   text-decoration: none;
 }
 
+/* Таблица для списка товаров в избранном */
 #favorite-list {
   width: 100%;
   border-collapse: collapse;
@@ -415,7 +471,7 @@ body {
 
 #scooter-form select {
   width: 100%;
-  padding: 8px; /* Уменьшаем немного отступы */
+  padding: 8px; 
   margin-top: 5px;
   border: 1px solid #ddd; 
   border-radius: 5px; 
@@ -429,7 +485,15 @@ body {
   color: rgb(0, 0, 0);
   border: none;
   cursor: pointer;
-  border-radius: 5px; 
+  border-radius: 5px;
+}
+
+#login-button a {
+  display: block; /* Ссылка занимает всю кнопку */
+  width: 100%;
+  height: 100%;
+  text-decoration: none; /* Убираем подчеркивание */
+  color: inherit;
 }
 
 #add-scooter:hover, #login-button:hover {
@@ -467,8 +531,9 @@ td img {
   margin-left: auto;
   margin-right: auto;
 }
+/*размер кнопок +- в модальном окне*/
 .quantity-change {
-padding: 11px 11px !important;
+padding: 6px 6px !important;
 margin-right: 10px;
 margin-left: 10px;
 align-items: center;
@@ -493,16 +558,15 @@ align-items: center;
 }
 
 .highlighted {
-  background-color: #45EFDA; /* Подсветка найденного текста */
-  color: black;
-  text-decoration: none; /* Убираем подчеркивание ссылки */
+  background-color: #45EFDA;
+  padding: 2px;
+  border-radius: 3px;
+  transition: background-color 0.3s ease;
 }
-
 
 .highlighted:hover {
-  background-color: rgb(80, 237, 232);
+  background-color: #45EFDA;
 }
-
 
 /* Поисковик */
 .search-bar {
@@ -561,16 +625,20 @@ align-items: center;
 
 
 /* .tabs */
+/* Подменю */
+
 .submenu {
-  display: none;
-  position: absolute;
-  left: 60%;
-  transform: translateX(-50%); 
-  width: auto;
-  padding: 17px;
-  top: 40px;
-  z-index: 1000;
+  opacity: 0;
   transition: opacity 0.5s ease;
+  height: auto;
+  pointer-events: none;
+  margin-left: 55px;
+  margin-top: 48px; /* Опускаем подменю, чтобы оно не пересекалось с поисковой строкой */
+}
+
+.submenu.visible {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .submenu ul {
@@ -579,6 +647,7 @@ align-items: center;
   justify-content: space-between; 
   list-style-type: none;
   padding: 0;
+  margin: 0; /* Сброс отступов */
 }
 
 .submenu ul li {
@@ -589,10 +658,14 @@ align-items: center;
 .submenu ul li a {
   text-decoration: none;
   color: white;
-  font-size: 14px;
+  font-size: 13px; /* Уменьшаем размер шрифта */
+  font-weight: 700; /* Делаем шрифт более жирным */
   display: block;
-  padding: 5px 5px;
+  padding: 10px 5px; /* Добавляем равные отступы сверху и снизу */
+  text-transform: uppercase; /* Делаем все буквы заглавными */
+  text-align: center; /* Выровнять текст по центру */
 }
+
 
 .submenu ul li a:hover {
   background-color: #1c1c1c;
@@ -600,16 +673,28 @@ align-items: center;
   transition: all 0.3s ease;
 }
 
+
 .submenu ul li:not(:last-child)::after {
   content: '';
   position: absolute;
-  height: calc(100% + 22px);
+  height: calc(100% + 20px); /* Увеличиваем, чтобы черточка захватывала текст */
   width: 1px;
   background-color: #4b4a4a;
   top: -10px;
-  right: -5px; /* Исправляем положение разделителя */
+  right: 0px;
   transform: rotate(20deg);
 }
+
+/* Контейнер действий */
+.action-container {
+  transition: margin-left 0.3s ease; /* Плавное смещение */
+}
+
+/* При сворачивании */
+.header.collapsed .action-container {
+  margin-left: -7px; /* Смещаем контейнер на 5 пикселей влево */
+}
+
 
 
 
@@ -675,10 +760,6 @@ align-items: center;
   cursor: pointer;
 }
 
-.filters button:hover {
-  background-color: #45EFDA;
-}
-
 .filters input[type="text"] {
   padding: 10px;
   border: none;
@@ -732,6 +813,9 @@ align-items: center;
   margin-bottom: 15px;
   box-sizing: border-box;
 }
+
+
+
 
 .category-container {
   text-align: center;
@@ -791,16 +875,23 @@ align-items: center;
   margin-right: 1100px;
   white-space: nowrap; /* Запрещает перенос строк внутри элемента */
   font-size: 22px;
+
 }
 
 .red-line {
-  width: 268px;
+  width: 275px;
+  height: 2px;
+  background-color: red;
+  margin: 0 100px 20px 2px;
+}
+.red-liness {
+  width: 295px;
   height: 2px;
   background-color: red;
   margin: 0 100px 20px 2px;
 }
 .red-lines {
-  width: 130px;
+  width: 140px;
   height: 2px;
   background-color: red;
   margin: 0 100px 20px 2px;
@@ -816,7 +907,7 @@ align-items: center;
 
 .product-card {
   width: 280px;
-  height: 455px;
+  height: 450px;
   margin-right: 20px;
   text-align: left;
   position: relative;
@@ -834,7 +925,7 @@ align-items: center;
   margin-top: 25px;
   margin-left: auto; /* Выровнять по центру */
   margin-right: auto; /* Выровнять по центру */
-  border: 2px solid #ddd; /* Обводка для изображения */
+  /* border: 2px solid #ddd;  */
 }
 
 .discount {
@@ -862,6 +953,7 @@ align-items: center;
   font-size: 16px;
   margin-bottom: 10px;
   line-height: 1.2; /* Позволяет название состоять из нескольких строк */
+  text-transform: uppercase;
 }
 
 .price {
@@ -891,11 +983,12 @@ align-items: center;
 }
 
 .stock-bar {
-  width: 40px;
+  width: 45px;
   height: 10px;
   background-color: green; 
   margin-left: 10px;
   border-radius: 5px;
+  margin-bottom: 10px;
 }
 
 /* Цвет шкалы в зависимости от наличия */
@@ -911,36 +1004,38 @@ align-items: center;
   background-color: #333;
   color: white;
   border: none;
-  padding: 2px 4px;
+  padding: 6px 5px;
   border-radius: 5px;
   cursor: pointer;
   margin-left: auto;
+  margin-top: 15px;
 }
 
 .add-to-favorites {
   position: absolute;
-  top: 15px;
-  right: -20px;
+  top: 10px;
+  right: -25px;
   background-color: transparent;
   border: none;
   color: #666;
   cursor: pointer;
 }
 
-.favorited .fa-heart {
+.add-to-favorites i.active {
   color: red;
 }
 
 .original-price-wrapper {
-  background-color: #45EFDA;
+  background-color: #ffffff;
   padding: 2px 5px;
   border-radius: 5px;
   margin-left: 0px;
 }
 
 .no-discount .original-prices {
+  font-size: 20px;
   text-decoration: none; 
-  color: #000000; 
+  color:  #000000; 
 }
 
 /* Для карточек без скидки */
@@ -948,19 +1043,19 @@ align-items: center;
   text-decoration: none; 
 }
 .product-card {
-  position: relative; /* Для позиционирования внутри карточки */
+  position: relative; 
 }
 
 .stock-label {
-  font-family:  'Merriweather', sans-serif; /* Используем шрифт Arial */
-  font-size: 11px; /* Размер шрифта */
-  color: #28a745; /* Зеленый цвет для обозначения наличия */
-  padding: 10px; /* Отступы сверху и снизу */
-  display: block; /* Блочный элемент, чтобы занял всю ширину */
-  position: absolute; /* Абсолютное позиционирование внутри карточки */
-  bottom: 0; /* Расположение внизу карточки */
-  right: 0; /* Привязка к правому краю */
-  text-align: right; /* Выравнивание текста по правому краю */
+  font-size: 11.5px; 
+  text-transform: uppercase;
+  color: #28a745; 
+  padding: 1px; 
+  display: block; 
+  position: absolute; 
+  bottom: 35px; /* Расположение внизу карточки */
+  right: 20px; /* Привязка к правому краю */
+  text-align: right; 
 }
 
 
@@ -1225,27 +1320,8 @@ align-items: center;
   display: none;
 }
 
-/*УТП3*/
-/* .c {
-  margin-bottom: 10px;
-  margin-right: 990px;
-}
 
-.red-lines {
-  width: 190px;
-  height: 2px;
-  background-color: red;
-  margin: 0 100px 20px 10px;
-} */
-
-/*баннер индивидульного заказа*/
-/* .banner-container1 {
-  width: 1180px;
-  margin: 0 auto;
-  padding-top: 20px;
-} */
-
-.close {
+/* .close {
   position: absolute;
   top: 10px;
   right: 15px;
@@ -1255,7 +1331,7 @@ align-items: center;
 
 .close:hover {
   color: #aaa;
-}
+} */
 
 .banner-image {
   width: 1200px; 
@@ -1268,13 +1344,17 @@ align-items: center;
 .modal {
   display: none; /* Скрывает модальное окно по умолчанию */
   position: fixed; /* Фиксирует модальное окно на экране */
-  z-index: 1000; /* Устанавливает приоритет отображения модального окна */
+  z-index: 1000; /* Приоритет отображения */
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
-  overflow: auto; /* Позволяет прокрутку, если содержимое превышает размеры окна */
+  overflow: auto; /* Позволяет прокрутку содержимого */
   background-color: rgba(0,0,0,0.4); /* Полупрозрачный фон */
+}
+
+.modal.show {
+  display: block; /* Отображает модальное окно при открытии */
 }
 
 .modal-content {
@@ -1305,6 +1385,7 @@ button:hover {
   background-color: #25D366;
   color: white;
   width: 150px;
+  margin-left: 15px;
 }
 
 .telegram-btn {

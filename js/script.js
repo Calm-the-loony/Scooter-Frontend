@@ -29,15 +29,114 @@ function performSearch() {
 function toggleFavorite(button) {
   button.classList.toggle('favorited');
 }
+$(document).ready(function() {
+    let isDragging = false;
+    let startX = 0;
+    let dragThreshold = 10;
+    let isMouseMoved = false;
 
-//карусель
-$(document).ready(function(){
-    $('.carousel').slick({
-      infinite: true,
-      slidesToShow: 4, // Количество отображаемых слайдов
-      slidesToScroll: 2, // Количество прокручиваемых слайдов
+    // Функция для установки одинаковой высоты карточек
+    function setEqualHeight() {
+        let maxHeight = 0;
+
+        // Находим максимальную высоту карточек
+        $('.product-card').each(function() {
+            let cardHeight = $(this).outerHeight();
+            if (cardHeight > maxHeight) {
+                maxHeight = cardHeight;
+            }
+        });
+
+        // Устанавливаем одинаковую высоту для всех карточек
+        $('.product-card').each(function() {
+            $(this).css('height', maxHeight + 'px');
+        });
+    }
+
+    // Инициализация карусели с автопрокруткой
+    $('.carousel').on('init', function() {
+        setEqualHeight(); // Устанавливаем одинаковую высоту после инициализации карусели
+    }).slick({
+        infinite: true,
+        slidesToShow: 4,
+        slidesToScroll: 2,
+        arrows: true,
+        prevArrow: '<button class="slick-prev slick-arrow" aria-label="Previous" type="button">←</button>',
+        nextArrow: '<button class="slick-next slick-arrow" aria-label="Next" type="button">→</button>',
+        draggable: true,
+        swipeToSlide: true,
+        touchThreshold: 10,
+        autoplay: true,
+        autoplaySpeed: 2000,
+        pauseOnHover: true,
     });
-  });
+
+    // Обработчики перетаскивания карусели
+    $('.carousel').on('mousedown touchstart', function(e) {
+        isDragging = true;
+        isMouseMoved = false;
+        startX = e.type === 'mousedown' ? e.pageX : e.originalEvent.touches[0].pageX;
+    });
+
+    $('.carousel').on('mousemove touchmove', function(e) {
+        if (isDragging) {
+            const currentX = e.type === 'mousemove' ? e.pageX : e.originalEvent.touches[0].pageX;
+            if (Math.abs(currentX - startX) > dragThreshold) {
+                isMouseMoved = true;
+            }
+        }
+    });
+
+    $('.carousel').on('mouseup touchend', function() {
+        isDragging = false;
+    });
+
+    // Открытие карточки при клике, если не было перетаскивания
+    $('.product-card').on('click', function(e) {
+        if (!isMouseMoved && !$(e.target).hasClass('add-to-cart')) {
+            const productInfo = $(this).find('.product-info');
+            productInfo.slideToggle();
+        }
+    });
+
+    // Функция для добавления товара в корзину
+    $('.add-to-cart').on('click', function(e) {
+        e.stopPropagation();
+        const productCard = $(this).closest('.product-card');
+        const productId = productCard.attr('data-id');
+        const productInfo = productCard.find('.product-info');
+        const product = {
+            id: productId,
+            image: productCard.find('img').attr('src'),
+            name: productCard.find('.name').text(),
+            price: productCard.find('.discounted-price').text() || productCard.find('.original-price').text() || productCard.find('.original-prices').text(),
+            quantity: 1
+        };
+
+        const index = cart.findIndex(item => item.id === productId);
+
+        if (index > -1) {
+            cart[index].quantity += 1;
+        } else {
+            cart.push(product);
+        }
+
+        if (productInfo) {
+            productInfo.hide();
+        }
+
+        if (cartCount) {
+            cartCount.text(cart.length);
+        }
+        updateCartList();
+        saveCart();
+    });
+
+    // Устанавливаем одинаковую высоту карточек при изменении размера окна
+    $(window).on('resize', function() {
+        setEqualHeight();
+    });
+});
 
 
 //кнопка View more
@@ -77,21 +176,35 @@ viewMoreButton.addEventListener('click', toggleVisibility);
 
 
 
+//модальные окна
 
-//баннер
-// Отображение модального окна
-function showModal() {
-  const modal = document.getElementById('myModal');
-  modal.style.display = 'block';
-}
+        // Отображение модального окна
+        function showModal() {
+            const modal = document.getElementById('myModal');
+            modal.style.display = 'block';
+          }
+          
+        // Отображение модального окна
+        function showModal() {
+            const modal = document.getElementById('myModal');
+            modal.style.display = 'block';
+          }
+          
+          // Закрытие модального окна при клике вне его
+          window.onclick = function(event) {
+            const modal = document.getElementById('myModal');
+            if (event.target === modal) {
+              modal.style.display = 'none';
+            }
+          }
+          
+          // Закрытие модального окна при клике на крестик
+          function closeModal() {
+            const modal = document.getElementById('myModal');
+            modal.style.display = 'none';
+          }
 
-// Закрытие модального окна при клике вне его
-window.onclick = function(event) {
-  const modal = document.getElementById('myModal');
-  if (event.target == modal) {
-    modal.style.display = 'none';
-  }
-}
+
 
 // Переадресация на WhatsApp
 function redirectToWhatsApp() {
@@ -106,98 +219,7 @@ function makePhoneCall() {
   window.location.href = 'tel:+9614277510';
 }
 
-//шапка
-let prevScrollPos = window.pageYOffset;
-let isMenuOpen = false;
 
-function scrollHandler() {
-    const currentScrollPos = window.pageYOffset;
-    const header = document.getElementById("header");
-    const actionContainer = document.querySelector(".action-container");
-    const submenu = document.querySelector('.submenu');
-    const locationText = document.querySelector('.location-text');
-    const changeCityButton = document.getElementById('change-city-button');
-
-    if (currentScrollPos < 100) {
-        // Разворачиваем шапку
-        header.style.height = "100px"; 
-        header.classList.remove('collapsed');
-        header.classList.add('expanded');
-        actionContainer.style.marginLeft = "0"; 
-
-        // Показать подменю, если оно открыто
-        submenu.style.display = 'block';
-        submenu.style.opacity = "1"; // Стабильное отображение меню
-
-        locationText.classList.remove('hidden'); 
-        changeCityButton.classList.remove('hidden-button'); 
-    } else {
-        // Сворачиваем шапку
-        header.style.height = "50px"; 
-        header.classList.remove('expanded');
-        header.classList.add('collapsed');
-
-        // Скрываем подменю
-        submenu.style.opacity = '0'; 
-        setTimeout(() => submenu.style.display = 'none', 500); 
-
-        actionContainer.style.marginLeft = "-7px"; // Смещаем контейнер при сворачивании
-
-        locationText.classList.add('hidden'); 
-        changeCityButton.classList.add('hidden-button'); 
-    }
-    
-    prevScrollPos = currentScrollPos;
-}
-
-function toggleMenu() {
-    const header = document.querySelector('.header');
-    const submenu = document.querySelector('.submenu');
-    const locationElements = document.querySelectorAll('.location-text');
-
-    if (!isMenuOpen && window.pageYOffset < 100) {
-        // Разворачиваем шапку и показываем подменю
-        header.style.height = '100px';
-        header.classList.add('expanded');
-        header.classList.remove('collapsed');
-        submenu.style.display = 'block';
-        submenu.style.opacity = "1"; // Стабильное появление
-        isMenuOpen = true;
-
-        // Показываем элементы геолокации
-        locationElements.forEach(el => el.classList.remove('hidden'));
-    } else {
-        // Сворачиваем шапку и скрываем подменю
-        header.style.height = '50px';
-        header.classList.add('collapsed');
-        header.classList.remove('expanded');
-        submenu.style.opacity = '0';
-        setTimeout(() => submenu.style.display = 'none', 500);
-        isMenuOpen = false;
-
-        // Скрываем элементы геолокации
-        locationElements.forEach(el => el.classList.add('hidden'));
-    }
-}
-
-// Обработка события прокрутки
-window.addEventListener('scroll', function() {
-    const container = document.querySelector('.action-container');
-    container.style.left = '259px'; // Обновляем значение left
-    container.style.transform = 'skew(-20deg)'; // Обновляем трансформацию
-});
-
-// Привязываем обработчик события скролла
-window.onscroll = function () {
-    scrollHandler();
-
-    // Обновляем меню независимо от текущей позиции прокрутки
-    if (window.pageYOffset < 100) {
-        const submenu = document.querySelector('.submenu');
-        submenu.style.display = 'block'; 
-        submenu.style.opacity = "1"; // Убеждаемся, что текст отображается стабильно
-    }
-};
 
 
 //избранное и корзина
@@ -481,6 +503,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
+
 //личный кабинет, управление отображением форм
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -540,7 +563,7 @@ document.querySelectorAll('.product-card').forEach(function(card) {
         // Создаем элемент .stock-label
         let stockLabel = document.createElement('div');
         stockLabel.className = 'stock-label';
-        stockLabel.textContent = 'В наличии';
+        stockLabel.textContent = 'Много';
 
         // Вставляем .stock-label сразу после .stock-bar
         stockBar.insertAdjacentElement('afterend', stockLabel);
@@ -550,53 +573,171 @@ document.querySelectorAll('.product-card').forEach(function(card) {
 });
 
 
-
-// //геолокация
+// // Обработка кликов на карточках товаров
 // document.addEventListener("DOMContentLoaded", function() {
-//     getUserCity();
+//     document.querySelectorAll('.product-card').forEach(card => {
+//       card.addEventListener('click', function(event) {
+//         // Проверяем, если клик был по кнопкам "Добавить в корзину" или "Добавить в избранное"
+//         if (event.target.closest('.add-to-favorites') || event.target.closest('.add-to-cart')) {
+//           return; // Не открываем карточку
+//         }
+  
+//         // Создаем объект с информацией о товаре
+//         const product = {
+//           image: this.querySelector('img').src,
+//           name: this.querySelector('.name').innerText || "Название не указано",
+//           price: this.querySelector('.discounted-price, .original-price').innerText || "Цена не указана",
+//           availability: this.dataset.stock || "Нет данных",
+//           article: (this.querySelector('.product-info .article')?.innerText.split(': ')[1]) || "Артикул не указан",
+//           category: this.querySelector('.category').innerText || "Категория не указана",
+//           tags: (this.querySelector('.product-info .tags')?.innerText.split(': ')[1]) || "Метки не указаны",
+//           dimensions: (this.querySelector('.product-info .details').innerText.match(/Габариты: (.+)/)?.[1]) || "Габариты не указаны",
+//           weight: (this.querySelector('.product-info .details').innerText.match(/Вес: (.+)/)?.[1]) || "Вес не указан",
+//           description: this.querySelector('.product-info .details')?.innerText || "Описание не указано"
+//         };
+  
+//         // Сохраняем информацию о товаре в localStorage
+//         localStorage.setItem('selectedProduct', JSON.stringify(product));
+  
+//         // Перенаправляем на страницу товара
+//         window.location.href = 'product.html';
+//       });
+//     });
 //   });
   
-//   function getUserCity() {
-//     fetch('http://ip-api.com/json/?lang=ru')
-//       .then(response => response.json())
-//       .then(data => {
-//         const city = data.city || "Неизвестно";
-//         document.getElementById("city-name").textContent = city;
-//       })
-//       .catch(error => {
-//         console.error("Ошибка получения города:", error);
-//         document.getElementById("city-name").textContent = "Неизвестно";
-//       });
-//   }
-  
-//   function openCityModal() {
-//     document.getElementById("city-modal").style.display = "block";
-//   }
-  
-//   function closeCityModal() {
-//     document.getElementById("city-modal").style.display = "none";
-//   }
-  
-//   function filterCities() {
-//     const filter = document.getElementById("city-input").value.toLowerCase();
-//     const cityList = document.getElementById("city-list");
-//     const li = cityList.getElementsByTagName("li");
-  
-//     for (let i = 0; i < li.length; i++) {
-//       const txtValue = li[i].textContent || li[i].innerText;
-//       li[i].style.display = txtValue.toLowerCase().includes(filter) ? "" : "none";
+//   // Обработка страницы товара
+//   document.addEventListener("DOMContentLoaded", function() {
+//     const product = JSON.parse(localStorage.getItem('selectedProduct'));
+//     if (product) {
+//       document.getElementById('product-image').src = product.image || '';
+//       document.getElementById('product-name').innerText = product.name || "Без названия";
+//       document.getElementById('product-price').innerText = product.price || "Цена не указана";
+//       document.getElementById('product-availability').innerText = `На складе: ${product.availability || "Нет данных"}`;
+//       document.getElementById('product-sku').innerText = product.article;
+//       document.getElementById('product-category').innerText = product.category;
+//       document.getElementById('product-tags').innerText = product.tags;
+//       document.getElementById('product-dimensions').innerText = product.dimensions;
+//       document.getElementById('product-weight').innerText = product.weight;
+//       document.getElementById('product-description').innerText = product.description;
+//     } else {
+//       document.getElementById('product-details').innerText = "Информация о товаре не найдена.";
 //     }
-//   }
-  
-//   function selectCity(city) {
-//     document.getElementById("city-name").textContent = city;
-//     closeCityModal();
-//   }
-  
-//   function enterCityManually() {
-//     const manualCity = prompt("Введите название вашего города:");
-//     if (manualCity) {
-//       selectCity(manualCity);
-//     }
-//   }
-  
+//   });
+ // Обработка кликов на карточках товаров
+document.addEventListener("DOMContentLoaded", function() {
+    document.querySelectorAll('.product-card').forEach(card => {
+        card.addEventListener('click', function(event) {
+            // Проверяем, если клик был по кнопке добавления в корзину или избранное
+            if (event.target.closest('.add-to-favorites') || event.target.closest('.add-to-cart')) {
+                return; // Не открываем карточку товара
+            }
+
+            // Создаем объект с информацией о товаре
+            const product = {
+                image: this.querySelector('img').src,
+                name: this.querySelector('.name').innerText || "Название не указано",
+                price: this.querySelector('.original-prices').innerText || "Цена не указана",
+                availability: this.dataset.stock || "Нет данных",
+                article: (this.querySelector('.product-info .article')?.innerText.split(': ')[1]) || "Артикул не указан",
+                category: this.querySelector('.category').innerText || "Категория не указана",
+                tags: (this.querySelector('.product-info .tags')?.innerText.split(': ')[1]) || "Метки не указаны",
+                dimensions: (this.querySelector('.product-info .dimensions')?.innerText.split(': ')[1]) || "Габариты не указаны",
+                weight: (this.querySelector('.product-info .weight')?.innerText.split(': ')[1]) || null,
+                additional: (this.querySelector('.product-info .extra')?.innerText.split(': ')[1]) || "Доп. комплект не указан",
+                description: (this.querySelector('.product-info .description')?.innerText.split(': ')[1]) || null
+            };
+
+            // Сохраняем информацию о товаре в localStorage
+            localStorage.setItem('selectedProduct', JSON.stringify(product));
+
+            // Перенаправляем на страницу товара
+            window.location.href = 'product.html';
+        });
+    });
+});
+
+// Обработка страницы товара
+document.addEventListener("DOMContentLoaded", function() {
+    // Получаем информацию о товаре из localStorage
+    const product = JSON.parse(localStorage.getItem('selectedProduct'));
+
+    if (product) {
+        // Заполняем информацию на странице товара
+        document.getElementById('product-image').src = product.image || "";
+        document.getElementById('product-name').innerText = product.name || "Без названия";
+        document.getElementById('product-price').innerText = product.price || "Цена не указана";
+        document.getElementById('product-availability').innerText = `На складе: ${product.availability || "Нет данных"}`;
+        document.getElementById('product-sku').innerText = product.article || "Артикул не указан";
+        document.getElementById('product-category').innerText = product.category || "Категория не указана";
+        document.getElementById('product-tags').innerText = product.tags || "Метки не указаны";
+
+        // Отображаем доп. комплект
+        document.getElementById('product-additional').innerText = `Доп. комплект: ${product.additional || "Доп. комплект не указан"}`;
+
+        // Отображаем вес (если указан)
+        if (product.weight) {
+            document.getElementById('product-weight').innerText = `Вес: ${product.weight}`;
+        } else {
+            document.getElementById('product-weight').style.display = 'none';
+        }
+
+        // Отображаем габариты
+        document.getElementById('product-dimensions').innerText = product.dimensions || "Габариты не указаны";
+    }
+
+    // Обработка переключения вкладок
+    const tabs = document.querySelectorAll('.tab');
+    const contents = document.querySelectorAll('.tab-content');
+
+    tabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+            tabs.forEach(t => t.classList.remove('active'));
+            contents.forEach(c => c.classList.remove('active'));
+            this.classList.add('active');
+            document.getElementById(this.id.replace('-tab', '-content')).classList.add('active');
+        });
+    });
+
+    // Всегда отображаем вкладку "Детали"
+    document.getElementById('details-tab').style.display = 'block';
+    document.getElementById('details-content').classList.add('active');
+});
+
+// Обработка аккордеона
+document.addEventListener("DOMContentLoaded", function() {
+    const accordionHeaders = document.querySelectorAll('.accordion-header');
+    const product = JSON.parse(localStorage.getItem('selectedProduct'));
+
+    if (product) {
+        // Отображаем вес
+        document.getElementById('product-weight').innerText = product.weight ? `Вес: ${product.weight}` : "Вес: Не указан";
+        // Отображаем габариты
+        document.getElementById('product-dimensions').innerText = product.dimensions || "Габариты не указаны";
+
+        const descriptionContent = document.getElementById('description-content');
+        const descriptionHeader = document.getElementById('description-header');
+        
+        // Условие для отображения описания
+        if (product.description && product.description.trim()) {
+            descriptionContent.querySelector('#product-description').innerText = product.description;
+            descriptionHeader.style.display = 'flex'; // Отображаем описание
+        } else {
+            descriptionHeader.style.display = 'none'; // Скрываем, если описания нет
+        }
+    }
+
+    accordionHeaders.forEach(header => {
+        header.addEventListener('click', function() {
+            const content = this.nextElementSibling;
+            const icon = this.querySelector('i');
+            
+            // Сворачиваем/разворачиваем блок
+            content.classList.toggle('active');
+            this.classList.toggle('active');
+            
+            // Поворачиваем стрелочку
+            icon.classList.toggle('fa-chevron-down');
+            icon.classList.toggle('fa-chevron-up');
+        });
+    });
+});
