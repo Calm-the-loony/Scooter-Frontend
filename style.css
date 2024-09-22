@@ -5,7 +5,7 @@
 }
 
 body {
-  font-family: 'Merriweather', serif;
+  font-family: 'Barlow', sans-serif;
     max-height: 2000px; /* Для прокрутки контента */
 }
 
@@ -194,13 +194,17 @@ body {
 
 /* Геолокация */
 #location-container {
-  font-size: 14.5px;
+  font-size: 13px;
+  font-weight: 700; 
+  text-align: center;
+  text-transform: uppercase; /* Делаем все буквы заглавными */
   color: #ffffff;
-  margin-top: 40px;
+  margin-top: 48px;
   margin-left: 250px;
   transition: opacity 0.5s ease, transform 0.5s ease; /* Плавное появление/скрытие */
   position: relative;
 }
+
 
 /* Скрытие с плавной анимацией */
 .hidden {
@@ -598,8 +602,8 @@ td img {
   transition: opacity 0.5s ease;
   height: auto;
   pointer-events: none;
-  margin-left: 50px;
-  margin-top: 40px; /* Опускаем подменю, чтобы оно не пересекалось с поисковой строкой */
+  margin-left: 55px;
+  margin-top: 48px; /* Опускаем подменю, чтобы оно не пересекалось с поисковой строкой */
 }
 
 .submenu.visible {
@@ -624,10 +628,14 @@ td img {
 .submenu ul li a {
   text-decoration: none;
   color: white;
-  font-size: 14px;
+  font-size: 13px; /* Уменьшаем размер шрифта */
+  font-weight: 700; /* Делаем шрифт более жирным */
   display: block;
-  padding: 5px 5px;
+  padding: 10px 5px; /* Добавляем равные отступы сверху и снизу */
+  text-transform: uppercase; /* Делаем все буквы заглавными */
+  text-align: center; /* Выровнять текст по центру */
 }
+
 
 .submenu ul li a:hover {
   background-color: #1c1c1c;
@@ -635,14 +643,15 @@ td img {
   transition: all 0.3s ease;
 }
 
+
 .submenu ul li:not(:last-child)::after {
   content: '';
   position: absolute;
-  height: calc(100% + 22px);
+  height: calc(100% + 20px); /* Увеличиваем, чтобы черточка захватывала текст */
   width: 1px;
   background-color: #4b4a4a;
   top: -10px;
-  right: -5px;
+  right: 0px;
   transform: rotate(20deg);
 }
 
@@ -1791,7 +1800,6 @@ margin-right: 50px;
 }
 
 
-
 .stock-label {
   font-size: 11.5px; 
   text-transform: uppercase;
@@ -1799,9 +1807,9 @@ margin-right: 50px;
   padding: 1px; 
   display: block; 
   position: absolute; 
-  bottom: 15px; /* Расположение внизу карточки */
-  right: 17px; /* Привязка к правому краю */
-  text-align: right; /* Выравнивание текста по правому краю */
+  bottom: 35px; /* Расположение внизу карточки */
+  right: 21px; /* Привязка к правому краю */
+  text-align: right; 
 }
 
 
@@ -2402,9 +2410,9 @@ margin-right: 50px;
   font-weight: bold;
   font-size: 16px;
   margin-bottom: 10px;
-  line-height: 1.2;
+  line-height: 1.2; /* Позволяет название состоять из нескольких строк */
+  text-transform: uppercase;
 }
-
 .price {
   display: flex;
   align-items: center;
@@ -2428,19 +2436,19 @@ margin-right: 50px;
   color: #000000;
   margin-left: 18px;
   font-size: 17px;
-} 
+}
 .original-price-wrapper {
-  background-color: #45EFDA;
+  background-color: #ffffff;
   padding: 2px 5px;
   border-radius: 5px;
   margin-left: 0px;
 }
 
 .no-discount .original-prices {
+  font-size: 20px;
   text-decoration: none; 
-  color: #000000; 
+  color:  #000000; 
 }
-
 /* Для карточек без скидки */
 .product-card:not([data-id="1"]) .no-discount .original-prices {
   text-decoration: none; 
@@ -2456,11 +2464,12 @@ margin-right: 50px;
 }
 
 .stock-bar {
-  width: 40px;
+  width: 45px;
   height: 10px;
-  background-color: green;
+  background-color: green; 
   margin-left: 10px;
   border-radius: 5px;
+  margin-bottom: 10px;
 }
 
 [data-stock='0'] .stock-bar {
