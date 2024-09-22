@@ -105,7 +105,7 @@ body {
   left: 258px;
   top: 0;
   width: 60%;
-  height: 50px;
+  height: 55px;
   padding: 10px;
   display: flex;
   align-items: center;
@@ -115,7 +115,6 @@ body {
   transition: margin-left 0.5s ease;
   will-change: transform, left; /* Указываем, что будут изменяться transform и left */
 }
-
 
 .user-actions {
   display: flex;
