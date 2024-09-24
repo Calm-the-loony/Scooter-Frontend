@@ -1,21 +1,23 @@
 //карта
 document.addEventListener('DOMContentLoaded', () => {
-    // Скрипты, специфичные для страницы торгового помещения
+    // Скрипты, специальные для страниц торговых помещений
     const mapElement = document.getElementById('map');
+    
     if (mapElement) {
-      var map = L.map('map').setView([47.2313, 39.7233], 13); // Координаты для Ростова-на-Дону
+      var map = L.map('map').setView([47.2228, 39.7206], 13); // Координаты для ул. Дранко, 141, Ростов-на-Дону
+      
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        attribution: '© <a href="https://www.openstreetmap.org/copyright">участники OpenStreetMap</a>'
       }).addTo(map);
-      L.marker([47.2313, 39.7233]).addTo(map)
-        .bindPopup('Торговое помещение.<br> Ул. Мечникова 35')
+      
+      L.marker([47.2228, 39.7206]).addTo(map)
+        .bindPopup('Торговое помещение.<br> Ул. Дранко 141')
         .openPopup();
     }
-  
-    // Добавьте другие специфичные скрипты для торгового помещения здесь
+    
+    // добавляем сюда другие специальные скрипты для торговых помещений
   });
   
-
 
   //поиск
 var lastResFind = ""; // последний удачный результат
