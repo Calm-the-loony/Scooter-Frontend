@@ -113,3 +113,14 @@ window.addEventListener('scroll', scrollHandler);
 window.onload = function () {
     scrollHandler();
 };
+
+
+document.getElementById('favorite-button').addEventListener('click', function() {
+  window.location.href = 'favorites.html';
+});
+document.getElementById('account-button').addEventListener('click', function() {
+  window.location.href = 'account.html';
+});
+document.getElementById('cart-button').addEventListener('click', function() {
+  window.location.href = 'cart.html';
+});

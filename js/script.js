@@ -29,6 +29,8 @@ function performSearch() {
 function toggleFavorite(button) {
   button.classList.toggle('favorited');
 }
+
+// Карусель
 $(document).ready(function() {
     let isDragging = false;
     let startX = 0;
@@ -67,7 +69,7 @@ $(document).ready(function() {
         swipeToSlide: true,
         touchThreshold: 10,
         autoplay: true,
-        autoplaySpeed: 2000,
+        autoplaySpeed: 1000,
         pauseOnHover: true,
     });
 
@@ -93,7 +95,7 @@ $(document).ready(function() {
 
     // Открытие карточки при клике, если не было перетаскивания
     $('.product-card').on('click', function(e) {
-        if (!isMouseMoved && !$(e.target).hasClass('add-to-cart')) {
+        if (!isMouseMoved && !$(e.target).hasClass('add-to-cart') && !$(e.target).hasClass('add-to-favorites')) {
             const productInfo = $(this).find('.product-info');
             productInfo.slideToggle();
         }
@@ -130,6 +132,15 @@ $(document).ready(function() {
         }
         updateCartList();
         saveCart();
+    });
+
+    // Функция для добавления товара в избранное
+    $('.add-to-favorites').on('click', function(e) {
+        e.stopPropagation(); // Останавливаем всплытие события
+        // Логика добавления товара в избранное
+        const productCard = $(this).closest('.product-card');
+        const productId = productCard.attr('data-id');
+        // Ваша логика добавления в избранное...
     });
 
     // Устанавливаем одинаковую высоту карточек при изменении размера окна
@@ -493,6 +504,9 @@ function initializePage() {
 document.getElementById('account-button').addEventListener('click', function() {
     window.location.href = 'account.html';
 });
+document.getElementById('favorite-button').addEventListener('click', function() {
+    window.location.href = 'favorites.html';
+});
 
 
 // Событие DOMContentLoaded
@@ -623,7 +637,10 @@ document.querySelectorAll('.product-card').forEach(function(card) {
 //       document.getElementById('product-details').innerText = "Информация о товаре не найдена.";
 //     }
 //   });
- // Обработка кликов на карточках товаров
+
+
+
+// Обработка кликов на карточках товаров
 document.addEventListener("DOMContentLoaded", function() {
     document.querySelectorAll('.product-card').forEach(card => {
         card.addEventListener('click', function(event) {
@@ -636,7 +653,9 @@ document.addEventListener("DOMContentLoaded", function() {
             const product = {
                 image: this.querySelector('img').src,
                 name: this.querySelector('.name').innerText || "Название не указано",
-                price: this.querySelector('.original-prices').innerText || "Цена не указана",
+                price: this.querySelector('.discounted-price') ? 
+                        this.querySelector('.discounted-price').innerText : 
+                        this.querySelector('.original-prices')?.innerText || "Цена не указана",
                 availability: this.dataset.stock || "Нет данных",
                 article: (this.querySelector('.product-info .article')?.innerText.split(': ')[1]) || "Артикул не указан",
                 category: this.querySelector('.category').innerText || "Категория не указана",

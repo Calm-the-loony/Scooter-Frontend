@@ -330,10 +330,6 @@ function initializePage() {
         // Убедитесь, что вы добавили необходимые изменения для корзины, если это необходимо
     });
 }
-document.getElementById('account-button').addEventListener('click', function() {
-    window.location.href = 'account.html';
-});
-
 
 // Событие DOMContentLoaded
 document.addEventListener('DOMContentLoaded', () => {
@@ -345,6 +341,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+document.getElementById('favorite-button').addEventListener('click', function() {
+    window.location.href = 'favorites.html';
+});
+document.getElementById('account-button').addEventListener('click', function() {
+    window.location.href = 'account.html';
+});
 
 
 //личный кабинет, управление отображением форм
@@ -519,7 +521,6 @@ function showModal() {
   }
   
   
-
 // Обработка кликов на карточках товаров
 document.addEventListener("DOMContentLoaded", function() {
     document.querySelectorAll('.product-card').forEach(card => {
@@ -533,7 +534,9 @@ document.addEventListener("DOMContentLoaded", function() {
             const product = {
                 image: this.querySelector('img').src,
                 name: this.querySelector('.name').innerText || "Название не указано",
-                price: this.querySelector('.original-prices').innerText || "Цена не указана",
+                price: this.querySelector('.discounted-price') ? 
+                        this.querySelector('.discounted-price').innerText : 
+                        this.querySelector('.original-prices')?.innerText || "Цена не указана",
                 availability: this.dataset.stock || "Нет данных",
                 article: (this.querySelector('.product-info .article')?.innerText.split(': ')[1]) || "Артикул не указан",
                 category: this.querySelector('.category').innerText || "Категория не указана",
@@ -861,4 +864,5 @@ document.addEventListener("DOMContentLoaded", function() {
             filterProducts();
         });
     });
+    
     

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Войти</title>
+  <title>Личный кабинет</title>
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap">
@@ -85,6 +85,47 @@
 </div>
 </div>
 
+<div id="favorites-modal" class="modal">
+  <div class="modal-contents">
+    <span class="close" id="favorites-close">&times;</span>
+    <h2>Избранное</h2>
+    <table id="favorite-list">
+      <thead>
+        <tr>
+          <th>Изображение</th>
+          <th>Название товара</th>
+          <th>Цена за штуку</th>
+          <th>Наличие на складе</th>
+          <th>Действия</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</div>
+
+<div id="cart-modal" class="modal">
+    <div class="modal-contents">
+      <span class="close" id="cart-close">&times;</span>
+      <h2>Корзина</h2>
+      <table id="cart-list">
+        <thead>
+          <tr>
+            <th>Изображение</th>
+            <th>Название</th>
+            <th>Цена</th>
+            <th>Количество</th>
+            <th>Действия</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <div class="cart-total">
+        <p>Итого: <span id="total-price">0.00 ₽</span></p>
+        <button class="buy-button" onclick="buyItems()">Купить</button>
+      </div>
+    </div>
+  </div>
 
 
   <div id="scooter-modal" class="modal">
@@ -125,6 +166,22 @@
         <button id="login-button"><a href="account.html" >Авторизация</a> </button>
     </div>
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const tabs = document.querySelectorAll('.account-tab');
+        const sections = document.querySelectorAll('.account-section, .account-orders-section, .account-password-section');
+      
+        tabs.forEach((tab, index) => {
+          tab.addEventListener('click', function() {
+            tabs.forEach(t => t.classList.remove('active'));
+            sections.forEach(s => s.classList.remove('active'));
+      
+            this.classList.add('active');
+            sections[index].classList.add('active');
+          });
+        });
+      });
+      </script>
 
       <script>
         function setupScooterModal() {
@@ -182,70 +239,83 @@
             // Закрываем модальное окно
             scooterModal.style.display = 'none';
         });
-        
-        
           </script>
           
-          <div class="lcab-container">
-            <div class="lcab-wrapper">
-                <h1 class="lcab-header">Личный кабинет</h1>
-        
-                <div class="lcab-form-container">
-                    <!-- Регистрация -->
-                    <form id="lcab-registration-form" class="lcab-form" action="register.php" method="post">
-                        <h2 class="lcab-subheader">Регистрация</h2>
-                        <label for="reg_name" class="lcab-label">ФИО:</label>
-                        <input type="text" id="reg_name" name="name" class="lcab-input" required>
-        
-                        <label for="reg_dob" class="lcab-label">Дата рождения:</label>
-                        <input type="date" id="reg_dob" name="dob" class="lcab-input" required>
-        
-                        <label for="reg_address" class="lcab-label">Адрес:</label>
-                        <input type="text" id="reg_address" name="address" class="lcab-input" required>
-        
-                        <label for="reg_email" class="lcab-label">Email:</label>
-                        <input type="email" id="reg_email" name="email" class="lcab-input" required>
-        
-                        <label for="reg_password" class="lcab-label">Пароль:</label>
-                        <input type="password" id="reg_password" name="password" class="lcab-input" required>
-        
-                        <a href="personalaccount.html">
-                          <button type="button" class="lcab-button">Зарегистрироваться</button>
-                      </a>
-                      
-                        
-                        <!-- Регистрация через Google -->
-                        <div class="lcab-google">
-                            <span>или</span>
-                            <button type="button" class="lcab-google-btn">Зарегистрироваться через Google</button>
-                        </div>
-                    </form>
-        
-                    <!-- Авторизация -->
-                    <form id="lcab-login-form" class="lcab-form" action="login.php" method="post">
-                        <h2 class="lcab-subheader">Авторизация</h2>
-                        <label for="login_email" class="lcab-label">Email:</label>
-                        <input type="email" id="login_email" name="email" class="lcab-input" required>
-        
-                        <label for="login_password" class="lcab-label">Пароль:</label>
-                        <input type="password" id="login_password" name="password" class="lcab-input" required>
-
-                        <a href="personalaccount.html">
-                          <button type="button" class="lcab-button">Войти</button>
-                      </a>
-                        
-        
-                        <!-- Забыл пароль -->
-                        <div class="lcab-forgot-password">
-                            <a href="forgot_password.php">Забыли пароль?</a>
-                        </div>
-                    </form>
+          <main class="account-page">
+            <div class="account-wrapper">
+              <h1 class="account-header">Личный кабинет</h1>
+          
+              <!-- Вкладки -->
+              <div class="account-tabs">
+                <div class="account-tab active" data-section="account-section">Мои данные</div>
+                <div class="account-tab" data-section="account-orders-section">Мои заказы</div>
+                <div class="account-tab" data-section="account-password-section">Изменить пароль</div>
+              </div>
+          
+              <!-- Мои данные -->
+              <section class="account-section active">
+                <h2 class="account-subheader">Мои данные</h2>
+                <form id="account-details-form" class="account-form" action="update_profile.php" method="post">
+                  <label for="account_name" class="account-label">ФИО:</label>
+                  <input type="text" id="account_name" name="name" class="account-input" required value="Имя пользователя">
+                  
+                  <label for="account_dob" class="account-label">Дата рождения:</label>
+                  <input type="date" id="account_dob" name="dob" class="account-input" required value="1990-01-01">
+                  
+                  <label for="account_address" class="account-label">Адрес:</label>
+                  <input type="text" id="account_address" name="address" class="account-input" required value="Адрес пользователя">
+          
+                  <label for="account_email" class="account-label">Email:</label>
+                  <input type="email" id="account_email" name="email" class="account-input" required value="email@example.com">
+                  
+                  <label for="account_phone" class="account-label">Телефон:</label>
+                  <input type="tel" id="account_phone" name="phone" class="account-input" value="+7 123 456 78 90">
+          
+                  <button type="submit" class="account-button">Сохранить изменения</button>
+                </form>
+              </section>
+          
+              <!-- Мои заказы -->
+              <section class="account-orders-section">
+                <h2 class="account-subheader">Мои заказы</h2>
+                <div class="account-orders">
+                  <!-- Пример заказа -->
+                  <div class="order-card">
+                    <h3 class="order-title">Заказ №123456</h3>
+                    <p>Дата: 12.09.2024</p>
+                    <p>Статус: Доставлен</p>
+                    <a href="order_details.php?order_id=123456" class="order-details-link">Подробнее</a>
+                  </div>
+                  <div class="order-card">
+                    <h3 class="order-title">Заказ №654321</h3>
+                    <p>Дата: 08.09.2024</p>
+                    <p>Статус: В обработке</p>
+                    <a href="order_details.php?order_id=654321" class="order-details-link">Подробнее</a>
+                  </div>
                 </div>
+              </section>
+          
+              <!-- Изменить пароль -->
+              <section class="account-password-section">
+                <h2 class="account-subheader">Изменить пароль</h2>
+                <form id="change-password-form" class="account-form" action="change_password.php" method="post">
+                  <label for="current_password" class="account-label">Текущий пароль:</label>
+                  <input type="password" id="current_password" name="current_password" class="account-input" required>
+          
+                  <label for="new_password" class="account-label">Новый пароль:</label>
+                  <input type="password" id="new_password" name="new_password" class="account-input" required>
+          
+                  <button type="submit" class="account-button">Сохранить пароль</button>
+                </form>
+              </section>
+              
+              <div class="account-return-home">
+                <a href="index.html" class="account-return-home-btn">На главную</a>
+              </div>
             </div>
-            <div class="lcab-return-home">
-                <a href="index.html" class="lcab-return-home-btn">На главную</a>
-            </div>
-        </div>
+          </main>
+          
+
         
 <footer class="footer">
     <div class="footer-section">

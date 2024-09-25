@@ -384,6 +384,8 @@ body {
 #favorite-list {
   width: 100%;
   border-collapse: collapse;
+  margin: 0;
+  padding: 0;
 }
 
 #favorite-list th, #favorite-list td {
@@ -443,7 +445,7 @@ body {
 }
 
 .remove-from-cart {
-  background-color: #000000;
+  background-color: #007bff;
   color: white;
   border: none;
   padding: 5px 10px;
@@ -533,7 +535,7 @@ td img {
 }
 /*размер кнопок +- в модальном окне*/
 .quantity-change {
-padding: 6px 6px !important;
+padding: 4px 4px !important;
 margin-right: 10px;
 margin-left: 10px;
 align-items: center;
@@ -620,11 +622,10 @@ align-items: center;
   padding: 8px 15px;
   margin-left: 10px;
   cursor: pointer;
-  transform: none; /* Убираем наклон у кнопок */
+  transform: none; 
 }
 
 
-/* .tabs */
 /* Подменю */
 
 .submenu {
@@ -633,7 +634,7 @@ align-items: center;
   height: auto;
   pointer-events: none;
   margin-left: 55px;
-  margin-top: 48px; /* Опускаем подменю, чтобы оно не пересекалось с поисковой строкой */
+  margin-top: 48px; 
 }
 
 .submenu.visible {
@@ -647,7 +648,7 @@ align-items: center;
   justify-content: space-between; 
   list-style-type: none;
   padding: 0;
-  margin: 0; /* Сброс отступов */
+  margin: 0; 
 }
 
 .submenu ul li {
@@ -658,12 +659,12 @@ align-items: center;
 .submenu ul li a {
   text-decoration: none;
   color: white;
-  font-size: 13px; /* Уменьшаем размер шрифта */
-  font-weight: 700; /* Делаем шрифт более жирным */
+  font-size: 13px;
+  font-weight: 700;
   display: block;
-  padding: 10px 5px; /* Добавляем равные отступы сверху и снизу */
-  text-transform: uppercase; /* Делаем все буквы заглавными */
-  text-align: center; /* Выровнять текст по центру */
+  padding: 10px 5px; 
+  text-transform: uppercase; 
+  text-align: center;
 }
 
 
@@ -677,7 +678,7 @@ align-items: center;
 .submenu ul li:not(:last-child)::after {
   content: '';
   position: absolute;
-  height: calc(100% + 20px); /* Увеличиваем, чтобы черточка захватывала текст */
+  height: calc(100% + 20px); 
   width: 1px;
   background-color: #4b4a4a;
   top: -10px;
@@ -687,12 +688,12 @@ align-items: center;
 
 /* Контейнер действий */
 .action-container {
-  transition: margin-left 0.3s ease; /* Плавное смещение */
+  transition: margin-left 0.3s ease; 
 }
 
 /* При сворачивании */
 .header.collapsed .action-container {
-  margin-left: -7px; /* Смещаем контейнер на 5 пикселей влево */
+  margin-left: -7px; 
 }
 
 
@@ -952,7 +953,7 @@ align-items: center;
   font-weight: bold;
   font-size: 16px;
   margin-bottom: 10px;
-  line-height: 1.2; /* Позволяет название состоять из нескольких строк */
+  line-height: 1.2; 
   text-transform: uppercase;
 }
 
@@ -964,7 +965,7 @@ align-items: center;
 
 .discounted-price {
   font-weight: bold;
-  font-size: 20px; /* Увеличенный размер шрифта для цены */
+  font-size: 20px; 
   color: red;
 }
 
@@ -1066,7 +1067,7 @@ align-items: center;
   width: 1190px;
   margin: 0 auto;
   display: flex;
-  justify-content: space-between; /* Чтобы баннеры равномерно распределялись */
+  justify-content: space-between; 
   transform: translateX(-7px);
 }
 
@@ -1294,8 +1295,6 @@ align-items: center;
 }
 
 
-
-/*УТП2*/
 /* Стили для контейнера карточек */
 .card-row {
   display: flex;
@@ -1342,19 +1341,19 @@ align-items: center;
 
 
 .modal {
-  display: none; /* Скрывает модальное окно по умолчанию */
-  position: fixed; /* Фиксирует модальное окно на экране */
-  z-index: 1000; /* Приоритет отображения */
+  display: none; 
+  position: fixed;
+  z-index: 1000; 
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
   overflow: auto; /* Позволяет прокрутку содержимого */
-  background-color: rgba(0,0,0,0.4); /* Полупрозрачный фон */
+  background-color: rgba(0,0,0,0.4); 
 }
 
 .modal.show {
-  display: block; /* Отображает модальное окно при открытии */
+  display: block; 
 }
 
 .modal-content {

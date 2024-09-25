@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Войти</title>
+  <title>Избранное</title>
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap">
@@ -85,6 +85,47 @@
 </div>
 </div>
 
+<!-- <div id="favorites-modal" class="modal">
+  <div class="modal-contents">
+    <span class="close" id="favorites-close">&times;</span>
+    <h2>Избранное</h2>
+    <table id="favorite-list">
+      <thead>
+        <tr>
+          <th>Изображение</th>
+          <th>Название товара</th>
+          <th>Цена за штуку</th>
+          <th>Наличие на складе</th>
+          <th>Действия</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</div> -->
+
+<div id="cart-modal" class="modal">
+    <div class="modal-contents">
+      <span class="close" id="cart-close">&times;</span>
+      <h2>Корзина</h2>
+      <table id="cart-list">
+        <thead>
+          <tr>
+            <th>Изображение</th>
+            <th>Название</th>
+            <th>Цена</th>
+            <th>Количество</th>
+            <th>Действия</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <div class="cart-total">
+        <p>Итого: <span id="total-price">0.00 ₽</span></p>
+        <button class="buy-button" onclick="buyItems()">Купить</button>
+      </div>
+    </div>
+  </div>
 
 
   <div id="scooter-modal" class="modal">
@@ -125,6 +166,7 @@
         <button id="login-button"><a href="account.html" >Авторизация</a> </button>
     </div>
 </div>
+
 
       <script>
         function setupScooterModal() {
@@ -182,70 +224,98 @@
             // Закрываем модальное окно
             scooterModal.style.display = 'none';
         });
-        
-        
           </script>
-          
-          <div class="lcab-container">
-            <div class="lcab-wrapper">
-                <h1 class="lcab-header">Личный кабинет</h1>
-        
-                <div class="lcab-form-container">
-                    <!-- Регистрация -->
-                    <form id="lcab-registration-form" class="lcab-form" action="register.php" method="post">
-                        <h2 class="lcab-subheader">Регистрация</h2>
-                        <label for="reg_name" class="lcab-label">ФИО:</label>
-                        <input type="text" id="reg_name" name="name" class="lcab-input" required>
-        
-                        <label for="reg_dob" class="lcab-label">Дата рождения:</label>
-                        <input type="date" id="reg_dob" name="dob" class="lcab-input" required>
-        
-                        <label for="reg_address" class="lcab-label">Адрес:</label>
-                        <input type="text" id="reg_address" name="address" class="lcab-input" required>
-        
-                        <label for="reg_email" class="lcab-label">Email:</label>
-                        <input type="email" id="reg_email" name="email" class="lcab-input" required>
-        
-                        <label for="reg_password" class="lcab-label">Пароль:</label>
-                        <input type="password" id="reg_password" name="password" class="lcab-input" required>
-        
-                        <a href="personalaccount.html">
-                          <button type="button" class="lcab-button">Зарегистрироваться</button>
-                      </a>
-                      
-                        
-                        <!-- Регистрация через Google -->
-                        <div class="lcab-google">
-                            <span>или</span>
-                            <button type="button" class="lcab-google-btn">Зарегистрироваться через Google</button>
-                        </div>
-                    </form>
-        
-                    <!-- Авторизация -->
-                    <form id="lcab-login-form" class="lcab-form" action="login.php" method="post">
-                        <h2 class="lcab-subheader">Авторизация</h2>
-                        <label for="login_email" class="lcab-label">Email:</label>
-                        <input type="email" id="login_email" name="email" class="lcab-input" required>
-        
-                        <label for="login_password" class="lcab-label">Пароль:</label>
-                        <input type="password" id="login_password" name="password" class="lcab-input" required>
-
-                        <a href="personalaccount.html">
-                          <button type="button" class="lcab-button">Войти</button>
-                      </a>
-                        
-        
-                        <!-- Забыл пароль -->
-                        <div class="lcab-forgot-password">
-                            <a href="forgot_password.php">Забыли пароль?</a>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <div class="lcab-return-home">
-                <a href="index.html" class="lcab-return-home-btn">На главную</a>
-            </div>
+    
+    <div class="container">
+      <!-- Flexbox для заголовка "Избранное" и хлебных крошек -->
+      <div class="favorites-header">
+        <h2 class="favorites-title">Избранное</h2>
+        <div class="breadcrumbs">
+          <a href="index.html">Главная</a> &raquo; <span>Избранное</span>
         </div>
+      </div>
+    
+      <!-- Таблица избранных товаров -->
+      <table id="favorite-list">
+        <thead>
+          <tr>
+            <th>Изображение</th>
+            <th>Название товара</th>
+            <th>Цена за штуку</th>
+            <th>Наличие на складе</th>
+            <th>Действия</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Динамическое наполнение товарами из localStorage -->
+        </tbody>
+      </table>
+    </div>
+    
+      <style>.container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        margin-top: 100px;
+      }
+      
+      /* Flexbox для заголовка "Избранное" и хлебных крошек */
+.favorites-header {
+  display: flex;
+  justify-content: space-between; /* Разместить заголовок и крошки по разным сторонам */
+  align-items: center; /* Выровнять элементы по вертикали */
+  margin-bottom: 20px; /* Отступ снизу */
+}
+
+.favorites-title {
+  font-size: 24px; /* Размер заголовка */
+  font-weight: bold;
+}
+
+.breadcrumbs {
+  font-size: 16px; /* Размер текста для хлебных крошек */
+  padding-top: 20px; /* Отступ сверху */
+}
+    
+      #favorite-list {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      
+      #favorite-list th, #favorite-list td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+      }
+      
+      #favorite-list th {
+        background-color: #f2f2f2;
+      }
+      
+      #favorite-list td {
+        vertical-align: middle;
+      }
+      
+      .favorite-product-image {
+        width: 80px;
+        height: auto;
+      }
+      
+      .remove-from-favorites {
+        background-color: #45EFDA;
+        color: rgb(0, 0, 0);
+        border: none;
+        padding: 5px 10px;
+        margin: 0 5px;
+      }
+      
+      .add-to-cart {
+        background-color: #007bff;
+        color: rgb(255, 255, 255);
+        border: none;
+        padding: 5px 10px;
+      }
+      </style>
         
 <footer class="footer">
     <div class="footer-section">

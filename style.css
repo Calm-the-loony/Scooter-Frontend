@@ -353,69 +353,8 @@ body {
   text-decoration: none;
 }
 
-#favorite-list {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-#favorite-list th, #favorite-list td {
-  border: 1px solid #ddd;
-  padding: 8px;
-  text-align: left;
-}
-
-#favorite-list th {
-  background-color: #f2f2f2;
-}
-
-#favorite-list td {
-  vertical-align: middle;
-}
-
-.favorite-product-image {
-  width: 50px;
-  height: auto;
-
-}
-
-.remove-from-favorites {
-  background-color: #45EFDA;
-  color: rgb(0, 0, 0);
-  border: none;
-  padding: 5px 10px;
-  margin: 0 5px}
-
-  .add-to-favorites i.active {
-    color: red;
-}
-
-
-#cart-list {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-#cart-list th, #cart-list td {
-  border: 1px solid #ddd;
-  padding: 8px;
-  text-align: left;
-}
-
-#cart-list th {
-  background-color: #f2f2f2;
-}
-
-#cart-list td {
-  vertical-align: middle;
-}
-
-.cart-product-image {
-  width: 50px;
-  height: auto;
-}
-
 .remove-from-cart {
-  background-color: #000000;
+  background-color: #007bff;
   color: white;
   border: none;
   padding: 5px 10px;
@@ -423,13 +362,6 @@ body {
   cursor: pointer;
 }
 
-.remove-from-cart:hover {
-  background-color: #000000;
-}
-.cart-product-image {
-  width: 50px;
-  height: auto;
-}
 
 
 #scooter-form {
@@ -504,7 +436,7 @@ td img {
 }
 /*размер кнопок +- в модальном окне*/
 .quantity-change {
-  padding: 6px 6px !important;
+  padding: 4px 4px !important;
   margin-right: 10px;
   margin-left: 10px;
   align-items: center;
@@ -2639,4 +2571,159 @@ margin-right: 50px;
 .btn-primary:hover, .btn:hover {
   background-color: #36c7c2; 
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
+}
+
+
+/*личный кабинет*/
+.account-page {
+  padding: 20px;
+  background-color: #fff;
+  margin-top: 100px;
+}
+
+.account-wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+
+.account-header {
+  font-size: 32px;
+  margin-bottom: 30px;
+  color: #212529;
+  text-align: left;
+}
+
+/* Вкладки для переключения между разделами */
+.account-tabs {
+  display: flex;
+  margin-bottom: 30px;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.account-tab {
+  padding: 15px 20px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #495057;
+  cursor: pointer;
+  transition: color 0.3s, border-bottom 0.3s;
+  border-bottom: 3px solid transparent;
+  margin-right: 30px;
+}
+
+.account-tab.active {
+  color: #45EFDA; 
+  border-bottom: 3px solid #45EFDA; 
+}
+
+.account-tab:hover {
+  color: #3ed5c4; 
+}
+
+/* Секции профиля и заказов */
+.account-section,
+.account-orders-section,
+.account-password-section {
+  display: none;
+}
+
+.account-section.active,
+.account-orders-section.active,
+.account-password-section.active {
+  display: block;
+}
+
+.account-subheader {
+  font-size: 24px;
+  color: #212529;
+  margin-bottom: 20px;
+}
+
+.account-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.account-label {
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #495057;
+}
+
+.account-input {
+  padding: 12px;
+  margin-bottom: 20px;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+  font-size: 16px;
+  width: 100%;
+}
+
+.account-button {
+  padding: 12px 25px;
+  background-color: #45EFDA; 
+  color: #000000;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: fit-content;
+}
+
+.account-button:hover {
+  background-color: #3bcdbc; 
+}
+
+/* Карточки заказов */
+.account-orders {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.order-card {
+  background: #f8f9fa;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+  padding: 20px;
+  width: calc(50% - 10px);
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.order-title {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: #212529;
+}
+
+.order-details-link {
+  color: #007bff;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.order-details-link:hover {
+  text-decoration: underline;
+}
+
+/* Кнопка возврата на главную */
+.account-return-home {
+  margin-top: 30px;
+}
+
+.account-return-home-btn {
+  background-color: #007bff;
+  padding: 12px 25px;
+  color: white;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.account-return-home-btn:hover {
+  background-color: #006de2;
 }

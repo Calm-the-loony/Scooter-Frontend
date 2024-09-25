@@ -440,9 +440,7 @@ function initializePage() {
         // Убедитесь, что вы добавили необходимые изменения для корзины, если это необходимо
     });
 }
-document.getElementById('account-button').addEventListener('click', function() {
-    window.location.href = 'account.html';
-});
+
 
 // Событие DOMContentLoaded
 document.addEventListener('DOMContentLoaded', () => {
@@ -831,3 +829,8 @@ document.querySelector('.lcab-forgot-password a').addEventListener('click', func
         alert('Пожалуйста, введите ваш email.');
     }
 });
+
+
+
+
+//кабинет
