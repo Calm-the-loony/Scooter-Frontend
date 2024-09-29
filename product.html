@@ -24,10 +24,10 @@
   
     <!-- <div class="menu-icon" onclick="toggleMenu()" id="menu-toggle-button">&#9776;</div>  -->
     <div class="action-container"> 
-      <div class="search-bar">
-        <input type="text" id="text-to-find" placeholder="Поиск...">
-        <img src="image/free-icon-loupe-2482343.png" class="search-icon" onclick="FindOnPage('text-to-find')" alt="Поиск">
-      </div>
+        <div class="search-bar">
+            <input type="text" id="text-to-find" placeholder="Поиск...">
+            <img src="image/free-icon-loupe-2482343.png" class="search-icon" onclick="handleSearch()" alt="Поиск">
+          </div>
         
       <div class="user-actions">
         <button id="favorite-button">
@@ -501,12 +501,12 @@
                 </section>
             </section>
 
-            <section class="featured-productss" >
+            <section class="featured-products" >
               <h2 class="as">Топ продаж</h2>
               <div class="red-lines"></div>
               <div class="carousel">
                 
-                <div class="product-cardc" data-id="100" data-stock="23">
+                <div class="product-card" data-id="100" data-stock="23">
                   <img src="image/product/100_amor100.jpg" alt="Надсвечник 90 градусов (Универсальный)">
                   <div class="details">
                     <p class="category">Uncategorized</p>
@@ -528,7 +528,7 @@
                   </div>
                 </div>
 
-                <div class="product-cardc" data-id="59" data-stock="23">
+                <div class="product-card" data-id="59" data-stock="23">
                   <img src="image/product/59_amor59.jpg" alt="Карбюратор на скутер Сузуки Летс / Верде 50 кубов (Morini) Suzuki Lets / Verde 50cc">
                   <div class="details">
                     <p class="category">Uncategorized</p>
@@ -550,7 +550,7 @@
                   </div>
                 </div>
                   
-                  <div class="product-cardc" data-id="2" data-stock="23">
+                  <div class="product-card" data-id="2" data-stock="23">
                       <img src="image/product/168_zerkalo.jpg" alt="Product 2">
                       <div class="details">
                           <p class="category">Аксессуары</p>
@@ -572,7 +572,7 @@
                       </div>
                   </div>
                   
-                  <div class="product-cardc" data-id="3" data-stock="23">
+                  <div class="product-card" data-id="3" data-stock="23">
                     <img src="image/product/209_katuchka.jpg" alt="Катушка Зажигания На Скутер Стайлинг Хонда Дио">
                     <div class="details">
                         <p class="category">Электрика</p>
@@ -597,7 +597,7 @@
                 </div>
             
               
-              <div class="product-cardc" data-id="24" data-stock="22">
+              <div class="product-card" data-id="24" data-stock="22">
                 <img src="image/product/170_chet.jpg" alt="Тахометр цифровой со счетчиком моточасов">
                 <div class="details">
                     <p class="category">Аксессуары, Электрика</p>
@@ -613,13 +613,13 @@
                 </div>
                 <div class="product-info" style="display: none;">
                     <p class="article">Артикул: SCOT78235428916222</p>
-                    <p class="extra">Доп. комплект: Счетчик моточасов</p> <!-- Отдельный элемент для доп. комплекта -->
-                    <p class="dimensions">Габариты: 3 × 6 × 5 см</p> <!-- Отдельный элемент для габаритов -->
+                    <p class="extra">Доп. комплект: Счетчик моточасов</p> 
+                    <p class="dimensions">Габариты: 3 × 6 × 5 см</p> 
                     <p class="tags">Метки: 1 год</p>
                 </div>
             </div>
             
-                  <div class="product-cardc" data-id="3" data-stock="22">
+                  <div class="product-card" data-id="3" data-stock="22">
                       <img src="image/product/203_tormoz.jpg" alt="Product 3">
                       <div class="details">
                           <p class="category">Тормозная Система</p>
@@ -641,7 +641,7 @@
                       </div>
                   </div>
                   
-                  <div class="product-cardc" data-id="4" data-stock="23">
+                  <div class="product-card" data-id="4" data-stock="23">
                       <img src="image/product/192_engine23.jpg" alt="Product 4">
                       <div class="details">
                           <p class="category">Прокладки и сальники</p>
@@ -663,7 +663,7 @@
                       </div>
                   </div>
                   
-                  <div class="product-cardc" data-id="5" data-stock="23">
+                  <div class="product-card" data-id="5" data-stock="23">
                       <img src="image/product/184_engine15.jpg" alt="Product 5">
                       <div class="details">
                           <p class="category">Прокладки и сальники</p>
@@ -685,7 +685,7 @@
                       </div>
                   </div>
                   
-                  <div class="product-cardc" data-id="6" data-stock="23">
+                  <div class="product-card" data-id="6" data-stock="23">
                       <img src="image/product/179_engine10.jpg" alt="Product 6">
                       <div class="details">
                           <p class="category">Двигатель</p>
@@ -702,13 +702,13 @@
                       <div class="product-info" style="display: none;">
                           <p class="article">Артикул: SCOT1267234561315</p>
                           <p class="extra">Плотная упаковка, Запчасть на скутер</p>
-                          <p class="weight">Вес: 1 kg</p> <!-- Добавляем блок для веса -->
+                          <p class="weight">Вес: 1 kg</p> 
                           <p class="dimensions">Габариты: 10 × 20 × 10 cm</p>
                           <p class="tags">Метки: 1 год</p>
                       </div>
                   </div>
                   
-                  <div class="product-cardc" data-id="7" data-stock="23">
+                  <div class="product-card" data-id="7" data-stock="23">
                       <img src="image/product/194_engine25.jpg" alt="Product 7">
                       <div class="details">
                           <p class="category">Топливная Система</p>
@@ -730,7 +730,7 @@
                       </div>
                   </div>
                   
-                  <div class="product-cardc" data-id="8" data-stock="22">
+                  <div class="product-card" data-id="8" data-stock="22">
                       <img src="image/product/197_Karb.jpg" alt="Product 8">
                       <div class="details">
                           <p class="category">Топливная Система</p>
@@ -754,94 +754,8 @@
                   
             </section>
           </main>
-          <script>//карусель
-            $(document).ready(function() {
-                let isDragging = false; // Флаг для отслеживания начала и окончания перетаскивания
-                let startX = 0; // Начальная позиция мыши при начале перетаскивания
-                let dragThreshold = 10; // Минимальная длина перетаскивания для определения как перетаскивание
-                let isMouseMoved = false; // Флаг для отслеживания движения мыши
-            
-                // Инициализация карусели с автопрокруткой
-                $('.carousel').slick({
-                    infinite: true,
-                    slidesToShow: 4,
-                    slidesToScroll: 2,
-                    arrows: true, // Включаем стрелки для навигации
-                    prevArrow: '<button class="slick-prev slick-arrow" aria-label="Previous" type="button">←</button>',
-                    nextArrow: '<button class="slick-next slick-arrow" aria-label="Next" type="button">→</button>',
-                    draggable: true, // Возможность перетаскивать слайды
-                    swipeToSlide: true, // Позволяет пролистывать слайды свайпами
-                    touchThreshold: 10, // Чувствительность для свайпа
-                    autoplay: true, // Автопрокрутка
-                    autoplaySpeed: 3000, // Скорость автопрокрутки (в миллисекундах)
-                    pauseOnHover: true, // Остановка автопрокрутки при наведении мыши
-                });
-            
-                // Обработчик начала перетаскивания карусели
-                $('.carousel').on('mousedown touchstart', function(e) {
-                    isDragging = true;
-                    isMouseMoved = false;
-                    startX = e.type === 'mousedown' ? e.pageX : e.originalEvent.touches[0].pageX;
-                });
-            
-                // Обработчик движения мыши (или пальца)
-                $('.carousel').on('mousemove touchmove', function(e) {
-                    if (isDragging) {
-                        const currentX = e.type === 'mousemove' ? e.pageX : e.originalEvent.touches[0].pageX;
-                        if (Math.abs(currentX - startX) > dragThreshold) {
-                            isMouseMoved = true; // Если мышь двинулась достаточно далеко, считаем это перетаскиванием
-                        }
-                    }
-                });
-            
-                // Обработчик окончания перетаскивания
-                $('.carousel').on('mouseup touchend', function() {
-                    isDragging = false;
-                });
-            
-                // Открытие карточки при клике, если не было перетаскивания и клик был не по кнопке добавления в корзину
-                $('.product-card').on('click', function(e) {
-                    if (!isMouseMoved && !$(e.target).hasClass('add-to-cart')) {
-                        const productInfo = $(this).find('.product-info');
-                        productInfo.slideToggle(); // Открываем или закрываем блок информации
-                    }
-                });
-            
-                // Функция для добавления товара в корзину
-                $('.add-to-cart').on('click', function(e) {
-                    e.stopPropagation(); // Останавливаем всплытие события клика, чтобы не срабатывало открытие информации о продукте
-                    const productCard = $(this).closest('.product-card');
-                    const productId = productCard.attr('data-id');
-                    const productInfo = productCard.find('.product-info'); // Найдем блок product-info
-                    const product = {
-                        id: productId,
-                        image: productCard.find('img').attr('src'),
-                        name: productCard.find('.name').text(),
-                        price: productCard.find('.discounted-price').text() || productCard.find('.original-price').text() || productCard.find('.original-prices').text(),
-                        quantity: 1
-                    };
-            
-                    const index = cart.findIndex(item => item.id === productId);
-            
-                    if (index > -1) {
-                        cart[index].quantity += 1;
-                    } else {
-                        cart.push(product);
-                    }
-            
-                    // Убедимся, что блок product-info остается скрытым
-                    if (productInfo) {
-                        productInfo.hide();
-                    }
-            
-                    if (cartCount) {
-                        cartCount.text(cart.length);
-                    }
-                    updateCartList();
-                    saveCart();
-                });
-            });
-            </script>
+          
+
 
               <script>document.addEventListener('DOMContentLoaded', function () {
                 const detailsTab = document.getElementById('details-tab');
@@ -913,7 +827,87 @@
               
               </script>
 
+<style>
+    /*featured-products*/
+    
+    .featured-products {
+      text-align: center;
+      margin-top: 80px;
+      width: 1200px;
+      margin-left: 70px;
+      position: relative;
+      right: 70px; 
+    }
+    .a {
+      margin-top: 360px;
+      margin-right: 960px;
+      white-space: nowrap; /* Запрещает перенос строк внутри элемента */
+      font-size: 22px;
+    }
+    .as {
+      margin-top: 60px;
+      margin-right: 1100px;
+      white-space: nowrap; 
+      font-size: 22px;
+    }
+    
+    .red-lines {
+      width: 145px;
+      height: 2px;
+      background-color: red;
+      margin: 0 100px 20px 0px;
+    }
+    
+    /* Стили для карусели */
+    .carousel {
+      display: flex;
+      overflow: hidden; 
+      width: 1200px; 
+      margin: 0 auto; 
+    }
+    .product-card {
+      width: 240px;
+      height: 400px;
+      margin-right: 20px;
+      text-align: left;
+      position: relative;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 7px;
+      flex: 0 0 auto; 
+    }
+    
+    .product-card img {
+      width: 80%;
+      height: auto;
+      object-fit: cover;
+      display: block; 
+      margin-top: 25px;
+      margin-left: auto; 
+      margin-right: auto; 
+    }
+    .stock-label {
+  font-size: 11.5px; 
+  text-transform: uppercase;
+  color: #28a745; 
+  padding: 1px; 
+  display: block; 
+  position: absolute; 
+  bottom: 10px; 
+  right: 18px; 
+  text-align: right; }
 
+  .stock-bar {
+  width: 45px;
+  height: 10px;
+  background-color: green; 
+  margin-left: 10px;
+  border-radius: 5px;
+  margin-bottom: 18px;
+}
+
+
+    </style>
 <footer class="footer">
     <div class="footer-section">
       <h4 class="yellow-text">НОВОСТНАЯ РАССЫЛКА</h4>

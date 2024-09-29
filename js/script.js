@@ -1,28 +1,3 @@
-function performSearch() {
-    const query = document.getElementById('search-input').value.trim().toLowerCase(); // Получаем запрос пользователя
-    const productCards = document.querySelectorAll('.product-card'); // Получаем все карточки товаров
-
-    if (query === "") {
-        alert("Введите запрос для поиска!");
-        return;
-    }
-
-    // Проходим по каждой карточке и проверяем её содержимое
-    productCards.forEach(card => {
-        // Получаем текстовое содержимое карточки: название, артикул, описание
-        const productName = card.querySelector('.name').innerText.toLowerCase();
-        const productArticle = card.querySelector('.article') ? card.querySelector('.article').innerText.toLowerCase() : '';
-        const productExtra = card.querySelector('.extra') ? card.querySelector('.extra').innerText.toLowerCase() : '';
-        
-        // Проверяем, содержит ли карточка запрос пользователя
-        if (productName.includes(query) || productArticle.includes(query) || productExtra.includes(query)) {
-            card.style.display = "block"; // Если совпадение найдено, показываем карточку
-        } else {
-            card.style.display = "none"; // Если совпадений нет, скрываем карточку
-        }
-    });
-}
-
 
 
 //избранное на карточке

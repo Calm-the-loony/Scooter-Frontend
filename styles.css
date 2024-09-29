@@ -28,12 +28,13 @@ body {
 }
 /*шапка*/
 /* Специфические стили для кнопок в .user-actions */
-.user-actions button {
+ .user-actions button {
   background-color: #4b4a4a !important;
   border: none;
   padding: 0;
   position: relative;
-}
+} 
+ 
 
 .user-actions button img {
   width: 20px;
@@ -42,21 +43,20 @@ body {
   transform: none !important; 
 }
 
-/* Меняем цвет изображения при наведении, но без наклона */
 .user-actions button:hover img {
-  filter: invert(0);
-  transform: none !important; 
+  filter: invert(1); /* Иконки остаются белыми при наведении */
+  transform: none !important; /* Убираем любые трансформации при наведении */
 }
 
 .user-actions button:not(:last-child)::after {
   content: '';
   position: absolute;
-  height: calc(100% + 12px);
+  height: calc(100% + 14px);
   width: 1px;
   background-color: #000000;
   top: -7px;
-  right: -7px;
-  transform: rotate(3deg); /* Черточка под углом */
+  right: -11px;
+  transform: rotate(2deg); /* Черточка под углом */
 }
 
 
@@ -164,6 +164,18 @@ body {
   border-radius: 50%;
   padding: 2px 6px;
   font-size: 12px;
+}
+
+
+
+.user-actions button {
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 15px;
+  margin-left: 10px;
+  cursor: pointer;
+  transform: none; 
 }
 
 .contact-number {
@@ -612,18 +624,6 @@ align-items: center;
   opacity: 1; /* Не меняем прозрачность при наведении */
 }
 
-
-
-.user-actions button {
-  background-color: #000;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  padding: 8px 15px;
-  margin-left: 10px;
-  cursor: pointer;
-  transform: none; 
-}
 
 
 /* Подменю */
@@ -1534,3 +1534,23 @@ button:hover {
 }
 
 
+/*поиск*/
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  min-height: calc(100vh - 100px); /* Обеспечиваем, что контейнер занимает всю высоту */
+  display: flex;
+  flex-direction: column;
+}
+.container h2{
+  margin-top: 100px;
+}
+
+/* Контейнер для содержимого */
+#search-results {
+  flex-grow: 1; /* Растягивает контейнер с результатами поиска на доступное пространство */
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}

@@ -22,7 +22,7 @@
     <div class="action-container"> 
       <div class="search-bar">
         <input type="text" id="text-to-find" placeholder="Поиск...">
-        <img src="image/free-icon-loupe-2482343.png" class="search-icon" onclick="FindOnPage('text-to-find')" alt="Поиск">
+        <img src="image/free-icon-loupe-2482343.png" class="search-icon" onclick="handleSearch()" alt="Поиск">
       </div>
         
       <div class="user-actions">
@@ -256,7 +256,7 @@
         max-width: 1200px;
         margin: 0 auto;
         padding: 20px;
-        margin-top: 100px;
+        margin-top: 50px;
       }
       
       /* Flexbox для заголовка "Избранное" и хлебных крошек */
@@ -264,17 +264,19 @@
   display: flex;
   justify-content: space-between; /* Разместить заголовок и крошки по разным сторонам */
   align-items: center; /* Выровнять элементы по вертикали */
-  margin-bottom: 20px; /* Отступ снизу */
+  margin-bottom: 10px;
 }
 
 .favorites-title {
-  font-size: 24px; /* Размер заголовка */
+  font-size: 24px;
   font-weight: bold;
+  padding: 30px;
+  margin-left: -30px;
 }
 
 .breadcrumbs {
-  font-size: 16px; /* Размер текста для хлебных крошек */
-  padding-top: 20px; /* Отступ сверху */
+  font-size: 16px; 
+  padding-top: 115px; 
 }
     
       #favorite-list {
@@ -284,7 +286,7 @@
       
       #favorite-list th, #favorite-list td {
         border: 1px solid #ddd;
-        padding: 8px;
+        padding: 9px;
         text-align: left;
       }
       

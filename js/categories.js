@@ -865,4 +865,121 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
     
-    
+    // Карусель
+$(document).ready(function() {
+    let isDragging = false;
+    let startX = 0;
+    let dragThreshold = 10;
+    let isMouseMoved = false;
+
+    // Функция для установки одинаковой высоты карточек
+    function setEqualHeight() {
+        let maxHeight = 0;
+
+        // Находим максимальную высоту карточек
+        $('.product-card').each(function() {
+            let cardHeight = $(this).outerHeight();
+            if (cardHeight > maxHeight) {
+                maxHeight = cardHeight;
+            }
+        });
+
+        // Устанавливаем одинаковую высоту для всех карточек
+        $('.product-card').each(function() {
+            $(this).css('height', maxHeight + 'px');
+        });
+    }
+
+    // Инициализация карусели с автопрокруткой
+    $('.carousel').on('init', function() {
+        setEqualHeight(); // Устанавливаем одинаковую высоту после инициализации карусели
+    }).slick({
+        infinite: true,
+        slidesToShow: 4,
+        slidesToScroll: 2,
+        arrows: true,
+        prevArrow: '<button class="slick-prev slick-arrow" aria-label="Previous" type="button">←</button>',
+        nextArrow: '<button class="slick-next slick-arrow" aria-label="Next" type="button">→</button>',
+        draggable: true,
+        swipeToSlide: true,
+        touchThreshold: 10,
+        autoplay: true,
+        autoplaySpeed: 1000,
+        pauseOnHover: true,
+    });
+
+    // Обработчики перетаскивания карусели
+    $('.carousel').on('mousedown touchstart', function(e) {
+        isDragging = true;
+        isMouseMoved = false;
+        startX = e.type === 'mousedown' ? e.pageX : e.originalEvent.touches[0].pageX;
+    });
+
+    $('.carousel').on('mousemove touchmove', function(e) {
+        if (isDragging) {
+            const currentX = e.type === 'mousemove' ? e.pageX : e.originalEvent.touches[0].pageX;
+            if (Math.abs(currentX - startX) > dragThreshold) {
+                isMouseMoved = true;
+            }
+        }
+    });
+
+    $('.carousel').on('mouseup touchend', function() {
+        isDragging = false;
+    });
+
+    // Открытие карточки при клике, если не было перетаскивания
+    $('.product-card').on('click', function(e) {
+        if (!isMouseMoved && !$(e.target).hasClass('add-to-cart') && !$(e.target).hasClass('add-to-favorites')) {
+            const productInfo = $(this).find('.product-info');
+            productInfo.slideToggle();
+        }
+    });
+
+    // Функция для добавления товара в корзину
+    $('.add-to-cart').on('click', function(e) {
+        e.stopPropagation();
+        const productCard = $(this).closest('.product-card');
+        const productId = productCard.attr('data-id');
+        const productInfo = productCard.find('.product-info');
+        const product = {
+            id: productId,
+            image: productCard.find('img').attr('src'),
+            name: productCard.find('.name').text(),
+            price: productCard.find('.discounted-price').text() || productCard.find('.original-price').text() || productCard.find('.original-prices').text(),
+            quantity: 1
+        };
+
+        const index = cart.findIndex(item => item.id === productId);
+
+        if (index > -1) {
+            cart[index].quantity += 1;
+        } else {
+            cart.push(product);
+        }
+
+        if (productInfo) {
+            productInfo.hide();
+        }
+
+        if (cartCount) {
+            cartCount.text(cart.length);
+        }
+        updateCartList();
+        saveCart();
+    });
+
+    // Функция для добавления товара в избранное
+    $('.add-to-favorites').on('click', function(e) {
+        e.stopPropagation(); // Останавливаем всплытие события
+        // Логика добавления товара в избранное
+        const productCard = $(this).closest('.product-card');
+        const productId = productCard.attr('data-id');
+        // Ваша логика добавления в избранное...
+    });
+
+    // Устанавливаем одинаковую высоту карточек при изменении размера окна
+    $(window).on('resize', function() {
+        setEqualHeight();
+    });
+});

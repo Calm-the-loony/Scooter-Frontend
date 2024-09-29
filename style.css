@@ -16,31 +16,32 @@ body {
   border: none;
   padding: 0;
   position: relative;
-}
+} 
+ 
 
 .user-actions button img {
   width: 20px;
   height: 20px;
   filter: invert(1);
-  transform: none !important; /* Убираем наклон у изображений */
+  transform: none !important; 
 }
 
-/* Меняем цвет изображения при наведении, но без наклона */
 .user-actions button:hover img {
-  filter: invert(0);
-  transform: none !important; /* Убираем наклон при наведении */
+  filter: invert(1); /* Иконки остаются белыми при наведении */
+  transform: none !important; /* Убираем любые трансформации при наведении */
 }
 
 .user-actions button:not(:last-child)::after {
   content: '';
   position: absolute;
-  height: calc(100% + 12px);
+  height: calc(100% + 14px);
   width: 1px;
   background-color: #000000;
   top: -7px;
-  right: -7px;
-  transform: rotate(3deg); /* Черточка под углом */
+  right: -11px;
+  transform: rotate(2deg); /* Черточка под углом */
 }
+
 /* Основные стили */
 .header {
   background-color: #000;
@@ -146,6 +147,17 @@ body {
   border-radius: 50%;
   padding: 2px 6px;
   font-size: 12px;
+}
+
+
+.user-actions button {
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 15px;
+  margin-left: 10px;
+  cursor: pointer;
+  transform: none; 
 }
 
 
@@ -486,18 +498,19 @@ td img {
   height: 37px; 
   border-radius: 4px;
   margin-top: 3px;
-
+  border: none; /* Убираем границу */
 }
 
 .search-bar input[type="text"] {
   padding: 8px;
-  border: none;
+  border: none; /* Убираем границу */
   border-radius: 5px;
   transform: skewX(1deg); /* Компенсируем наклон текста внутри */
   width: 100%;
   box-sizing: border-box;
   background-color: transparent; /* Прозрачный фон, чтобы был виден черный контейнер */
-  color: #555; 
+  color: #ffffff; 
+  outline: none; /* Убираем контур при фокусе */
 }
 
 .search-icon {
@@ -506,25 +519,14 @@ td img {
   width: 25px;
   height: 25px;
   cursor: pointer;
-  transform: skewX(8deg); /* Компенсируем наклон иконки */
+  transform: skewX(8deg); 
 }
 
+/* Убираем изменения при наведении на иконку поиска */
 .search-icon:hover {
-  opacity: 0.8;
+  opacity: 1; /* Не меняем прозрачность при наведении */
 }
 
-
-
-.user-actions button {
-  background-color: #000;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  padding: 8px 15px;
-  margin-left: 10px;
-  cursor: pointer;
-  transform: none; /* Убираем наклон у кнопок */
-}
 
 
 /* .tabs */
@@ -1445,7 +1447,7 @@ button:hover {
   from { transform: scale(0.5); }
   to { transform: scale(1); }
 }
-
+/* 
 .search-section {
   display: flex;
   justify-content: center;
@@ -1481,7 +1483,7 @@ button:hover {
   border-radius: 0 5px 5px 0;
   transition: background-color 0.3s;
   border: 2px solid  #45EFDA;
-}
+} */
 
 
 /*без категории*/
@@ -2448,66 +2450,6 @@ margin-right: 50px;
 }
 
 
-/*featured-products*/
-
-.featured-productss {
-  text-align: center;
-  margin-top: 80px;
-  width: 1200px;
-  margin-left: 70px;
-  position: relative;
-  right: 70px; 
-}
-.a {
-  margin-top: 360px;
-  margin-right: 960px;
-  white-space: nowrap; /* Запрещает перенос строк внутри элемента */
-  font-size: 22px;
-}
-.as {
-  margin-top: 60px;
-  margin-right: 1100px;
-  white-space: nowrap; 
-  font-size: 22px;
-}
-
-.red-lines {
-  width: 145px;
-  height: 2px;
-  background-color: red;
-  margin: 0 100px 20px 0px;
-}
-
-/* Стили для карусели */
-.carousel {
-  display: flex;
-  overflow: hidden; 
-  width: 1200px; 
-  margin: 0 auto; 
-}
-.product-cardc {
-  width: 240px;
-  height: 400px;
-  margin-right: 20px;
-  text-align: left;
-  position: relative;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 7px;
-  flex: 0 0 auto; 
-}
-
-.product-cardc img {
-  width: 80%;
-  height: auto;
-  object-fit: cover;
-  display: block; 
-  margin-top: 25px;
-  margin-left: auto; 
-  margin-right: auto; 
-  border: 2px solid #ddd;
-}
-
 
 /* Основные стили для секции выбора скутера */
 .scooter-selection {
@@ -2726,4 +2668,26 @@ margin-right: 50px;
 
 .account-return-home-btn:hover {
   background-color: #006de2;
+}
+
+
+/*поиск*/
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  min-height: calc(100vh - 100px); /* Обеспечиваем, что контейнер занимает всю высоту */
+  display: flex;
+  flex-direction: column;
+}
+.container h2{
+  margin-top: 100px;
+}
+
+/* Контейнер для содержимого */
+#search-results {
+  flex-grow: 1; /* Растягивает контейнер с результатами поиска на доступное пространство */
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
 }
