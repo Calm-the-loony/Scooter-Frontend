@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -256,7 +255,31 @@
 
     
 <style>
+/* Адаптация под мобильные устройства */
+@media (max-width: 768px) {
+    #search-bar {
+        width: 100%; /* Полная ширина для мобильных устройств */
+    }
 
+    .alphabet-buttons button {
+        flex: 1 1 30%; /* Кнопки занимают 30% ширины */
+        margin: 5px 0; /* Вертикальные отступы */
+    }
+
+    .brand-card {
+        flex: 1 1 calc(45% - 20px); /* Ширина карточек на планшетах */
+    }
+}
+
+@media (max-width: 480px) {
+    .brand-card {
+        flex: 1 1 100%; /* Полная ширина карточек на телефонах */
+    }
+
+    .alphabet-buttons button {
+        flex: 1 1 100%; /* Полная ширина кнопок на телефонах */
+    }
+}
 .container {
   width: 80%;
   margin: 20px auto;
@@ -378,6 +401,9 @@
       <a href="https://www.ozon.ru/seller/scooter24-462340/products/?miniapp=seller_462340" class="social-icon">
           <img src="image/ozon.png" alt="Ozon" class="social-image">
       </a>
+      <a href="https://market.yandex.ru/business--scooter-24/35256421" class="social-icon">
+            <img src="image/market.png" alt="Y.market" class="social-image">
+        </a>
     </div>
     </div>    
     <div class="modal" id="myModal">

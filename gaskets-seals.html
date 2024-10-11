@@ -231,6 +231,44 @@
                 </div>
                 <h2>Прокладки и сальники</h2>
                 <hr class="dashed-line">
+                <section id="scooter-selection" class="scooter-selection">
+                    <h2 class="section-title">Добавьте свой скутер</h2>
+                    <form id="scooter-form" class="scooter-form">
+                        <div class="form-group">
+                            <label for="scooter-type">Тип скутера:</label>
+                            <select id="scooter-type" name="type" class="form-control">
+                                <option value="">Выберите тип</option>
+                                <option value="scooter">Скутер</option>
+                                <option value="moped">Мопед</option>
+                                <option value="motorcycle">Мотоцикл</option>
+                                <!-- Добавьте другие типы скутеров -->
+                            </select>
+                        </div>
+                
+                        <div class="form-group">
+                            <label for="scooter-brand">Выберите бренд:</label>
+                            <select id="scooter-brand" name="brand" class="form-control">
+                                <option value="">Выберите бренд</option>
+                                <option value="honda">Honda</option>
+                                <option value="yamaha">Yamaha</option>
+                                <option value="suzuki">Suzuki</option>
+                                <option value="piaggio">Piaggio</option>
+                                <option value="vespa">Vespa</option>
+                                <!-- Добавьте другие бренды -->
+                            </select>
+                        </div>
+                
+                        <div class="form-group">
+                            <label for="scooter-model">Выберите модель:</label>
+                            <select id="scooter-model" name="model" class="form-control">
+                                <option value="">Выберите модель</option>
+                                <!-- Модели будут добавляться динамически -->
+                            </select>
+                        </div>
+                
+                        <button type="button" id="filter-products" class="btn btn-primary">Фильтровать товары</button>
+                    </form>
+                </section>
                 <section class="cards-container" id="cards-container">
                   <div class="product-card" data-id="10" data-stock="23">
                     <img src="image/product/180_engine11.jpg" alt="Набор прокладок на китайский скутер 50 кубов (139QMB) 100 кубов">
@@ -561,7 +599,7 @@
     </div>
     <div class="footer-section">
       <h3 class="yellow-text">FAQ</h3>
-      <h4 onclick="showModal()">Контакты</h4> <!-- Либо ссылка на сторонний источник -->
+      <h4 onclick="showModal()">Контакты</h4> 
       <h4><a href="pay.html">Способы оплаты</a></h4>
       <h4><a href="delivery.html">Доставка</a></h4>
       <h4><a href="return.html">Возвраты</a></h4>
@@ -592,6 +630,9 @@
       <a href="https://www.ozon.ru/seller/scooter24-462340/products/?miniapp=seller_462340" class="social-icon">
           <img src="image/ozon.png" alt="Ozon" class="social-image">
       </a>
+      <a href="https://market.yandex.ru/business--scooter-24/35256421" class="social-icon">
+            <img src="image/market.png" alt="Y.market" class="social-image">
+        </a>
     </div>
     </div>    
     <div class="modal" id="myModal">

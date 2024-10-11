@@ -254,7 +254,42 @@
                     <a href="index.html" class="back-to-main">Вернуться на главную страницу</a>
     </main>
     
-    <style>.container {
+    <style>
+      /* Адаптация под планшеты */
+@media (max-width: 768px) {
+    section h2 {
+        font-size: 1.5em;
+    }
+
+    .container {
+        width: 95%;
+        margin-top: 80px;
+    }
+
+    #search-bar {
+        max-width: 100%;
+    }
+}
+
+/* Адаптация под телефоны */
+@media (max-width: 480px) {
+    section h2 {
+        font-size: 1.2em;
+    }
+
+    .container {
+        margin-top: 60px;
+    }
+
+    .link {
+        padding: 8px 15px;
+    }
+
+    #search-bar {
+        padding: 8px;
+    }
+}
+    .container {
         width: 80%;
         margin: 20px auto;
         margin-top: 100px;
@@ -319,9 +354,18 @@ section h3 {
     border-radius: 4px;
     margin-right: 10px;
 }
+.video iframe {
+    width: 100%;
+    height: auto; 
+    border-radius: 8px;
+}
 
+.video {
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+}
 
-/* Additional styles for animated hover effects on cards */
 article:hover {
     transform: translateY(-5px);
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
@@ -375,6 +419,9 @@ article:hover {
       <a href="https://www.ozon.ru/seller/scooter24-462340/products/?miniapp=seller_462340" class="social-icon">
           <img src="image/ozon.png" alt="Ozon" class="social-image">
       </a>
+      <a href="https://market.yandex.ru/business--scooter-24/35256421" class="social-icon">
+            <img src="image/market.png" alt="Y.market" class="social-image">
+        </a>
     </div>
     </div>    
     <div class="modal" id="myModal">

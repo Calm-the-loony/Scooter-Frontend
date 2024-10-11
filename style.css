@@ -730,6 +730,7 @@ main.pay .back-to-main, main.jobs .back-to-main, main.container .back-to-main {
   margin-bottom: 10px;
   color: #000000; 
   text-align: left; 
+  margin-top: 20px;
 }
 
 /* Списки */
@@ -752,7 +753,47 @@ main.pay .back-to-main, main.jobs .back-to-main, main.container .back-to-main {
   border-radius: 5px;
 }
 
+/* Адаптивные стили */
+@media (max-width: 768px) {
+  .returns-page {
+    padding: 15px;
+    max-width: 90%; 
+  }
 
+  .returns-title {
+    font-size: 1.8em; 
+  }
+
+  .returns-subtitle {
+    font-size: 1.5em; 
+  }
+
+  .returns-info, .shipping-expenses, .individual-returns, .corporate-returns, .product-guarantee {
+    margin-bottom: 30px;
+  }
+
+  .back-to-main {
+    padding: 8px 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .returns-title {
+    font-size: 1.5em; 
+  }
+
+  .returns-subtitle {
+    font-size: 1.3em; 
+  }
+
+  .returns-info, .shipping-expenses, .individual-returns, .corporate-returns, .product-guarantee {
+    margin-bottom: 20px;
+  }
+
+  .back-to-main {
+    padding: 6px 12px;
+  }
+}
 
 /* Основной контейнер для страницы оплаты */
 .pay-page {
@@ -843,7 +884,55 @@ main.pay .back-to-main, main.jobs .back-to-main, main.container .back-to-main {
   text-decoration: underline;
 }
 
+/* Медиазапросы для мобильных устройств */
+@media (max-width: 768px) {
+  .pay-title {
+    font-size: 2em;
+  }
 
+  .pay-toc ul {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .pay-toc ul li {
+    font-size: 1em;
+  }
+
+  .pay-method-title {
+    font-size: 1.5em;
+  }
+
+  .back-to-main {
+    font-size: 1em;
+  }
+}
+
+@media (max-width: 480px) {
+  .pay-title {
+    font-size: 1.8em;
+  }
+
+  .pay-toc ul {
+    padding: 0 10px;
+  }
+
+  .pay-section {
+    margin-bottom: 30px;
+  }
+
+  .pay-method-title {
+    font-size: 1.3em;
+  }
+
+  .pay-img {
+    width: 100%;
+  }
+
+  .back-to-main {
+    font-size: 0.9em;
+  }
+}
 
 
 /* Основной контейнер для страницы доставки */
@@ -917,7 +1006,51 @@ main.pay .back-to-main, main.jobs .back-to-main, main.container .back-to-main {
   margin: 20px 0; 
   text-align: left; 
 }
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .shipping-title {
+    font-size: 24px;
+    text-align: center;
+  }
+  
+  .shipping-toc ul {
+    padding: 0;
+    list-style-type: none;
+  }
 
+  .shipping-toc li {
+    margin: 10px 0;
+  }
+
+  .shipping-section {
+    margin-bottom: 20px;
+  }
+
+  .shipping-img {
+    width: 100%;
+    height: auto;
+  }
+
+  .back-to-main {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .shipping-title {
+    font-size: 20px;
+  }
+
+  .shipping-method-title {
+    font-size: 18px;
+  }
+
+  .shipping-section p {
+    font-size: 14px;
+  }
+}
 
 
 /* Основной контейнер для страницы */
@@ -991,7 +1124,30 @@ main.pay .back-to-main, main.jobs .back-to-main, main.container .back-to-main {
   display: block;
   margin: 20px 0; 
 }
+/* Адаптивные стили */
+@media (max-width: 768px) {
+  .legal-title {
+      font-size: 2rem;
+  }
 
+  .legal-section-title {
+      font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .legal-title {
+      font-size: 1.8rem;
+  }
+
+  .legal-section-title {
+      font-size: 1.2rem;
+  }
+
+  .subscribe-button {
+      font-size: 0.9rem;
+  }
+}
 
 
 
@@ -1112,7 +1268,7 @@ footer {
   justify-content: center; 
   align-items: center;
   margin-top: 10px; 
-  margin-right: 225px;
+  margin-right: 180px;
 }
 
 .social-icon {
@@ -1126,8 +1282,6 @@ footer {
   height: 24px; 
   margin-top: 4px;
 }
-
-
 
 
 .footer {
@@ -1246,14 +1400,16 @@ footer {
 }
 
 .map {
-  height: 400px;
-  margin-top: 20px;
+  height: 400px; /* или другая фиксированная высота */
+  width: 100%; /* или max-width: 800px; */
+  margin: 20px auto; /* центрирует карту */
   border-radius: 5px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 
 
+/* Адаптивные стили */
 @media (max-width: 768px) {
   .salesroom-images {
     flex-direction: column;
@@ -1264,12 +1420,35 @@ footer {
     flex: none;
   }
 
-  .salesroom-images .small-images {
+  .small-images {
     flex-direction: row;
+    justify-content: space-between;
   }
 
-  .modal-content {
-    width: 90%;
+  .large-image, .small-image {
+    margin-bottom: 10px;
+  }
+
+  .work-hours, .payment-methods {
+    padding: 15px;
+  }
+
+  .map {
+    height: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .large-image, .small-image {
+    width: 100%;
+  }
+
+  .work-hours, .payment-methods {
+    padding: 10px;
+  }
+
+  .map {
+    height: 200px;
   }
 }
 
@@ -1431,7 +1610,51 @@ button:hover {
   background-color:  #45EFDA;
 }
 
+/* Адаптация под планшеты */
+@media (max-width: 768px) {
+  .jobs {
+    padding: 80px 10px;
+  }
 
+  .vacancy-card {
+    padding: 15px;
+  }
+
+  .benefits li {
+    font-size: 14px;
+  }
+
+  .apply-button {
+    padding: 8px;
+  }
+
+  .modal-content {
+    width: 90%; /* Увеличение ширины модального окна на планшетах */
+  }
+}
+
+/* Адаптация под телефоны */
+@media (max-width: 480px) {
+  .jobs {
+    padding: 60px 10px;
+  }
+
+  .vacancy-card {
+    padding: 10px;
+  }
+
+  .benefits li {
+    font-size: 12px;
+  }
+
+  .apply-button {
+    padding: 6px;
+  }
+
+  .modal-content {
+    width: 95%; /* Увеличение ширины модального окна на телефонах */
+  }
+}
 
 @keyframes fadeIn {
   from { opacity: 0; }
@@ -2263,6 +2486,7 @@ margin-right: 50px;
   display: block; /* Обеспечиваем корректное выравнивание */
   margin-left: auto; /* Выровнять по центру */
   margin-right: auto; /* Выровнять по центру */
+  object-fit: contain;
 }
 
 .pagination {
@@ -2413,7 +2637,183 @@ margin-right: 50px;
 .favorited .fa-heart {
   color: red;
 }
+/* Адаптация для планшетов (768px) */
+@media (max-width: 768px) {
+  .product-card {
+    width: calc(50% - 20px); /* Ширина карточки для планшетов */
+  }
 
+  .details .name {
+    font-size: 14px;
+  }
+
+  .details .category {
+    font-size: 12px;
+  }
+
+  .original-price-wrapper {
+    font-size: 16px;
+  }
+
+  .add-to-cart {
+    padding: 4px;
+  }
+}
+
+/* Адаптация для мобильных телефонов (480px и меньше) */
+@media (max-width: 480px) {
+  .product-card {
+    width: 100%;
+    margin: 0 0 20px 0; /* Делает карточки полноразмерными на телефоне */
+  }
+
+  .details .name {
+    font-size: 12px;
+  }
+
+  .details .category {
+    font-size: 10px;
+  }
+
+  .original-price-wrapper {
+    font-size: 14px;
+  }
+
+  .add-to-cart {
+    padding: 3px;
+    font-size: 14px;
+  }
+
+  .add-to-favorites {
+    top: 5px;
+    right: 5px;
+  }
+}
+/* Мобильные устройства */
+@media (max-width: 480px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .header .logo-image {
+    max-width: 150px;
+  }
+
+  .header .action-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .submenu ul {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+  }
+
+  .sidebar {
+    display: none; /* Скрываем на мобильных */
+  }
+
+  .main-content {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .product-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .product-card img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .details {
+    margin-top: 10px;
+  }
+
+  .price {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .footer {
+    text-align: center;
+    padding: 20px;
+  }
+
+  /* Адаптация форм */
+  .scooter-selection .form-group {
+    width: 100%;
+    margin-bottom: 15px;
+  }
+
+  .scooter-selection .form-control {
+    width: 100%;
+    padding: 10px;
+  }
+
+}
+
+/* Планшеты */
+@media (min-width: 481px) and (max-width: 768px) {
+  .header .search-bar input {
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .header .action-container {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .sidebar {
+    width: 30%;
+  }
+
+  .main-content {
+    width: 50%;
+    padding: 20px;
+  }
+
+
+
+  .footer {
+    padding: 20px;
+  }
+}
+
+/* Десктопы */
+@media (min-width: 769px) {
+  .header {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .sidebar {
+    width: 25%;
+  }
+
+  .main-content {
+    width: 75%;
+    padding: 30px;
+  }
+
+  .cards-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+  }
+
+  .footer {
+    padding: 40px;
+    text-align: left;
+  }
+}
 /* Установка стилей для кнопок вкладок */
 .tabs {
   display: flex; /* Располагает кнопки в один ряд */
@@ -2454,40 +2854,47 @@ margin-right: 50px;
 /* Основные стили для секции выбора скутера */
 .scooter-selection {
   background-color: #f9f9f9;
-  padding: 15px; 
-  border-radius: 6px; 
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); 
-  margin: 15px 0; 
-  margin-top: 45px; 
+  padding: 15px;
+  border-radius: 6px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+  margin: 15px 0;
+  margin-top: 45px;
+  width: 50%; /* Уменьшаем ширину секции до 50% */
+  margin-left: auto; /* Центрируем секцию */
+  margin-right: auto;
 }
 
 .section-title {
-  font-size: 20px; 
+  padding-top: 30px;
+  font-size: 18px; /* Немного уменьшаем размер заголовка */
   font-weight: bold;
-  margin-bottom: 10px; 
+  margin-bottom: 10px;
   color: #333;
+  text-align: center; /* Центрируем заголовок */
 }
 
 .scooter-form {
   display: flex;
   flex-direction: column;
+  align-items: center; /* Центрируем элементы формы */
 }
 
 .form-group {
-  margin-bottom: 10px; 
+  margin-bottom: 10px;
+  width: 80%; /* Уменьшаем ширину группы формы */
 }
 
 .form-group label {
   display: block;
-  font-size: 14px; 
-  margin-bottom: 4px; 
+  font-size: 14px;
+  margin-bottom: 4px;
   color: #555;
 }
 
 .form-control {
-  width: 40%;
+  width: 100%; /* Поля формы теперь занимают всю ширину группы формы */
   padding: 8px;
-  font-size: 14px; 
+  font-size: 14px;
   border: 1px solid #ddd;
   border-radius: 4px;
   box-sizing: border-box;
@@ -2500,20 +2907,22 @@ margin-right: 50px;
 
 .btn, .btn-primary {
   display: inline-block;
-  padding: 8px 3px; 
-  font-size: 14px; 
-  color: #000000; 
-  background-color: #45EFDA; 
+  padding: 8px 20px; /* Немного увеличиваем padding кнопки */
+  font-size: 14px;
+  color: #000000;
+  background-color: #45EFDA;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.3s, box-shadow 0.3s; 
+  transition: background-color 0.3s, box-shadow 0.3s;
+  margin-top: 10px;
 }
 
 .btn-primary:hover, .btn:hover {
-  background-color: #36c7c2; 
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
+  background-color: #36c7c2;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
+
 
 
 /*личный кабинет*/
@@ -2691,3 +3100,4 @@ margin-right: 50px;
   flex-wrap: wrap;
   gap: 20px;
 }
+

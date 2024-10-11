@@ -61,7 +61,90 @@
             <a href="tel:+1234567890">+7(973)345-53-14</a>
         </div>
     </header>
+    <div id="cookie-modal" class="modal">
+        <div class="modal-content">
+            <h2>Использование Cookies</h2>
+            <p>Мы используем cookies для улучшения вашего опыта на нашем сайте. Пожалуйста, подтвердите ваше согласие.</p>
+            <button id="accept-cookies">Согласен</button>
+        </div>
+    </div>
+    <div id="consent-modal" class="modal">
+        <div class="modal-content">
+            <h2>Согласие на обработку персональных данных</h2>
+            <p>Для продолжения работы на сайте, пожалуйста, дайте согласие на обработку ваших персональных данных в соответствии с нашей <a href="dataprotection.html">Политикой конфиденциальности</a>.</p>
+            <button id="accept-consent">Согласен</button>
+        </div>
+    </div>
+    <style>/* Основные стили для модального окна */
+       /* Основные стили для модального окна */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.5s ease-in-out;
+}
 
+.modal-content {
+    background-color: #f5f5f5;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 80%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.modal-content h2 {
+    margin-top: 0;
+    color: #333;
+    font-family: Arial, sans-serif;
+}
+
+.modal-content p {
+    color: #555;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.modal-content a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.modal-content button {
+    background-color: #4b4a4a;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.modal-content button:hover {
+    background-color: #363636;
+}
+
+/* Анимация появления окна */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+        </style>
 
  <!-- Модальное окно для выбора города -->
  <div id="city-modal" class="city-modal">
@@ -132,6 +215,8 @@
       </div>
     </div>
   </div> -->
+<!-- Модальное окно согласия на обработку персональных данных -->
+
 
 
   <div id="scooter-modal" class="modal">
@@ -254,7 +339,7 @@
             </div>
         </div>
     </section>
-    
+
 
 <div class="categories-section">
   <div class="category">
@@ -1134,7 +1219,11 @@
         <a href="https://www.ozon.ru/seller/scooter24-462340/products/?miniapp=seller_462340" class="social-icon">
             <img src="image/ozon.png" alt="Ozon" class="social-image">
         </a>
+        <a href="https://market.yandex.ru/business--scooter-24/35256421" class="social-icon">
+            <img src="image/market.png" alt="Y.market" class="social-image">
+        </a>
     </div>
+    
     </div>    
   </footer>
 
