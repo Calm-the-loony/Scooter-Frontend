@@ -833,4 +833,3 @@ document.querySelector('.lcab-forgot-password a').addEventListener('click', func
 
 
 
-//кабинет

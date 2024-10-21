@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Результаты поиска</title>
+  <title>Результат поиска</title>
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap">
@@ -85,7 +85,47 @@
 </div>
 </div>
 
+<!-- <div id="favorites-modal" class="modal">
+  <div class="modal-contents">
+    <span class="close" id="favorites-close">&times;</span>
+    <h2>Избранное</h2>
+    <table id="favorite-list">
+      <thead>
+        <tr>
+          <th>Изображение</th>
+          <th>Название товара</th>
+          <th>Цена за штуку</th>
+          <th>Наличие на складе</th>
+          <th>Действия</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</div> -->
 
+<div id="cart-modal" class="modal">
+    <div class="modal-contents">
+      <span class="close" id="cart-close">&times;</span>
+      <h2>Корзина</h2>
+      <table id="cart-list">
+        <thead>
+          <tr>
+            <th>Изображение</th>
+            <th>Название</th>
+            <th>Цена</th>
+            <th>Количество</th>
+            <th>Действия</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <div class="cart-total">
+        <p>Итого: <span id="total-price">0.00 ₽</span></p>
+        <button class="buy-button" onclick="buyItems()">Купить</button>
+      </div>
+    </div>
+  </div>
 
 
   <div id="scooter-modal" class="modal">
@@ -126,72 +166,47 @@
         <button id="login-button"><a href="account.html" >Авторизация</a> </button>
     </div>
 </div>
-
-
-      <script>
-        function setupScooterModal() {
-            const scooterButton = document.getElementById('scooter-button');
-            const scooterModal = document.getElementById('scooter-modal');
-            const scooterModalClose = document.getElementById('scooter-modal-close');
-            const addScooterButton = document.getElementById('add-scooter');
-            const loginButton = document.getElementById('login-button');
-          
-            scooterButton.addEventListener('click', () => {
-              scooterModal.style.display = 'block';
-            });
-          
-            scooterModalClose.addEventListener('click', () => {
-              scooterModal.style.display = 'none';
-            });
-          
-            window.addEventListener('click', (event) => {
-              if (event.target === scooterModal) {
-                scooterModal.style.display = 'none';
-              }
-            });
-          
-            addScooterButton.addEventListener('click', () => {
-              const type = document.getElementById('scooter-type').value;
-              const manufacturer = document.getElementById('scooter-manufacturer').value;
-              const model = document.getElementById('scooter-model').value;
-              alert(`Добавлен скутер: Тип - ${type}, Производитель - ${manufacturer}, Модель - ${model}`);
-              scooterModal.style.display = 'none';
-            });
-          
-            loginButton.addEventListener('click', () => {
-              // Перенаправление на страницу авторизации или открытие модального окна авторизации
-              alert('Перенаправление на страницу авторизации');
-            });
-          }
-          
-          // Вызываем функцию setupScooterModal после загрузки контента страницы
-          document.addEventListener('DOMContentLoaded', setupScooterModal);
-          
-          addScooterButton.addEventListener('click', () => {
-            const type = document.getElementById('scooter-type').value;
-            const manufacturer = document.getElementById('scooter-manufacturer').value;
-            const model = document.getElementById('scooter-model').value;
-        
-            // Обновляем данные в блоке scooter-details
-            document.getElementById('scooter-type-display').textContent = `Тип: ${type}`;
-            document.getElementById('scooter-manufacturer-display').textContent = `Производитель: ${manufacturer}`;
-            document.getElementById('scooter-model-display').textContent = `Модель: ${model}`;
-            document.getElementById('scooter-image').src = `image/scooter_${type}_${manufacturer}_${model}.png`;
-        
-            // Отображаем блок scooter-details
-            document.getElementById('scooter-details').style.display = 'block';
-        
-            // Закрываем модальное окно
-            scooterModal.style.display = 'none';
-        });
-          </script>
     
     <div class="container">
-      <h2>Результаты поиска</h2>
-      <div id="search-results">
-        <!-- Здесь будут отображаться результаты поиска -->
+      <div class="favorites-header">
+        <h2 class="favorites-title">Результат поиска</h2>
+        <div class="breadcrumbs">
+          <a href="index.html">Главная</a> &raquo; <span>Результат поиска</span>
+        </div>
       </div>
-    </div>
+    
+            <div id="search-results">
+              <!-- Здесь будут отображаться результаты поиска -->
+            </div>
+          </div>
+  
+      <style>.container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        margin-top: 20px;
+      }
+    
+.favorites-header {
+  display: flex;
+  justify-content: space-between; /* Разместить заголовок и крошки по разным сторонам */
+  align-items: center; /* Выровнять элементы по вертикали */
+  margin-bottom: 10px;
+}
+
+.favorites-title {
+  font-size: 24px;
+  font-weight: bold;
+  padding: 30px;
+  margin-left: -30px;
+}
+
+.breadcrumbs {
+  font-size: 16px; 
+  padding-top: 115px; 
+}
+    
+      </style>
         
 <footer class="footer">
     <div class="footer-section">
@@ -256,7 +271,7 @@
   </footer>
 
 
-  <script src="js/script.js"></script>
+  <script src="js/dopscript.js"></script>
   <script src="js/geo.js"></script>
 </body>
 </html>

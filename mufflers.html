@@ -125,66 +125,6 @@
     </div>
 </div>
 
-
-      <script>
-        function setupScooterModal() {
-            const scooterButton = document.getElementById('scooter-button');
-            const scooterModal = document.getElementById('scooter-modal');
-            const scooterModalClose = document.getElementById('scooter-modal-close');
-            const addScooterButton = document.getElementById('add-scooter');
-            const loginButton = document.getElementById('login-button');
-          
-            scooterButton.addEventListener('click', () => {
-              scooterModal.style.display = 'block';
-            });
-          
-            scooterModalClose.addEventListener('click', () => {
-              scooterModal.style.display = 'none';
-            });
-          
-            window.addEventListener('click', (event) => {
-              if (event.target === scooterModal) {
-                scooterModal.style.display = 'none';
-              }
-            });
-          
-            addScooterButton.addEventListener('click', () => {
-              const type = document.getElementById('scooter-type').value;
-              const manufacturer = document.getElementById('scooter-manufacturer').value;
-              const model = document.getElementById('scooter-model').value;
-              alert(`Добавлен скутер: Тип - ${type}, Производитель - ${manufacturer}, Модель - ${model}`);
-              scooterModal.style.display = 'none';
-            });
-          
-            loginButton.addEventListener('click', () => {
-              // Перенаправление на страницу авторизации или открытие модального окна авторизации
-              alert('Перенаправление на страницу авторизации');
-            });
-          }
-          
-          // Вызываем функцию setupScooterModal после загрузки контента страницы
-          document.addEventListener('DOMContentLoaded', setupScooterModal);
-          
-          addScooterButton.addEventListener('click', () => {
-            const type = document.getElementById('scooter-type').value;
-            const manufacturer = document.getElementById('scooter-manufacturer').value;
-            const model = document.getElementById('scooter-model').value;
-        
-            // Обновляем данные в блоке scooter-details
-            document.getElementById('scooter-type-display').textContent = `Тип: ${type}`;
-            document.getElementById('scooter-manufacturer-display').textContent = `Производитель: ${manufacturer}`;
-            document.getElementById('scooter-model-display').textContent = `Модель: ${model}`;
-            document.getElementById('scooter-image').src = `image/scooter_${type}_${manufacturer}_${model}.png`;
-        
-            // Отображаем блок scooter-details
-            document.getElementById('scooter-details').style.display = 'block';
-        
-            // Закрываем модальное окно
-            scooterModal.style.display = 'none';
-        });
-          </script>
-          
-
           <main class="containers">
             <aside class="sidebar">
                 <nav class="categories-nav">
@@ -230,11 +170,65 @@
                 </div>
                 <h2>Глушители</h2>
                 <hr class="dashed-line">
-                <div class="no-products" id="no-products">
-                    <p>Товаров, соответствующих вашему запросу, не обнаружено.</p>
-                    <img src="image/free-icon-black-cat-3704886.png" alt="Jumping Cat" class="cat">
-                </div>
-        </main>
+                <section class="cards-container" id="cards-container">
+
+                  <div class="product-card" data-id="1" data-stock="23" data-type="Скутер" data-brand="IRBIS, Honda, Yamaha, Omaks Motors, Suzuki" data-model="Giorno (Honda), Dio Cesta (Honda), Dio (Honda), TACT 50, Tact (Honda)">
+                    <img src="image/product/mufflers.webp" alt="Шпильки глушителя">
+                    <div class="details">
+                      <p class="category">Глушители</p>
+                      <p class="name ellipsis">Шпильки глушителя с гайками TWH Racing CO. универсальные для мототехники "ТВХ Рейсинг" для Honda Dio / Yamaha Jog / Suzuki / 139QMB / 157QMJ (на Хонда Дио /Ямаха Джог) 50 - 80 cc под тюнинг</p>
+                      <div class="price">
+                        <div class="original-price-wrapper no-discount">
+                          <span class="original-prices">1120,00 ₽</span>
+                        </div>
+                        <button class="add-to-cart" onclick="toggleCart(this)"><i class="fas fa-shopping-cart"></i></button>
+                        <div class="stock-bar" title="В наличии много"></div>
+                      </div>
+                      <button class="add-to-favorites" onclick="toggleFavorite(this)"><i class="fas fa-heart"></i></button>
+                    </div>
+                    <div class="product-info" style="display: none;">
+                      <p class="article">Артикул: SCOT2400000000137</p>
+                      <p class="extra">Доп. комплект: Плотная упаковка, шпильки глушителя универсальные</p>
+                      <p class="dimensions">Габариты: 6.3 мм</p>
+                      <div class="product-details">
+                      <p class="type">Тип: Скутер</p>
+                      <p class="brand">Бренд: IRBIS, Honda, Yamaha, Omaks Motors, Suzuki</p>
+                      <p class="model">Модели: Giorno (Honda), Dio Cesta (Honda), Dio (Honda), TACT 50, Tact (Honda)</p>
+                    </div> 
+                      <p class="tags">Метки: 1 год</p>
+                    </div>
+                  </div>
+                
+                  <div class="product-card" data-id="2" data-stock="23" data-type="Мотоцикл" data-brand="ABM, Alfer, American IronHorse, Apollo, Aprilia, Arctic Cat, Arlen Ness, Asiawing, Ataki, Avantis, Bajaj, Baltmotors, Bars, Benelli, Beta, Big Dog Motorcycles, BMW, Boom Trikes, BRP, BRZ, BSE, Buell, Butchbike, Cagiva, Campagna, CCM, Centurion, CFMOTO, Confederate, CPI, Curtiss, Cyclone, CZ, DKW, Ducati, EBR, EMAX, Falcon, Forsage, Fuego, Full Crew, Futong, FX moto, GAS GAS, GR, Gryphon, Harley-Davidson, Hasky, Honda, Honling, Husaberg, Husqvarna, Hyosung, Indian, IRBIS, Jawa, JMC, Johnny Pag, Kawasaki, KAYO, Keeway, KTM, KXD, Kymco, Lifan, Litus, Loncin, Malaguti, MGMoto, Minsk (Минск), Motax, Moto Guzzi, Motoland, MV Agusta, MZ, Nexus, Nitro, ODES, Omaks Motors, Orion, Pannonia, Patron, Phoenix Trike Works, Pitster Pro, Polaris, Progasi, PWR Racing, Racer, Regulmoto, Rewaco, Rieju, RM, Rockot, Roliz, Royal Enfield, S2 Motors, Sachs, Sagitta, Saxon, SCANMOTO" data-model="1000, 110, 250 / 390 Adventure (KTM), 250 (KTM), 259C (R 1200 C Independent), 259C (R 1200 C Montauk), 259C (R 850 C, R 1200 C), 259 (R 1100 S, R 1100 RS), 300, 300SR, 400, 400GT, 450, 450SR, 500, 500 Kazuma-GT ATV, 500А, 550, 650GT, 650MT, 650NK, 700, 700CLX Heritage, 800, 800MT Explore, 800MT Sport, 800MT Touring, AD100, AD50, Address 110 (Suzuki), Address 50 (Suzuki), Address (Suzuki), Address V100 (Suzuki), Adventure R (KTM), Adventure (KTM), Aerox (Yamaha), Africa Twin CRF1000L (Honda), Africa Twin CRF1100 L1 (Honda), Africa Twin CRF1100 L2/L4 (Honda), Africa Twin XRV 750 (Honda), Agusta F4 (MV AGUSTA), Alien Monster 300, Alpha, America (Triumph), ATV 125, ATV 200, ATV 250, ATV 300B, Avenger (Bajaj), Axis (Yamaha), Basic (KAYO), Benelli (Stels), BN 251 (Benelli), Bonneville (Triumph), Boulevard (Suzuki), Boxer (Bajaj), Brutale (MV Agusta), Burgman 400 (Suzuki), Burgman 650 (Suzuki), BWS 100 (Yamaha), BWS 50 (Yamaha), C1, C600 Sport (BMW), Can-Am Commander, Can-Am Maverick X3, Can-Am Renegade, CB 125 F (Honda), CB 500/650 F (Honda), CB 500 F (Honda), CBF 150 (Honda), CB (Honda), CBR 250 (Honda), CBR 600 F (Honda), CBR 600 RR (Honda), CBR 650 F (Honda), CBR (Honda), CBR (Wels), CFORCE 1000, CFORCE 400, CFORCE 600, CFORCE 800, Classic (KAYO), Classic (Royal Enfield), CLX700, COBRA, CRF 250/300 Rally (Honda), CRF 250 L/300 L (Honda), CRF (Honda), CRF (Wels), Cross, CR-Z 300, CR (Zuum), Cvo (Harley-Davidson), Cygnus X (Yamaha), DAKAR (Motoland), Delta, Diavel 1260 S (Ducati), Diavel (Ducati), Diavel Touring (Ducati), DINGO">
+                    <img src="image/product/mufflers2.webp" alt="Глушитель прямоток универсальный Carbon ( карбон ) для мотоцикла / на питбайк и квадроцикл 125 - 600 кубов 38-51 мм / мопед Выхлопная труба">
+                    <div class="details">
+                      <p class="category">Глушители</p>
+                      <p class="name ellipsis">Глушитель прямоток универсальный Carbon ( карбон ) для мотоцикла / на питбайк и квадроцикл 125 - 600 кубов 38-51 мм / мопед Выхлопная труба</p>
+                      <div class="price">
+                        <div class="original-price-wrapper no-discount">
+                          <span class="original-prices">11160,00 ₽</span>
+                        </div>
+                        <button class="add-to-cart" onclick="toggleCart(this)"><i class="fas fa-shopping-cart"></i></button>
+                        <div class="stock-bar" title="В наличии много"></div>
+                      </div>
+                      <button class="add-to-favorites" onclick="toggleFavorite(this)"><i class="fas fa-heart"></i></button>
+                    </div>
+                    <div class="product-info" style="display: none;">
+                      <p class="article">Артикул: SCOT240000000081</p>
+                      <p class="extra">Доп. комплект: Прямоток глушитель на мотоцикл, мопед, квадроцикл и скутер</p>
+                      <p class="dimensions">Габариты: 30 см × 51 × 60 × 62.5 мм</p>
+                      <div class="product-details">
+                      <p class="type">Тип: Мотоцикл</p>
+                      <p class="brand">Бренд: ABM, Alfer, American IronHorse, Apollo, Aprilia, Arctic Cat, Arlen Ness, Asiawing, Ataki, Avantis, Bajaj, Baltmotors, Bars, Benelli, Beta, Big Dog Motorcycles, BMW, Boom Trikes, BRP, BRZ, BSE, Buell, Butchbike, Cagiva, Campagna, CCM, Centurion, CFMOTO, Confederate, CPI, Curtiss, Cyclone, CZ, DKW, Ducati, EBR, EMAX, Falcon, Forsage, Fuego, Full Crew, Futong, FX moto, GAS GAS, GR, Gryphon, Harley-Davidson, Hasky, Honda, Honling, Husaberg, Husqvarna, Hyosung, Indian, IRBIS, Jawa, JMC, Johnny Pag, Kawasaki, KAYO, Keeway, KTM, KXD, Kymco, Lifan, Litus, Loncin, Malaguti, MGMoto, Minsk (Минск), Motax, Moto Guzzi, Motoland, MV Agusta, MZ, Nexus, Nitro, ODES, Omaks Motors, Orion, Pannonia, Patron, Phoenix Trike Works, Pitster Pro, Polaris, Progasi, PWR Racing, Racer, Regulmoto, Rewaco, Rieju, RM, Rockot, Roliz, Royal Enfield, S2 Motors, Sachs, Sagitta, Saxon, SCANMOTO</p>
+                      <p class="model">Модели: 1000, 110, 250 / 390 Adventure (KTM), 250 (KTM), 259C (R 1200 C Independent), 259C (R 1200 C Montauk), 259C (R 850 C, R 1200 C), 259 (R 1100 S, R 1100 RS), 300, 300SR, 400, 400GT, 450, 450SR, 500, 500 Kazuma-GT ATV, 500А, 550, 650GT, 650MT, 650NK, 700, 700CLX Heritage, 800, 800MT Explore, 800MT Sport, 800MT Touring, AD100, AD50, Address 110 (Suzuki), Address 50 (Suzuki), Address (Suzuki), Address V100 (Suzuki), Adventure R (KTM), Adventure (KTM), Aerox (Yamaha), Africa Twin CRF1000L (Honda), Africa Twin CRF1100 L1 (Honda), Africa Twin CRF1100 L2/L4 (Honda), Africa Twin XRV 750 (Honda), Agusta F4 (MV AGUSTA), Alien Monster 300, Alpha, America (Triumph), ATV 125, ATV 200, ATV 250, ATV 300B, Avenger (Bajaj), Axis (Yamaha), Basic (KAYO), Benelli (Stels), BN 251 (Benelli), Bonneville (Triumph), Boulevard (Suzuki), Boxer (Bajaj), Brutale (MV Agusta), Burgman 400 (Suzuki), Burgman 650 (Suzuki), BWS 100 (Yamaha), BWS 50 (Yamaha), C1, C600 Sport (BMW), Can-Am Commander, Can-Am Maverick X3, Can-Am Renegade, CB 125 F (Honda), CB 500/650 F (Honda), CB 500 F (Honda), CBF 150 (Honda), CB (Honda), CBR 250 (Honda), CBR 600 F (Honda), CBR 600 RR (Honda), CBR 650 F (Honda), CBR (Honda), CBR (Wels), CFORCE 1000, CFORCE 400, CFORCE 600, CFORCE 800, Classic (KAYO), Classic (Royal Enfield), CLX700, COBRA, CRF 250/300 Rally (Honda), CRF 250 L/300 L (Honda), CRF (Honda), CRF (Wels), Cross, CR-Z 300, CR (Zuum), Cvo (Harley-Davidson), Cygnus X (Yamaha), DAKAR (Motoland), Delta, Diavel 1260 S (Ducati), Diavel (Ducati), Diavel Touring (Ducati), DINGO</p>
+                    </div>
+                      <p class="tags">Метки: 1 год</p>
+                    </div>
+                  </div>
+                
+                
+                                </section>
+                        </main>
 
         
 <footer class="footer">

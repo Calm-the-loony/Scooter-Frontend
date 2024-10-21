@@ -737,40 +737,25 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 
+
+
+
+
 //согласие на обработку персональных данных
 document.addEventListener('DOMContentLoaded', function () {
     const consentModal = document.getElementById('consent-modal');
-    const acceptButton = document.getElementById('accept-consent');
+    const acceptConsentButton = document.getElementById('accept-consent');
 
-    // Временно очищаем localStorage для тестирования
-    localStorage.removeItem('consentGiven');
-
-    // Проверяем, дал ли пользователь уже согласие
-    if (!localStorage.getItem('consentGiven')) {
-        // Если не дал, показываем модальное окно через 2 секунды после загрузки страницы
-        setTimeout(function() {
-            consentModal.style.display = 'flex'; // Показать модальное окно
-        }, 2000);
+    // Проверяем, давал ли пользователь согласие на обработку данных и cookies
+    if (!localStorage.getItem('consentGiven') || !localStorage.getItem('cookiesAccepted')) {
+        // Убираем задержку и показываем окно сразу для теста
+        consentModal.style.display = 'flex'; // Показать модальное окно
     }
 
-    // Когда пользователь соглашается
-    acceptButton.addEventListener('click', function() {
-        localStorage.setItem('consentGiven', 'true'); // Сохраняем согласие в localStorage
+    // Когда пользователь соглашается на обработку данных и cookies
+    acceptConsentButton.addEventListener('click', function () {
+        localStorage.setItem('consentGiven', 'true'); // Сохраняем согласие на обработку данных
+        localStorage.setItem('cookiesAccepted', 'true'); // Сохраняем согласие на использование cookies
         consentModal.style.display = 'none'; // Закрываем модальное окно
-    });
-});
-document.addEventListener('DOMContentLoaded', function () {
-    const cookieModal = document.getElementById('cookie-modal');
-    const acceptCookieButton = document.getElementById('accept-cookies');
-
-    // Проверяем, давал ли пользователь согласие на cookies
-    if (!localStorage.getItem('cookiesAccepted')) {
-        cookieModal.style.display = 'flex'; // Показать модальное окно
-    }
-
-    // Когда пользователь соглашается
-    acceptCookieButton.addEventListener('click', function() {
-        localStorage.setItem('cookiesAccepted', 'true'); // Сохраняем согласие
-        cookieModal.style.display = 'none'; // Закрываем модальное окно
     });
 });

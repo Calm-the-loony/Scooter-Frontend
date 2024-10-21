@@ -61,17 +61,10 @@
             <a href="tel:+1234567890">+7(973)345-53-14</a>
         </div>
     </header>
-    <div id="cookie-modal" class="modal">
-        <div class="modal-content">
-            <h2>Использование Cookies</h2>
-            <p>Мы используем cookies для улучшения вашего опыта на нашем сайте. Пожалуйста, подтвердите ваше согласие.</p>
-            <button id="accept-cookies">Согласен</button>
-        </div>
-    </div>
     <div id="consent-modal" class="modal">
         <div class="modal-content">
-            <h2>Согласие на обработку персональных данных</h2>
-            <p>Для продолжения работы на сайте, пожалуйста, дайте согласие на обработку ваших персональных данных в соответствии с нашей <a href="dataprotection.html">Политикой конфиденциальности</a>.</p>
+            <h2>Согласие на обработку персональных данных и использование Cookies</h2>
+            <p>Для продолжения работы на сайте, пожалуйста, дайте согласие на обработку ваших персональных данных и использование cookies в соответствии с нашей <a href="dataprotection.html">Политикой конфиденциальности</a>.</p>
             <button id="accept-consent">Согласен</button>
         </div>
     </div>
@@ -259,63 +252,6 @@
 </div>
 
 
-
-<script>
-    function setupScooterModal() {
-      const scooterButton = document.getElementById('scooter-button');
-      const scooterModal = document.getElementById('scooter-modal');
-      const scooterModalClose = document.getElementById('scooter-modal-close');
-      const addScooterButton = document.getElementById('add-scooter');
-      const loginButton = document.getElementById('login-button');
-    
-      // Открываем модальное окно при клике на кнопку "Добавить скутер"
-      scooterButton.addEventListener('click', () => {
-        scooterModal.style.display = 'block';
-      });
-    
-      // Закрываем модальное окно при клике на крестик
-      scooterModalClose.addEventListener('click', () => {
-        scooterModal.style.display = 'none';
-      });
-    
-      // Закрываем модальное окно при клике вне его области
-      window.addEventListener('click', (event) => {
-        if (event.target === scooterModal) {
-          scooterModal.style.display = 'none';
-        }
-      });
-    
-      // Обработчик для добавления скутера
-      addScooterButton.addEventListener('click', () => {
-        const type = document.getElementById('scooter-type').value;
-        const manufacturer = document.getElementById('scooter-manufacturer').value;
-        const model = document.getElementById('scooter-model').value;
-    
-        // Обновляем данные на странице
-        document.getElementById('scooter-type-display').textContent = `Тип: ${type}`;
-        document.getElementById('scooter-manufacturer-display').textContent = `Производитель: ${manufacturer}`;
-        document.getElementById('scooter-model-display').textContent = `Модель: ${model}`;
-        document.getElementById('scooter-image').src = `image/scooter_${type}_${manufacturer}_${model}.png`;
-    
-        // Отображаем блок scooter-details
-        document.getElementById('scooter-details').style.display = 'block';
-    
-        // Закрываем модальное окно
-        scooterModal.style.display = 'none';
-      });
-    
-      // Обработчик для кнопки логина
-      loginButton.addEventListener('click', () => {
-        alert('Перенаправление на страницу авторизации');
-      });
-    }
-    
-    // Вызываем функцию setupScooterModal после загрузки контента страницы
-    document.addEventListener('DOMContentLoaded', setupScooterModal);
-    </script>
-    
-
-
     <section class="parts-search">
         <div class="background-image">
             <div class="content">
@@ -420,7 +356,7 @@
     <h2 class="as">Топ продаж</h2>
     <div class="red-lines"></div>
     <div class="carousel">
-        <div class="product-card" data-id="17" data-stock="23">
+        <div class="product-card" data-id="1" data-stock="23">
             <img src="image/product/187_engine18.jpg" alt="Набор сальников на китайский скутер 50 кубов (139QMB)">
             <div class="details">
                 <p class="category">Прокладки и сальники</p>
@@ -509,8 +445,8 @@
             </div>
         </div>
         
-        <div class="product-card" data-id="5" data-stock="23">
-            <img src="image/product/184_engine15.jpg" alt="Продукт 5">
+        <div class="product-card" data-id="4" data-stock="23">
+            <img src="image/product/184_engine15.jpg" alt="Продукт 4">
             <div class="details">
                 <p class="category">Прокладки и сальники</p>
                 <p class="name ellipsis">Набор прокладок на скутер Хонда Лид 90 кубов (Hf-05) Honda Lead 90cc</p>
@@ -700,7 +636,7 @@
             </div>
         </div>
     
-        <div class="product-card" data-id="10" data-stock="23">
+        <div class="product-card" data-id="2" data-stock="23">
             <img src="image/product/168_zerkalo.jpg" alt="Product 10">
             <div class="details">
                 <p class="category">Аксессуары</p>
@@ -754,7 +690,7 @@
     </div>
 </div>
 
-<div class="product-card" data-id="12" data-stock="23">
+<div class="product-card" data-id="4" data-stock="23">
     <img src="image/product/192_engine23.jpg" alt="Product 12">
     <div class="details">
         <p class="category">Прокладки и сальники</p>
@@ -784,7 +720,7 @@
 
     <!-- Второй ряд карточек -->
 <div class="card-row">
-    <div class="product-card" data-id="13" data-stock="23">
+    <div class="product-card" data-id="4" data-stock="23">
         <img src="image/product/192_engine23.jpg" alt="Product 13">
             <div class="details">
                 <p class="category">Прокладки и сальники</p>
@@ -899,7 +835,7 @@
             </div>
         </div>
 
-    <div class="product-card" data-id="18" data-stock="23">
+    <div class="product-card" data-id="4" data-stock="23">
                     <img src="image/product/192_engine23.jpg" alt="Product 4">
             <div class="details">
                 <p class="category">Прокладки и сальники</p>
@@ -1035,7 +971,7 @@
             </div>
         </div>
     
-    <div class="product-card" data-id="22" data-stock="23">
+    <div class="product-card" data-id="2" data-stock="23">
         <img src="image/product/168_zerkalo.jpg" alt="Product 22">
         <div class="details">
             <p class="category">Аксессуары</p>
@@ -1080,7 +1016,7 @@
         </div>
     </div>
     
-    <div class="product-card" data-id="24" data-stock="23">
+    <div class="product-card" data-id="4" data-stock="23">
         <img src="image/product/192_engine23.jpg" alt="Product 24">
         <div class="details">
             <p class="category">Прокладки и сальники</p>
@@ -1102,7 +1038,7 @@
         </div>
     </div>
     
-    <div class="product-card" data-id="25" data-stock="23">
+    <div class="product-card" data-id="4" data-stock="23">
         <img src="image/product/184_engine15.jpg" alt="Product 25">
             <div class="details">
                 <p class="category">Прокладки и сальники</p>

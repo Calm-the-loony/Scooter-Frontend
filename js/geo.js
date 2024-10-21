@@ -149,10 +149,10 @@ function handleSearch() {
                   price: product.querySelector('.original-prices').textContent,
                   image: product.querySelector('img').getAttribute('src'),
                   stock: product.getAttribute('data-stock'),
-                  category: product.querySelector('.category').innerText || "Категория не указана",
-                  tags: (product.querySelector('.product-info .tags')?.innerText.split(': ')[1]) || "Метки не указаны",
-                  dimensions: (product.querySelector('.product-info .dimensions')?.innerText.split(': ')[1]) || "Габариты не указаны",
-                  additional: (product.querySelector('.product-info .extra')?.innerText.split(': ')[1]) || "Доп. комплект не указан",
+                  category: product.querySelector('.category')?.innerText || "Категория не указана",
+                  tags: product.querySelector('.tags')?.innerText.split(': ')[1] || "Метки не указаны",
+                  dimensions: product.querySelector('.dimensions')?.innerText.split(': ')[1] || "Габариты не указаны",
+                  additional: product.querySelector('.extra')?.innerText.split(': ')[1] || "Доп. комплект не указан",
               };
           }
       }
@@ -200,10 +200,85 @@ function loadSearchResults() {
           `;
           resultsContainer.insertAdjacentHTML('beforeend', productCard);
       });
+
+      // Добавляем обработчик клика для открытия карточки товара
+      attachProductClickEvents();
   }
+}
+
+// Функция для добавления событий клика на карточки товаров
+function attachProductClickEvents() {
+  const productCards = document.querySelectorAll('.product-card');
+  
+  productCards.forEach(card => {
+    card.addEventListener('click', function () {
+      const productId = card.getAttribute('data-id');
+      // Переход на страницу товара с передачей ID
+      window.location.href = `/product.html?id=${productId}`;
+    });
+  });
 }
 
 // Проверяем, находимся ли на странице результатов поиска, и загружаем результаты при открытии страницы
 if (window.location.pathname.includes('search-results.html')) {
   window.onload = loadSearchResults;
 }
+
+
+
+
+function setupScooterModal() {
+  const scooterButton = document.getElementById('scooter-button');
+  const scooterModal = document.getElementById('scooter-modal');
+  const scooterModalClose = document.getElementById('scooter-modal-close');
+  const addScooterButton = document.getElementById('add-scooter');
+  const loginButton = document.getElementById('login-button');
+
+  scooterButton.addEventListener('click', () => {
+    scooterModal.style.display = 'block';
+  });
+
+  scooterModalClose.addEventListener('click', () => {
+    scooterModal.style.display = 'none';
+  });
+
+  window.addEventListener('click', (event) => {
+    if (event.target === scooterModal) {
+      scooterModal.style.display = 'none';
+    }
+  });
+
+  addScooterButton.addEventListener('click', () => {
+    const type = document.getElementById('scooter-type').value;
+    const manufacturer = document.getElementById('scooter-manufacturer').value;
+    const model = document.getElementById('scooter-model').value;
+    alert(`Добавлен скутер: Тип - ${type}, Производитель - ${manufacturer}, Модель - ${model}`);
+    scooterModal.style.display = 'none';
+  });
+
+  loginButton.addEventListener('click', () => {
+    // Перенаправление на страницу авторизации или открытие модального окна авторизации
+    alert('Перенаправление на страницу авторизации');
+  });
+}
+
+// Вызываем функцию setupScooterModal после загрузки контента страницы
+document.addEventListener('DOMContentLoaded', setupScooterModal);
+
+addScooterButton.addEventListener('click', () => {
+  const type = document.getElementById('scooter-type').value;
+  const manufacturer = document.getElementById('scooter-manufacturer').value;
+  const model = document.getElementById('scooter-model').value;
+
+  // Обновляем данные в блоке scooter-details
+  document.getElementById('scooter-type-display').textContent = `Тип: ${type}`;
+  document.getElementById('scooter-manufacturer-display').textContent = `Производитель: ${manufacturer}`;
+  document.getElementById('scooter-model-display').textContent = `Модель: ${model}`;
+  document.getElementById('scooter-image').src = `image/scooter_${type}_${manufacturer}_${model}.png`;
+
+  // Отображаем блок scooter-details
+  document.getElementById('scooter-details').style.display = 'block';
+
+  // Закрываем модальное окно
+  scooterModal.style.display = 'none';
+});

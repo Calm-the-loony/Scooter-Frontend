@@ -125,63 +125,7 @@
     </div>
 </div>
 
-      <script>
-        function setupScooterModal() {
-            const scooterButton = document.getElementById('scooter-button');
-            const scooterModal = document.getElementById('scooter-modal');
-            const scooterModalClose = document.getElementById('scooter-modal-close');
-            const addScooterButton = document.getElementById('add-scooter');
-            const loginButton = document.getElementById('login-button');
-          
-            scooterButton.addEventListener('click', () => {
-              scooterModal.style.display = 'block';
-            });
-          
-            scooterModalClose.addEventListener('click', () => {
-              scooterModal.style.display = 'none';
-            });
-          
-            window.addEventListener('click', (event) => {
-              if (event.target === scooterModal) {
-                scooterModal.style.display = 'none';
-              }
-            });
-          
-            addScooterButton.addEventListener('click', () => {
-              const type = document.getElementById('scooter-type').value;
-              const manufacturer = document.getElementById('scooter-manufacturer').value;
-              const model = document.getElementById('scooter-model').value;
-              alert(`Добавлен скутер: Тип - ${type}, Производитель - ${manufacturer}, Модель - ${model}`);
-              scooterModal.style.display = 'none';
-            });
-          
-            loginButton.addEventListener('click', () => {
-              // Перенаправление на страницу авторизации или открытие модального окна авторизации
-              alert('Перенаправление на страницу авторизации');
-            });
-          }
-          
-          // Вызываем функцию setupScooterModal после загрузки контента страницы
-          document.addEventListener('DOMContentLoaded', setupScooterModal);
-          
-          addScooterButton.addEventListener('click', () => {
-            const type = document.getElementById('scooter-type').value;
-            const manufacturer = document.getElementById('scooter-manufacturer').value;
-            const model = document.getElementById('scooter-model').value;
-        
-            // Обновляем данные в блоке scooter-details
-            document.getElementById('scooter-type-display').textContent = `Тип: ${type}`;
-            document.getElementById('scooter-manufacturer-display').textContent = `Производитель: ${manufacturer}`;
-            document.getElementById('scooter-model-display').textContent = `Модель: ${model}`;
-            document.getElementById('scooter-image').src = `image/scooter_${type}_${manufacturer}_${model}.png`;
-        
-            // Отображаем блок scooter-details
-            document.getElementById('scooter-details').style.display = 'block';
-        
-            // Закрываем модальное окно
-            scooterModal.style.display = 'none';
-        });
-          </script>
+
           <main class="containers">
             <aside class="sidebar">
                 <nav class="categories-nav">
@@ -269,18 +213,15 @@
               </section>
               
               
-              
-            
-              
                 <section class="cards-container" id="cards-container">
-                  <div class="product-card" data-id="22" data-stock="23">
-                    <img src="image/product/168_zerkalo.jpg" alt="Product 22">
+                  <div class="product-card" data-id="22" data-stock="23" data-type="Мотоцикл" data-brand="Baltmotors, Falcon, Omaks Motors, IRBIS, Motoland, CFMOTO, FX motoS" data-model="CRF (Wels), Classic (KAYO), DAKAR (Motoland), GS (IRBIS), NK (CFMOTO), Orion (Avantis), SSSR (BSE), Scorpion (Yamasaki), Sport (Patron), Start (YCF), TTR (IRBIS), TNT (Benelli), Trigger (Stels), WRX (Motoland)">
+                    <img src="image/product/mirrors.webp" alt="Product 22">
                     <div class="details">
                         <p class="category">Аксессуары</p>
-                        <p class="name ellipsis">Зеркала на мотоцикл / скутер / мопед круглые S24 (встраиваемые в клипоны или руль) черные регулируемые / универсальные / для мотоцикла</p>
+                        <p class="name ellipsis">Зеркала заднего вида черные овальные 10мм мопед Альфа (черное овальное) на мотоцикл, скутер 10 ММ Alpha / Delta на большой ножке</p>
                         <div class="price">
                             <div class="original-price-wrapper no-discount">
-                                <span class="original-prices">996,00 ₽</span>
+                                <span class="original-prices">876,00 ₽</span>
                             </div>
                             <button class="add-to-cart" onclick="toggleCart(this)"><i class="fas fa-shopping-cart"></i></button>
                             <div class="stock-bar" title="В наличии много"></div>
@@ -289,20 +230,25 @@
                     </div>
                     <div class="product-info" style="display: none;">
                         <p class="article">Артикул: SCOT78541892936</p>
-                        <p class="extra">Доп.комплект: 2 шт. — зеркала, комплект адаптеров для установки.</p> <!-- Отдельный элемент для доп. комплекта -->
-                        <p class="dimensions">Габариты: 5 × 13 × 13 см</p> <!-- Отдельный элемент для габаритов -->
+                        <p class="extra">Доп.комплект: 2 шт. — зеркала, комплект адаптеров для установки.</p> 
+                        <p class="dimensions">Габариты: 5 × 13 × 13 см</p> 
+                        <div class="product-details">
+                          <p class="type">Тип: Мотоцикл</p>
+                          <p class="brand">Бренд: Baltmotors, Falcon, Omaks Motors, IRBIS, Motoland, CFMOTO, FX moto</p>
+                          <p class="model">Модели: CRF (Wels), Classic (KAYO), DAKAR (Motoland), GS (IRBIS), NK (CFMOTO), Orion (Avantis), SSSR (BSE), Scorpion (Yamasaki), Sport (Patron), Start (YCF), TTR (IRBIS), TNT (Benelli), Trigger (Stels), WRX (Motoland)</p>
+                        </div>
                         <p class="tags">Метки: 1, год</p>
                     </div>
                 </div>
-                
-                <div class="product-card" data-id="23" data-stock="22">
-                  <img src="image/product/169_pencil.jpg" alt="Ручка газа короткоходная">
+
+                <div class="product-card" data-id="23" data-stock="23" data-type="Мотоцикл" data-brand="ABM, Asiawing, Ataki, Avantis, Bajaj, Baltmotors, Benelli, BRP, BRZ, BSE, Buell, Butchbike, CFMOTO, Curtiss, CPI, Ducati, Falcon, Forsage, Fuego, FX moto, GR, Gryphon, Hasky, Honda, Honling, Husaberg, Husqvarna, Hyosung, Indian, IRBIS, Keeway, Loncin, Malaguti, Motax, Moto Guzzi, Motoland, Nexus, Nitro, Omaks Motors, Racer, Regulmoto, Rieju, Roliz" data-model="Africa Twin CRF1000L (Honda), Africa Twin CRF1100 L1 (Honda), Africa Twin CRF1100 L2/L4 (Honda), Africa Twin XRV 750 (Honda), Agusta F4 (MV AGUSTA), America (Triumph), Avenger (Bajaj), Benelli (Stels), BN 251 (Benelli), Bonneville (Triumph), Boulevard (Suzuki), Brutale (MV Agusta), Burgman 400 (Suzuki), Burgman 650 (Suzuki), CBR 250 (Honda), CBR 600 F (Honda), CBR 600 RR (Honda), CBR 650 F (Honda), CBR (Honda), CBR (Wels), CFORCE 1000, CFORCE 400, CFORCE 600, CFORCE 800, CRF 250/300 Rally (Honda), CRF 250 L/300 L (Honda), CRF (Honda), CRF (Wels), CR-Z 300, Cygnus X (Yamaha)">
+                  <img src="image/product/mirrors2.webp" alt="Product 23">
                   <div class="details">
                       <p class="category">Аксессуары</p>
-                      <p class="name ellipsis">Ручка газа короткоходная (механизм / пульт) грипсы и трос газа / универсальные «S24» (2 клавиши) черная (полный комплект)</p>
+                      <p class="name ellipsis">Зеркала на мотоцикл снегоход многоугольные черные с креплением на пластик / корпус Мото зеркала , для Yamaha, Falcon, Racer, d8 mm</p>
                       <div class="price">
                           <div class="original-price-wrapper no-discount">
-                              <span class="original-prices">1192,00 ₽</span>
+                              <span class="original-prices">3107,00 ₽</span>
                           </div>
                           <button class="add-to-cart" onclick="toggleCart(this)"><i class="fas fa-shopping-cart"></i></button>
                           <div class="stock-bar" title="В наличии много"></div>
@@ -310,15 +256,157 @@
                       <button class="add-to-favorites" onclick="toggleFavorite(this)"><i class="fas fa-heart"></i></button>
                   </div>
                   <div class="product-info" style="display: none;">
-                      <p class="article">Артикул: SCOT7326746233481283</p>
-                      <p class="extra">Доп. комплект: Короткоходная ручка газа, трос газа, грипсы (2 шт.)</p> <!-- Отдельный элемент для доп. комплекта -->
-                      <p class="dimensions">Габариты: 7 × 10 × 20 см</p> <!-- Отдельный элемент для габаритов -->
+                      <p class="article">Артикул: SCOT240000000088</p>
+                      <p class="extra">Доп.комплект: 2 шт. — зеркала, комплект адаптеров для установки.</p> 
+                      <p class="dimensions">Габариты: 5 × 13 × 13 см</p> 
+                      <div class="product-details">
+                        <p class="type">Тип: Мотоцикл</p>
+                        <p class="brand">Бренд: ABM, Asiawing, Ataki, Avantis, Bajaj, Baltmotors, Benelli, BRP, BRZ, BSE, Buell, Butchbike, CFMOTO, Curtiss, CPI, Ducati, Falcon, Forsage, Fuego, FX moto, GR, Gryphon, Hasky, Honda, Honling, Husaberg, Husqvarna, Hyosung, Indian, IRBIS, Keeway, Loncin, Malaguti, Motax, Moto Guzzi, Motoland, Nexus, Nitro, Omaks Motors, Racer, Regulmoto, Rieju, Roliz</p>
+                        <p class="model">Модели: Africa Twin CRF1000L (Honda), Africa Twin CRF1100 L1 (Honda), Africa Twin CRF1100 L2/L4 (Honda), Africa Twin XRV 750 (Honda), Agusta F4 (MV AGUSTA), America (Triumph), Avenger (Bajaj), Benelli (Stels), BN 251 (Benelli), Bonneville (Triumph), Boulevard (Suzuki), Brutale (MV Agusta), Burgman 400 (Suzuki), Burgman 650 (Suzuki), CBR 250 (Honda), CBR 600 F (Honda), CBR 600 RR (Honda), CBR 650 F (Honda), CBR (Honda), CBR (Wels), CFORCE 1000, CFORCE 400, CFORCE 600, CFORCE 800, CRF 250/300 Rally (Honda), CRF 250 L/300 L (Honda), CRF (Honda), CRF (Wels), CR-Z 300, Cygnus X (Yamaha)</p>
+                      </div>
+                      <p class="tags">Метки: 1, год</p>
+                  </div>
+              </div>
+
+              <div class="product-card" data-id="28" data-stock="23" data-type="Скутер" data-brand="Yamaha" data-model="Aerox (Yamaha), Axis (Yamaha), BWS 50 (Yamaha), BWS 100 (Yamaha), Slider (Yamaha), Vino (Yamaha), Jog (Yamaha), Jog Poche (Yamaha), Tmax (Yamaha)">
+                <img src="image/product/mirrors3.webp" alt="Product 28">
+                <div class="details">
+                    <p class="category">Аксессуары</p>
+                    <p class="name ellipsis">Зеркала заднего вида черные овальные 10мм мопед Ямаха Джог, Вино (c левой и правой резьбой) на мотоцикл, скутер 8ММ Yamaha Jog, Vino, Aprio, Poshe, ZR, NZ на большой ножке</p>
+                    <div class="price">
+                        <div class="original-price-wrapper no-discount">
+                            <span class="original-prices">876,00 ₽</span>
+                        </div>
+                        <button class="add-to-cart" onclick="toggleCart(this)"><i class="fas fa-shopping-cart"></i></button>
+                        <div class="stock-bar" title="В наличии много"></div>
+                    </div>
+                    <button class="add-to-favorites" onclick="toggleFavorite(this)"><i class="fas fa-heart"></i></button>
+                </div>
+                <div class="product-info" style="display: none;">
+                    <p class="article">Артикул: SCOT240000000088</p>
+                    <p class="extra">Доп.комплект: 2 шт. — зеркала, комплект адаптеров для установки.</p> 
+                    <p class="dimensions">Габариты: 5 × 13 × 13 см</p> 
+                    <div class="product-details">
+                      <p class="type">Тип: Скутер</p>
+                      <p class="brand">Бренд: Yamaha</p>
+                      <p class="model">Модели: Aerox (Yamaha), Axis (Yamaha), BWS 50 (Yamaha), BWS 100 (Yamaha), Slider (Yamaha), Vino (Yamaha), Jog (Yamaha), Jog Poche (Yamaha), Tmax (Yamaha)</p>
+                    </div>
+                    <p class="tags">Метки: 1, год</p>
+                </div>
+            </div>
+                
+                <div class="product-card" data-id="24" data-stock="22" data-type="Мотоцикл" data-brand="ABM, Alfer, American IronHorse, Apollo, Aprilia, Arctic Cat, Arlen Ness, Asiawing, Ataki, Avantis, Bajaj, Baltmotors, Bars, Benelli, Beta, Boom Trikes, BMW, Big Dog Motorcycles, BRP, BRZ, BSE, Buell, Butchbike, Cagiva, Campagna, CCM, Centurion, CFMOTO, Confederate, CPI, Curtiss, Cyclone, CZ, DKW, Ducati, EBR, EMAX, Forsage, Falcon, Fuego, Full Crew, Futong, FX moto, GAS GAS, GR, Gryphon, Harley-Davidson, Hasky, Honda, Honling, Husaberg, Husqvarna, Hyosung, Indian, IRBIS, Jawa, JMC, Johnny Pag, Kawasaki, KAYO, Keeway, KTM, KXD, Kymco, Lifan, Litus, Malaguti, Loncin, MGMoto, Minsk (Минск), Motax, Moto Guzzi, Motoland, MV Agusta, MZ, Nexus, Nitro, ODES, Omaks Motors, Orion, Pannonia, Patron, Phoenix Trike Works, Pitster Pro, Polaris, Progasi, PWR Racing, Racer, Regulmoto, Rewaco, Rieju, RM, Rockot, Roliz, Royal Enfield, S2 Motors, Sachs, Sagitta, Saxon, SCANMOTO" data-model=" 1000, 110, 250 / 390 Adventure (KTM), 250 (KTM), 259C (R 1200 C Independent), 259C (R 1200 C Montauk), 259C (R 850 C, R 1200 C), 259 (R 1100 S, R 1100 RS), 300, 300SR, 400, 400GT, 450, 450SR, 500, 500 Kazuma-GT ATV, 500А, 550, 650GT, 650MT, 650NK, 700, 700CLX Heritage, 800, 800MT Explore, 800MT Sport, 800MT Touring, AD100, AD50, Address 110 (Suzuki), Address 50 (Suzuki), Address (Suzuki), Address V100 (Suzuki), Adventure (KTM), Adventure R (KTM), Aerox (Yamaha), Africa Twin CRF1000L (Honda), Africa Twin CRF1100 L1 (Honda), Africa Twin CRF1100 L2/L4 (Honda), Africa Twin XRV 750 (Honda), Agusta F4 (MV AGUSTA), Alien Monster 300, Alpha, America (Triumph), ATV 125, ATV 200, ATV 250, ATV 300B, Avenger (Bajaj), Axis (Yamaha), Basic (KAYO), Benelli (Stels), BN 251 (Benelli), Bonneville (Triumph), Boulevard (Suzuki), Boxer (Bajaj), Brutale (MV Agusta), Burgman 400 (Suzuki), Burgman 650 (Suzuki), BWS 100 (Yamaha), BWS 50 (Yamaha), C1, C600 Sport (BMW), Can-Am Commander, Can-Am Maverick X3, Can-Am Renegade, CB 125 F (Honda), CB 500/650 F (Honda), CB 500 F (Honda), CBF 150 (Honda), CB (Honda), CBR 250 (Honda), CBR 600 F (Honda), CBR 600 RR (Honda), CBR 650 F (Honda), CBR (Honda), CBR (Wels), CFORCE 1000, CFORCE 400, CFORCE 600, CFORCE 800, Classic (KAYO), Classic (Royal Enfield), CLX700, COBRA, CRF 250/300 Rally (Honda), CRF 250 L/300 L (Honda), CRF (Honda), CRF (Wels), Cross, CR-Z 300, CR (Zuum), Cvo (Harley-Davidson), Cygnus X (Yamaha), DAKAR (Motoland), Delta, Diavel 1260 S (Ducati), Diavel (Ducati), Diavel Touring (Ducati), DINGO">
+                  <img src="image/product/handles.webp" alt="Ручка руля для мотоцикла">
+                  <div class="details">
+                      <p class="category">Аксессуары</p>
+                      <p class="name ellipsis">Ручки руля для мотоцикла , питбайка скутера, мопеда (грипсы) DOMINO 22 мм силиконовые / универсальные аналог Protaper / мягкие серые на руль (домино)</p>
+                      <div class="price">
+                          <div class="original-price-wrapper no-discount">
+                              <span class="original-prices">477,00 ₽</span>
+                          </div>
+                          <button class="add-to-cart" onclick="toggleCart(this)"><i class="fas fa-shopping-cart"></i></button>
+                          <div class="stock-bar" title="В наличии много"></div>
+                      </div>
+                      <button class="add-to-favorites" onclick="toggleFavorite(this)"><i class="fas fa-heart"></i></button>
+                  </div>
+                  <div class="product-info" style="display: none;">
+                      <p class="article">Артикул: SCOT240000000084</p>
+                      <p class="extra">Доп. комплект: Ручки руля (грипсы) для мотоцикла (2 шт.)</p> 
+                      <p class="dimensions">Габариты: 12.3 × 2.2× 2.4 см</p> 
+                      <div class="product-details">
+                        <p class="type">Тип: Мотоцикл</p>
+                        <p class="brand">Бренд: ABM, Alfer, American IronHorse, Apollo, Aprilia, Arctic Cat, Arlen Ness, Asiawing, Ataki, Avantis, Bajaj, Baltmotors, Bars, Benelli, Beta, Boom Trikes, BMW, Big Dog Motorcycles, BRP, BRZ, BSE, Buell, Butchbike, Cagiva, Campagna, CCM, Centurion, CFMOTO, Confederate, CPI, Curtiss, Cyclone, CZ, DKW, Ducati, EBR, EMAX, Forsage, Falcon, Fuego, Full Crew, Futong, FX moto, GAS GAS, GR, Gryphon, Harley-Davidson, Hasky, Honda, Honling, Husaberg, Husqvarna, Hyosung, Indian, IRBIS, Jawa, JMC, Johnny Pag, Kawasaki, KAYO, Keeway, KTM, KXD, Kymco, Lifan, Litus, Malaguti, Loncin, MGMoto, Minsk (Минск), Motax, Moto Guzzi, Motoland, MV Agusta, MZ, Nexus, Nitro, ODES, Omaks Motors, Orion, Pannonia, Patron, Phoenix Trike Works, Pitster Pro, Polaris, Progasi, PWR Racing, Racer, Regulmoto, Rewaco, Rieju, RM, Rockot, Roliz, Royal Enfield, S2 Motors, Sachs, Sagitta, Saxon, SCANMOTO</p>
+                        <p class="model">Модели: 1000, 110, 250 / 390 Adventure (KTM), 250 (KTM), 259C (R 1200 C Independent), 259C (R 1200 C Montauk), 259C (R 850 C, R 1200 C), 259 (R 1100 S, R 1100 RS), 300, 300SR, 400, 400GT, 450, 450SR, 500, 500 Kazuma-GT ATV, 500А, 550, 650GT, 650MT, 650NK, 700, 700CLX Heritage, 800, 800MT Explore, 800MT Sport, 800MT Touring, AD100, AD50, Address 110 (Suzuki), Address 50 (Suzuki), Address (Suzuki), Address V100 (Suzuki), Adventure (KTM), Adventure R (KTM), Aerox (Yamaha), Africa Twin CRF1000L (Honda), Africa Twin CRF1100 L1 (Honda), Africa Twin CRF1100 L2/L4 (Honda), Africa Twin XRV 750 (Honda), Agusta F4 (MV AGUSTA), Alien Monster 300, Alpha, America (Triumph), ATV 125, ATV 200, ATV 250, ATV 300B, Avenger (Bajaj), Axis (Yamaha), Basic (KAYO), Benelli (Stels), BN 251 (Benelli), Bonneville (Triumph), Boulevard (Suzuki), Boxer (Bajaj), Brutale (MV Agusta), Burgman 400 (Suzuki), Burgman 650 (Suzuki), BWS 100 (Yamaha), BWS 50 (Yamaha), C1, C600 Sport (BMW), Can-Am Commander, Can-Am Maverick X3, Can-Am Renegade, CB 125 F (Honda), CB 500/650 F (Honda), CB 500 F (Honda), CBF 150 (Honda), CB (Honda), CBR 250 (Honda), CBR 600 F (Honda), CBR 600 RR (Honda), CBR 650 F (Honda), CBR (Honda), CBR (Wels), CFORCE 1000, CFORCE 400, CFORCE 600, CFORCE 800, Classic (KAYO), Classic (Royal Enfield), CLX700, COBRA, CRF 250/300 Rally (Honda), CRF 250 L/300 L (Honda), CRF (Honda), CRF (Wels), Cross, CR-Z 300, CR (Zuum), Cvo (Harley-Davidson), Cygnus X (Yamaha), DAKAR (Motoland), Delta, Diavel 1260 S (Ducati), Diavel (Ducati), Diavel Touring (Ducati), DINGO</p>
+                      </div>
                       <p class="tags">Метки: 2 года</p>
                   </div>
               </div>
               
+
+              <div class="product-card" data-id="25" data-stock="22" data-type="Мотоцикл" data-brand="ABM, Apollo, Aprilia, Avantis, BMW, BSE, BRP, Bajaj, Baltmotors, Bars, Benelli, Beta, Big Dog Motorcycles, Boom Trikes, Buell, CCM, CFMOTO, CPI, CZ, Cagiva, Campagna, Centurion, Curtiss, DKW, Ducati, EBR, EMAX, FX moto, Falcon, Futong, GAS GAS, Honda, Honling, Husaberg, Husqvarna, Hyosung, IRBIS, JMC, Kawasaki, Lifan, Litus, Minsk (Минск), Motax, Nexus, Motoland, Nitro, Omaks Motors, Orion, PWR Racing, Patron, Polaris, Racer, Regulmoto, Rewaco, Rieju, Rockot, Roliz, Royal Enfield, S2 Motors, Simson, Sherco, Saxon" data-model="Basic (KAYO), Boulevard (Suzuki), Boxer (Bajaj), Brutale (MV Agusta), CB (Honda), CBR (Honda), CBR (Wels), CR (Zuum), CRF (Honda), CRF (Wels), DAKAR (Motoland), DR-Z (Suzuki), Diavel (Ducati), Enduro Pro (Avantis), FORESTER (Motoland), GS (IRBIS), Gold (Wels), MINI (KAYO), MadAss (Sachs), NC (Honda), NK (CFMOTO), Orion (Avantis), RSV (Aprilia), RXF (Apollo), SSSR (BSE), Scorpion (Yamasaki), Start (YCF), TTR (IRBIS), TNT (Benelli), Tesi (Bimota)">
+                <img src="image/product/handles2.webp" alt="Ручка руля для мотоцикла">
+                <div class="details">
+                    <p class="category">Аксессуары</p>
+                    <p class="name ellipsis">Ручки руля для мотоцикла , питбайка скутера, мопеда (грипсы) PROTAPER Красные 22 ММ</p>
+                    <div class="price">
+                        <div class="original-price-wrapper no-discount">
+                            <span class="original-prices">436,00 ₽</span>
+                        </div>
+                        <button class="add-to-cart" onclick="toggleCart(this)"><i class="fas fa-shopping-cart"></i></button>
+                        <div class="stock-bar" title="В наличии много"></div>
+                    </div>
+                    <button class="add-to-favorites" onclick="toggleFavorite(this)"><i class="fas fa-heart"></i></button>
+                </div>
+                <div class="product-info" style="display: none;">
+                    <p class="article">Артикул: SCOT240000000054</p>
+                    <p class="extra">Доп. комплект: Грипсы 22 мм на скутер, мотоцикл и мопед (2 шт.)</p> 
+                    <p class="dimensions">Габариты: 12.3 × 2.2× 2.4 см</p> 
+                    <div class="product-details">
+                      <p class="type">Тип: Мотоцикл</p>
+                      <p class="brand">Бренд: ABM, Apollo, Aprilia, Avantis, BMW, BSE, BRP, Bajaj, Baltmotors, Bars, Benelli, Beta, Big Dog Motorcycles, Boom Trikes, Buell, CCM, CFMOTO, CPI, CZ, Cagiva, Campagna, Centurion, Curtiss, DKW, Ducati, EBR, EMAX, FX moto, Falcon, Futong, GAS GAS, Honda, Honling, Husaberg, Husqvarna, Hyosung, IRBIS, JMC, Kawasaki, Lifan, Litus, Minsk (Минск), Motax, Nexus, Motoland, Nitro, Omaks Motors, Orion, PWR Racing, Patron, Polaris, Racer, Regulmoto, Rewaco, Rieju, Rockot, Roliz, Royal Enfield, S2 Motors, Simson, Sherco, Saxon</p>
+                      <p class="model">Модели: Basic (KAYO), Boulevard (Suzuki), Boxer (Bajaj), Brutale (MV Agusta), CB (Honda), CBR (Honda), CBR (Wels), CR (Zuum), CRF (Honda), CRF (Wels), DAKAR (Motoland), DR-Z (Suzuki), Diavel (Ducati), Enduro Pro (Avantis), FORESTER (Motoland), GS (IRBIS), Gold (Wels), MINI (KAYO), MadAss (Sachs), NC (Honda), NK (CFMOTO), Orion (Avantis), RSV (Aprilia), RXF (Apollo), SSSR (BSE), Scorpion (Yamasaki), Start (YCF), TTR (IRBIS), TNT (Benelli), Tesi (Bimota)</p>
+                    </div>
+                    <p class="tags">Метки: 2 года</p>
+                </div>
+            </div>
+              
                     
-              <div class="product-card" data-id="24" data-stock="22">
+              <div class="product-card" data-id="26" data-stock="22" data-type="Мотоцикл" data-brand="ABM, Alfer, American IronHorse, Apollo, Aprilia, Arctic Cat, Arlen Ness, Asiawing, Ataki, Avantis, Bajaj, Baltmotors, Bars, Benelli, Beta, Boom Trikes, BMW, Big Dog Motorcycles, BRP, BRZ, BSE, Buell, Butchbike, Cagiva, Campagna, CCM, Centurion, CFMOTO, Confederate, CPI, Curtiss, Cyclone, CZ, DKW, Ducati, EBR, EMAX, Forsage, Falcon, Fuego, Full Crew, Futong, FX moto, GAS GAS, GR, Gryphon, Harley-Davidson, Hasky, Honda, Honling, Husaberg, Husqvarna, Hyosung, Indian, IRBIS, Jawa, JMC, Johnny Pag, Kawasaki, KAYO, Keeway, KTM, KXD, Kymco, Lifan, Litus, Malaguti, Loncin, MGMoto, Minsk (Минск), Motax, Moto Guzzi, Motoland, MV Agusta, MZ, Nexus, Nitro, ODES, Omaks Motors, Orion, Pannonia, Patron, Phoenix Trike Works, Pitster Pro, Polaris, Progasi, PWR Racing, Racer, Regulmoto, Rewaco, Rieju, RM, Rockot, Roliz, Royal Enfield, S2 Motors, Sachs, Sagitta, Saxon, SCANMOTO" data-model="1000, 110, 250 / 390 Adventure (KTM), 250 (KTM), 259C (R 1200 C Independent), 259C (R 1200 C Montauk), 259C (R 850 C, R 1200 C), 259 (R 1100 S, R 1100 RS), 300, 300SR, 400, 400GT, 450, 450SR, 500, 500 Kazuma-GT ATV, 500А, 550, 650GT, 650MT, 650NK, 700, 700CLX Heritage, 800, 800MT Explore, 800MT Sport, 800MT Touring, AD100, AD50, Address 110 (Suzuki), Address 50 (Suzuki), Address (Suzuki), Address V100 (Suzuki), Adventure (KTM), Adventure R (KTM), Aerox (Yamaha), Africa Twin CRF1000L (Honda), Africa Twin CRF1100 L1 (Honda), Africa Twin CRF1100 L2/L4 (Honda), Africa Twin XRV 750 (Honda), Agusta F4 (MV AGUSTA), Alien Monster 300, Alpha, America (Triumph), ATV 125, ATV 200, ATV 250, ATV 300B, Avenger (Bajaj), Axis (Yamaha), Basic (KAYO), Benelli (Stels), BN 251 (Benelli), Bonneville (Triumph), Boulevard (Suzuki), Boxer (Bajaj), Brutale (MV Agusta), Burgman 400 (Suzuki), Burgman 650 (Suzuki), BWS 100 (Yamaha), BWS 50 (Yamaha), C1, C600 Sport (BMW), Can-Am Commander, Can-Am Maverick X3, Can-Am Renegade, CB 125 F (Honda), CB 500/650 F (Honda), CB 500 F (Honda), CBF 150 (Honda), CB (Honda), CBR 250 (Honda), CBR 600 F (Honda), CBR 600 RR (Honda), CBR 650 F (Honda), CBR (Honda), CBR (Wels), CFORCE 1000, CFORCE 400, CFORCE 600, CFORCE 800, Classic (KAYO), Classic (Royal Enfield), CLX700, COBRA, CRF 250/300 Rally (Honda), CRF 250 L/300 L (Honda), CRF (Honda), CRF (Wels), Cross, CR-Z 300, CR (Zuum), Cvo (Harley-Davidson), Cygnus X (Yamaha), DAKAR (Motoland), Delta, Diavel 1260 S (Ducati), Diavel (Ducati), Diavel Touring (Ducati), DINGO">
+                <img src="image/product/handles3.webp" alt="Ручка руля для мотоцикла">
+                <div class="details">
+                    <p class="category">Аксессуары</p>
+                    <p class="name ellipsis">Ручки руля для мотоцикла , питбайка скутера, мопеда (грипсы) DOMINO 22 мм силиконовые / универсальные аналог Protaper / мягкие зеленые на руль (домино)</p>
+                    <div class="price">
+                        <div class="original-price-wrapper no-discount">
+                            <span class="original-prices">382,00 ₽</span>
+                        </div>
+                        <button class="add-to-cart" onclick="toggleCart(this)"><i class="fas fa-shopping-cart"></i></button>
+                        <div class="stock-bar" title="В наличии много"></div>
+                    </div>
+                    <button class="add-to-favorites" onclick="toggleFavorite(this)"><i class="fas fa-heart"></i></button>
+                </div>
+                <div class="product-info" style="display: none;">
+                    <p class="article">Артикул: SCOT240000000085</p>
+                    <p class="extra">Доп. комплект: Грипсы 22 мм на скутер, мотоцикл и мопед (2 шт.)</p> 
+                    <p class="dimensions">Габариты: 12.3 × 2.2× 2.4 см</p> 
+                    <div class="product-details">
+                      <p class="type">Тип: Мотоцикл</p>
+                      <p class="brand">Бренд: ABM, Alfer, American IronHorse, Apollo, Aprilia, Arctic Cat, Arlen Ness, Asiawing, Ataki, Avantis, Bajaj, Baltmotors, Bars, Benelli, Beta, Boom Trikes, BMW, Big Dog Motorcycles, BRP, BRZ, BSE, Buell, Butchbike, Cagiva, Campagna, CCM, Centurion, CFMOTO, Confederate, CPI, Curtiss, Cyclone, CZ, DKW, Ducati, EBR, EMAX, Forsage, Falcon, Fuego, Full Crew, Futong, FX moto, GAS GAS, GR, Gryphon, Harley-Davidson, Hasky, Honda, Honling, Husaberg, Husqvarna, Hyosung, Indian, IRBIS, Jawa, JMC, Johnny Pag, Kawasaki, KAYO, Keeway, KTM, KXD, Kymco, Lifan, Litus, Malaguti, Loncin, MGMoto, Minsk (Минск), Motax, Moto Guzzi, Motoland, MV Agusta, MZ, Nexus, Nitro, ODES, Omaks Motors, Orion, Pannonia, Patron, Phoenix Trike Works, Pitster Pro, Polaris, Progasi, PWR Racing, Racer, Regulmoto, Rewaco, Rieju, RM, Rockot, Roliz, Royal Enfield, S2 Motors, Sachs, Sagitta, Saxon, SCANMOTO</p>
+                      <p class="model">Модели: 1000, 110, 250 / 390 Adventure (KTM), 250 (KTM), 259C (R 1200 C Independent), 259C (R 1200 C Montauk), 259C (R 850 C, R 1200 C), 259 (R 1100 S, R 1100 RS), 300, 300SR, 400, 400GT, 450, 450SR, 500, 500 Kazuma-GT ATV, 500А, 550, 650GT, 650MT, 650NK, 700, 700CLX Heritage, 800, 800MT Explore, 800MT Sport, 800MT Touring, AD100, AD50, Address 110 (Suzuki), Address 50 (Suzuki), Address (Suzuki), Address V100 (Suzuki), Adventure (KTM), Adventure R (KTM), Aerox (Yamaha), Africa Twin CRF1000L (Honda), Africa Twin CRF1100 L1 (Honda), Africa Twin CRF1100 L2/L4 (Honda), Africa Twin XRV 750 (Honda), Agusta F4 (MV AGUSTA), Alien Monster 300, Alpha, America (Triumph), ATV 125, ATV 200, ATV 250, ATV 300B, Avenger (Bajaj), Axis (Yamaha), Basic (KAYO), Benelli (Stels), BN 251 (Benelli), Bonneville (Triumph), Boulevard (Suzuki), Boxer (Bajaj), Brutale (MV Agusta), Burgman 400 (Suzuki), Burgman 650 (Suzuki), BWS 100 (Yamaha), BWS 50 (Yamaha), C1, C600 Sport (BMW), Can-Am Commander, Can-Am Maverick X3, Can-Am Renegade, CB 125 F (Honda), CB 500/650 F (Honda), CB 500 F (Honda), CBF 150 (Honda), CB (Honda), CBR 250 (Honda), CBR 600 F (Honda), CBR 600 RR (Honda), CBR 650 F (Honda), CBR (Honda), CBR (Wels), CFORCE 1000, CFORCE 400, CFORCE 600, CFORCE 800, Classic (KAYO), Classic (Royal Enfield), CLX700, COBRA, CRF 250/300 Rally (Honda), CRF 250 L/300 L (Honda), CRF (Honda), CRF (Wels), Cross, CR-Z 300, CR (Zuum), Cvo (Harley-Davidson), Cygnus X (Yamaha), DAKAR (Motoland), Delta, Diavel 1260 S (Ducati), Diavel (Ducati), Diavel Touring (Ducati), DINGO</p>
+                    </div>
+                    <p class="tags">Метки: 2 года</p>
+                </div>
+            </div>
+
+            <div class="product-card" data-id="27" data-stock="22" data-type="Мотоцикл" data-brand="ABM, Alfer, American IronHorse, Apollo, Aprilia, Arctic Cat, Arlen Ness, Asiawing, Ataki, Avantis, Bajaj, Baltmotors, Bars, Benelli, Beta, Boom Trikes, BMW, Big Dog Motorcycles, BRP, BRZ, BSE, Buell, Butchbike, Cagiva, Campagna, CCM, Centurion, CFMOTO, Confederate, CPI, Curtiss, Cyclone, CZ, DKW, Ducati, EBR, EMAX, Forsage, Falcon, Fuego, Full Crew, Futong, FX moto, GAS GAS, GR, Gryphon, Harley-Davidson, Hasky, Honda, Honling, Husaberg, Husqvarna, Hyosung, Indian, IRBIS, Jawa, JMC, Johnny Pag, Kawasaki, KAYO, Keeway, KTM, KXD, Kymco, Lifan, Litus, Malaguti, Loncin, MGMoto, Minsk (Минск), Motax, Moto Guzzi, Motoland, MV Agusta, MZ, Nexus, Nitro, ODES, Omaks Motors, Orion, Pannonia, Patron, Phoenix Trike Works, Pitster Pro, Polaris, Progasi, PWR Racing, Racer, Regulmoto, Rewaco, Rieju, RM, Rockot, Roliz, Royal Enfield, S2 Motors, Sachs, Sagitta, Saxon, SCANMOTO" data-model="1000, 110, 250 / 390 Adventure (KTM), 250 (KTM), 259C (R 1200 C Independent), 259C (R 1200 C Montauk), 259C (R 850 C, R 1200 C), 259 (R 1100 S, R 1100 RS), 300, 300SR, 400, 400GT, 450, 450SR, 500, 500 Kazuma-GT ATV, 500А, 550, 650GT, 650MT, 650NK, 700, 700CLX Heritage, 800, 800MT Explore, 800MT Sport, 800MT Touring, AD100, AD50, Address 110 (Suzuki), Address 50 (Suzuki), Address (Suzuki), Address V100 (Suzuki), Adventure (KTM), Adventure R (KTM), Aerox (Yamaha), Africa Twin CRF1000L (Honda), Africa Twin CRF1100 L1 (Honda), Africa Twin CRF1100 L2/L4 (Honda), Africa Twin XRV 750 (Honda), Agusta F4 (MV AGUSTA), Alien Monster 300, Alpha, America (Triumph), ATV 125, ATV 200, ATV 250, ATV 300B, Avenger (Bajaj), Axis (Yamaha), Basic (KAYO), Benelli (Stels), BN 251 (Benelli), Bonneville (Triumph), Boulevard (Suzuki), Boxer (Bajaj), Brutale (MV Agusta), Burgman 400 (Suzuki), Burgman 650 (Suzuki), BWS 100 (Yamaha), BWS 50 (Yamaha), C1, C600 Sport (BMW), Can-Am Commander, Can-Am Maverick X3, Can-Am Renegade, CB 125 F (Honda), CB 500/650 F (Honda), CB 500 F (Honda), CBF 150 (Honda), CB (Honda), CBR 250 (Honda), CBR 600 F (Honda), CBR 600 RR (Honda), CBR 650 F (Honda), CBR (Honda), CBR (Wels), CFORCE 1000, CFORCE 400, CFORCE 600, CFORCE 800, Classic (KAYO), Classic (Royal Enfield), CLX700, COBRA, CRF 250/300 Rally (Honda), CRF 250 L/300 L (Honda), CRF (Honda), CRF (Wels), Cross, CR-Z 300, CR (Zuum), Cvo (Harley-Davidson), Cygnus X (Yamaha), DAKAR (Motoland), Delta, Diavel 1260 S (Ducati), Diavel (Ducati), Diavel Touring (Ducati), DINGO">
+              <img src="image/product/handles4.webp" alt="Ручка руля для мотоцикла">
+              <div class="details">
+                  <p class="category">Аксессуары</p>
+                  <p class="name ellipsis">Ручки руля для мотоцикла , питбайка скутера, мопеда (грипсы) ARIETE ARIES 22 мм силиконовые / универсальные / мягкие Коричневые на руль (ариете)</p>
+                  <div class="price">
+                      <div class="original-price-wrapper no-discount">
+                          <span class="original-prices">508,00 ₽</span>
+                      </div>
+                      <button class="add-to-cart" onclick="toggleCart(this)"><i class="fas fa-shopping-cart"></i></button>
+                      <div class="stock-bar" title="В наличии много"></div>
+                  </div>
+                  <button class="add-to-favorites" onclick="toggleFavorite(this)"><i class="fas fa-heart"></i></button>
+              </div>
+              <div class="product-info" style="display: none;">
+                  <p class="article">Артикул: 033187</p>
+                  <p class="extra">Доп. комплект: Грипсы 22 мм на скутер, мотоцикл и мопед (2 шт.)</p> 
+                  <p class="dimensions">Габариты: 12.3 × 2.2× 2.4 см</p> 
+                  <div class="product-details">
+                    <p class="type">Тип: Мотоцикл</p>
+                    <p class="brand">Бренд: ABM, Alfer, American IronHorse, Apollo, Aprilia, Arctic Cat, Arlen Ness, Asiawing, Ataki, Avantis, Bajaj, Baltmotors, Bars, Benelli, Beta, Boom Trikes, BMW, Big Dog Motorcycles, BRP, BRZ, BSE, Buell, Butchbike, Cagiva, Campagna, CCM, Centurion, CFMOTO, Confederate, CPI, Curtiss, Cyclone, CZ, DKW, Ducati, EBR, EMAX, Forsage, Falcon, Fuego, Full Crew, Futong, FX moto, GAS GAS, GR, Gryphon, Harley-Davidson, Hasky, Honda, Honling, Husaberg, Husqvarna, Hyosung, Indian, IRBIS, Jawa, JMC, Johnny Pag, Kawasaki, KAYO, Keeway, KTM, KXD, Kymco, Lifan, Litus, Malaguti, Loncin, MGMoto, Minsk (Минск), Motax, Moto Guzzi, Motoland, MV Agusta, MZ, Nexus, Nitro, ODES, Omaks Motors, Orion, Pannonia, Patron, Phoenix Trike Works, Pitster Pro, Polaris, Progasi, PWR Racing, Racer, Regulmoto, Rewaco, Rieju, RM, Rockot, Roliz, Royal Enfield, S2 Motors, Sachs, Sagitta, Saxon, SCANMOTO</p>
+                    <p class="model">Модели: 1000, 110, 250 / 390 Adventure (KTM), 250 (KTM), 259C (R 1200 C Independent), 259C (R 1200 C Montauk), 259C (R 850 C, R 1200 C), 259 (R 1100 S, R 1100 RS), 300, 300SR, 400, 400GT, 450, 450SR, 500, 500 Kazuma-GT ATV, 500А, 550, 650GT, 650MT, 650NK, 700, 700CLX Heritage, 800, 800MT Explore, 800MT Sport, 800MT Touring, AD100, AD50, Address 110 (Suzuki), Address 50 (Suzuki), Address (Suzuki), Address V100 (Suzuki), Adventure (KTM), Adventure R (KTM), Aerox (Yamaha), Africa Twin CRF1000L (Honda), Africa Twin CRF1100 L1 (Honda), Africa Twin CRF1100 L2/L4 (Honda), Africa Twin XRV 750 (Honda), Agusta F4 (MV AGUSTA), Alien Monster 300, Alpha, America (Triumph), ATV 125, ATV 200, ATV 250, ATV 300B, Avenger (Bajaj), Axis (Yamaha), Basic (KAYO), Benelli (Stels), BN 251 (Benelli), Bonneville (Triumph), Boulevard (Suzuki), Boxer (Bajaj), Brutale (MV Agusta), Burgman 400 (Suzuki), Burgman 650 (Suzuki), BWS 100 (Yamaha), BWS 50 (Yamaha), C1, C600 Sport (BMW), Can-Am Commander, Can-Am Maverick X3, Can-Am Renegade, CB 125 F (Honda), CB 500/650 F (Honda), CB 500 F (Honda), CBF 150 (Honda), CB (Honda), CBR 250 (Honda), CBR 600 F (Honda), CBR 600 RR (Honda), CBR 650 F (Honda), CBR (Honda), CBR (Wels), CFORCE 1000, CFORCE 400, CFORCE 600, CFORCE 800, Classic (KAYO), Classic (Royal Enfield), CLX700, COBRA, CRF 250/300 Rally (Honda), CRF 250 L/300 L (Honda), CRF (Honda), CRF (Wels), Cross, CR-Z 300, CR (Zuum), Cvo (Harley-Davidson), Cygnus X (Yamaha), DAKAR (Motoland), Delta, Diavel 1260 S (Ducati), Diavel (Ducati), Diavel Touring (Ducati), DINGO</p>
+                  </div>
+                  <p class="tags">Метки: 2 года</p>
+              </div>
+          </div>
+
+
+              <!-- <div class="product-card" data-id="24" data-stock="22">
                 <img src="image/product/170_chet.jpg" alt="Тахометр цифровой со счетчиком моточасов">
                 <div class="details">
                     <p class="category">Аксессуары, Электрика</p>
@@ -334,11 +422,11 @@
                 </div>
                 <div class="product-info" style="display: none;">
                     <p class="article">Артикул: SCOT78235428916222</p>
-                    <p class="extra">Доп. комплект: Счетчик моточасов</p> <!-- Отдельный элемент для доп. комплекта -->
-                    <p class="dimensions">Габариты: 3 × 6 × 5 см</p> <!-- Отдельный элемент для габаритов -->
+                    <p class="extra">Доп. комплект: Счетчик моточасов</p> 
+                    <p class="dimensions">Габариты: 3 × 6 × 5 см</p> 
                     <p class="tags">Метки: 1 год</p>
                 </div>
-            </div>
+            </div> -->
             
                   </section>
                   

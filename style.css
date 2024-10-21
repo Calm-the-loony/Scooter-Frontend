@@ -39,7 +39,7 @@ body {
   background-color: #000000;
   top: -7px;
   right: -11px;
-  transform: rotate(2deg); /* Черточка под углом */
+  transform: rotate(2deg); 
 }
 
 /* Основные стили */
@@ -88,7 +88,7 @@ body {
   transform: translate(-50%, -50%) skew(20deg);
   max-width: 95px;
   height: auto;
-  transition: all 0.5s ease; /* Увеличено время анимации */
+  transition: all 0.5s ease; 
 }
 
 .header.collapsed .logo-image {
@@ -116,6 +116,7 @@ body {
   transition: margin-left 0.5s ease;
   will-change: transform, left; /* Указываем, что будут изменяться transform и left */
 }
+
 
 .user-actions {
   display: flex;
@@ -588,15 +589,17 @@ td img {
   transform: rotate(20deg);
 }
 
+
 /* Контейнер действий */
 .action-container {
-  transition: margin-left 0.3s ease; /* Плавное смещение */
+  transition: margin-left 0.3s ease; 
 }
 
 /* При сворачивании */
 .header.collapsed .action-container {
-  margin-left: -6px; /* Смещаем контейнер на 5 пикселей влево */
+  margin-left: -7px; 
 }
+
 
 /* Иконка меню */
 .menu-icon {
@@ -2478,7 +2481,7 @@ margin-right: 50px;
 }
 
 .product-card img {
-  width: 90%; /* Адаптивная ширина изображения */
+  width: 100%; /* Адаптивная ширина изображения */
   height: auto; /* Сохраняем пропорции */
   object-fit: cover;
   margin-top: 20px;
@@ -2691,30 +2694,6 @@ margin-right: 50px;
 }
 /* Мобильные устройства */
 @media (max-width: 480px) {
-  .header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .header .logo-image {
-    max-width: 150px;
-  }
-
-  .header .action-container {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-  }
-
-  .submenu ul {
-    display: flex;
-    flex-direction: column;
-    padding: 0;
-  }
-
-  .sidebar {
-    display: none; /* Скрываем на мобильных */
-  }
 
   .main-content {
     width: 100%;
@@ -2761,19 +2740,6 @@ margin-right: 50px;
 
 /* Планшеты */
 @media (min-width: 481px) and (max-width: 768px) {
-  .header .search-bar input {
-    width: 100%;
-    max-width: 400px;
-  }
-
-  .header .action-container {
-    width: 100%;
-    justify-content: space-between;
-  }
-
-  .sidebar {
-    width: 30%;
-  }
 
   .main-content {
     width: 50%;
@@ -2789,15 +2755,6 @@ margin-right: 50px;
 
 /* Десктопы */
 @media (min-width: 769px) {
-  .header {
-    flex-direction: row;
-    justify-content: space-between;
-  }
-
-  .sidebar {
-    width: 25%;
-  }
-
   .main-content {
     width: 75%;
     padding: 30px;
@@ -3084,7 +3041,7 @@ margin-right: 50px;
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 0px;
   min-height: calc(100vh - 100px); /* Обеспечиваем, что контейнер занимает всю высоту */
   display: flex;
   flex-direction: column;
