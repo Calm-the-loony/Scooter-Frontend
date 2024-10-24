@@ -208,16 +208,173 @@
                         <button type="button" id="filter-products" class="btn btn-primary">Фильтровать товары</button>
                     </form>
                 </section>
-                <!-- <div class="sorting">
-                    <label for="sort">Сортировка:</label>
-                    <select id="sort" name="sort" onchange="sortProducts()">
-                        <option value="default">Исходная сортировка</option>
-                        <option value="popularity">По популярности</option>
-                        <option value="price-asc">По возрастанию цены</option>
-                        <option value="price-desc">По убыванию цены</option>
-                    </select>
-                </div> -->
+
+
                 <section class="cards-container" id="cards-container">
+
+                    <div class="product-card" data-id="1" data-stock="23" data-type="Скутер" data-brand=" Honda" data-model="Dio (Honda), Dio Cesta (Honda), Joker (Honda), Giorno (Honda), Julio (Honda), Today (Honda), Tact (Honda), ZX (Honda)">
+                        <img src="image/product/separator.webp" alt="Сепаратор тюнинг TWH 12x17x14 (Подшипник) на скутер Хонда Дио, Такт 50 кубов Af-18,27,31,34,51 Honda Dio, Giorno">
+                        <div class="details">
+                            <p class="category">Двигатель</p>
+                            <p class="name ellipsis">Сепаратор тюнинг TWH 12x17x14 (Подшипник) на скутер Хонда Дио, Такт 50 кубов Af-18,27,31,34,51 Honda Dio, Giorno</p>
+                            <div class="price">
+                                <div class="original-price-wrapper no-discount">
+                                    <span class="original-prices">891,00 ₽</span>
+                                </div>
+                                <button class="add-to-cart" onclick="toggleCart(this)"><i class="fas fa-shopping-cart"></i></button>
+                                <div class="stock-bar" title="В наличии много"></div>
+                            </div>
+                            <button class="add-to-favorites" onclick="toggleFavorite(this)"><i class="fas fa-heart"></i></button>
+                        </div>
+                        <div class="product-info" style="display: none;">
+                            <p class="article">Артикул: SCOT240000000043</p>
+                            <p class="extra">Доп. комплект: сепаратор </p>
+                            <p class="dimensions">Габариты: 17 × 14 × 12 mm</p>
+                            <div class="product-details">
+                              <p class="type">Тип: Скутер</p>
+                              <p class="brand">Бренд: Honda</p>
+                              <p class="model">Модели:  Dio (Honda), Dio Cesta (Honda), Joker (Honda), Giorno (Honda), Julio (Honda), Today (Honda), Tact (Honda), ZX (Honda)</p>
+                            </div>
+                            <p class="tags">Метки: 30 дней</p>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-id="2" data-stock="23" data-type="Скутер" data-brand="Yamaha, Stels" data-model="Benelli (Stels), Aerox (Yamaha), BWS 100 (Yamaha), BWS 50 (Yamaha), Axis (Yamaha)">
+                        <img src="image/product/separator2.webp" alt="Сепаратор TWH тюнинг 10x14x13 (Подшипник) на скутер Ямаха Джог, Сузуки Сепия, 50 кубов (Yamaha, Suzuki)">
+                        <div class="details">
+                            <p class="category">Двигатель</p>
+                            <p class="name ellipsis">Сепаратор TWH тюнинг 10x14x13 (Подшипник) на скутер Ямаха Джог, Сузуки Сепия, 50 кубов (Yamaha, Suzuki)</p>
+                            <div class="price">
+                                <div class="original-price-wrapper no-discount">
+                                    <span class="original-prices">891,00 ₽</span>
+                                </div>
+                                <button class="add-to-cart" onclick="toggleCart(this)"><i class="fas fa-shopping-cart"></i></button>
+                                <div class="stock-bar" title="В наличии много"></div>
+                            </div>
+                            <button class="add-to-favorites" onclick="toggleFavorite(this)"><i class="fas fa-heart"></i></button>
+                        </div>
+                        <div class="product-info" style="display: none;">
+                            <p class="article">Артикул: SCOT240000000042</p>
+                            <p class="extra">Доп. комплект: сепаратор </p>
+                            <p class="dimensions">Габариты: 10 × 14 × 12.5 mm</p>
+                            <div class="product-details">
+                              <p class="type">Тип: Скутер</p>
+                              <p class="brand">Бренд: Yamaha, Stels</p>
+                              <p class="model">Модели: Benelli (Stels), Aerox (Yamaha), BWS 100 (Yamaha), BWS 50 (Yamaha), Axis (Yamaha)</p>
+                            </div>
+                            <p class="tags">Метки: 30 дней</p>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-id="3" data-stock="23" data-type="Скутер" data-brand="Yamaha, Suzuki" data-model=" Aerox (Yamaha), Axis (Yamaha), BWS 50 (Yamaha), BWS 100 (Yamaha), Gear (Yamaha), Jog (Yamaha), Jog Poche (Yamaha), Slider (Yamaha), Zuma (Yamaha)">
+                        <img src="image/product/separator3.webp" alt="Сепаратор 10*14*13 (Верхний) на кутер Ямаха / Сузуки 50 кубов (Yamaha / Suzuki)">
+                        <div class="details">
+                            <p class="category">Двигатель</p>
+                            <p class="name ellipsis">Сепаратор 10*14*13 (Верхний) на кутер Ямаха / Сузуки 50 кубов (Yamaha / Suzuki)</p>
+                            <div class="price">
+                                <div class="original-price-wrapper no-discount">
+                                    <span class="original-prices">507,00 ₽</span>
+                                </div>
+                                <button class="add-to-cart" onclick="toggleCart(this)"><i class="fas fa-shopping-cart"></i></button>
+                                <div class="stock-bar" title="В наличии много"></div>
+                            </div>
+                            <button class="add-to-favorites" onclick="toggleFavorite(this)"><i class="fas fa-heart"></i></button>
+                        </div>
+                        <div class="product-info" style="display: none;">
+                            <p class="article">Артикул: SCOT1267234561337</p>
+                            <p class="extra">Доп. комплект: сепаратор </p>
+                            <p class="dimensions">Габариты: 10 × 14 × 12 mm</p>
+                            <div class="product-details">
+                              <p class="type">Тип: Скутер</p>
+                              <p class="brand">Бренд: Yamaha, Suzuki</p>
+                              <p class="model">Модели: Aerox (Yamaha), Axis (Yamaha), BWS 50 (Yamaha), BWS 100 (Yamaha), Gear (Yamaha), Jog (Yamaha), Jog Poche (Yamaha), Slider (Yamaha), Zuma (Yamaha)</p>
+                            </div>
+                            <p class="tags">Метки: 1 год</p>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-id="4" data-stock="23" data-type="Скутер" data-brand="Honda" data-model="Dio (Honda), Dio Cesta (Honda), Julio (Honda), Joker (Honda), Lead (Honda), Pal (Honda), Tact (Honda), Today (Honda), Varadero (Honda), ZX (Honda)">
+                        <img src="image/product/separator4.webp" alt="Сепаратор 12*17*14 (Верхний) на скутер Хонда Дио / Такт 50 кубов Af-18/27/31/34/51 Honda Dio, Giorno">
+                        <div class="details">
+                            <p class="category">Двигатель</p>
+                            <p class="name ellipsis">Сепаратор 12*17*14 (Верхний) на скутер Хонда Дио / Такт 50 кубов Af-18/27/31/34/51 Honda Dio, Giorno</p>
+                            <div class="price">
+                                <div class="original-price-wrapper no-discount">
+                                    <span class="original-prices">507,00 ₽</span>
+                                </div>
+                                <button class="add-to-cart" onclick="toggleCart(this)"><i class="fas fa-shopping-cart"></i></button>
+                                <div class="stock-bar" title="В наличии много"></div>
+                            </div>
+                            <button class="add-to-favorites" onclick="toggleFavorite(this)"><i class="fas fa-heart"></i></button>
+                        </div>
+                        <div class="product-info" style="display: none;">
+                            <p class="article">Артикул: SCOT1267234561340</p>
+                            <p class="extra">Доп. комплект: сепаратор </p>
+                            <p class="dimensions">Габариты: 17 × 14 × 12 mm</p>
+                            <div class="product-details">
+                              <p class="type">Тип: Скутер</p>
+                              <p class="brand">Бренд: Honda</p>
+                              <p class="model">Модели: Dio (Honda), Dio Cesta (Honda), Julio (Honda), Joker (Honda), Lead (Honda), Pal (Honda), Tact (Honda), Today (Honda), Varadero (Honda), ZX (Honda)</p>
+                            </div>
+                            <p class="tags">Метки: 1 год</p>
+                        </div>
+                    </div>
+                    
+
+                    <div class="product-card" data-id="5" data-stock="23" data-type="Скутер" data-brand="Stels, Yamaha" data-model="Aerox (Yamaha), Axis (Yamaha), BWS 100 (Yamaha), BWS 50 (Yamaha), Slider (Yamaha), Tmax (Yamaha)">
+                        <img src="image/product/separator5.webp" alt="Сепаратор 12*16*14 (Верхний) на китайский скутер Стелс 50 кубов (1e40qmb) Stels 50cc">
+                        <div class="details">
+                            <p class="category">Двигатель</p>
+                            <p class="name ellipsis">Сепаратор 12*16*14 (Верхний) на китайский скутер Стелс 50 кубов (1e40qmb) Stels 50cc</p>
+                            <div class="price">
+                                <div class="original-price-wrapper no-discount">
+                                    <span class="original-prices">507,00 ₽</span>
+                                </div>
+                                <button class="add-to-cart" onclick="toggleCart(this)"><i class="fas fa-shopping-cart"></i></button>
+                                <div class="stock-bar" title="В наличии много"></div>
+                            </div>
+                            <button class="add-to-favorites" onclick="toggleFavorite(this)"><i class="fas fa-heart"></i></button>
+                        </div>
+                        <div class="product-info" style="display: none;">
+                            <p class="article">Артикул: SCOT1267234561339</p>
+                            <p class="extra">Доп. комплект: сепаратор </p>
+                            <p class="dimensions">Габариты: 16 × 14 × 12 mm</p>
+                            <div class="product-details">
+                              <p class="type">Тип: Скутер</p>
+                              <p class="brand">Бренд: Stels, Yamaha</p>
+                              <p class="model">Модели: Aerox (Yamaha), Axis (Yamaha), BWS 100 (Yamaha), BWS 50 (Yamaha), Slider (Yamaha), Tmax (Yamaha)</p>
+                            </div>
+                            <p class="tags">Метки: 1 год</p>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-id="6" data-stock="23" data-type="Скутер" data-brand="Stels, Yamaha" data-model="Benelli (Stels), Aerox (Yamaha), Axis (Yamaha), BWS 100 (Yamaha), BWS 50 (Yamaha), Gear (Yamaha), Jog Poche (Yamaha), Jog (Yamaha), Slider (Yamaha), Vino (Yamaha), Zuma (Yamaha)">
+                        <img src="image/product/separator6.webp" alt="Сепаратор 12*15*16,5 (Верхний) на скутер Ямаха Аксис 90 кубов (Ямаха Аксис)(3WF) Yamaha Axis 90cc">
+                        <div class="details">
+                            <p class="category">Двигатель</p>
+                            <p class="name ellipsis">Сепаратор 12*15*16,5 (Верхний) на скутер Ямаха Аксис 90 кубов (Ямаха Аксис)(3WF) Yamaha Axis 90cc</p>
+                            <div class="price">
+                                <div class="original-price-wrapper no-discount">
+                                    <span class="original-prices">507,00 ₽</span>
+                                </div>
+                                <button class="add-to-cart" onclick="toggleCart(this)"><i class="fas fa-shopping-cart"></i></button>
+                                <div class="stock-bar" title="В наличии много"></div>
+                            </div>
+                            <button class="add-to-favorites" onclick="toggleFavorite(this)"><i class="fas fa-heart"></i></button>
+                        </div>
+                        <div class="product-info" style="display: none;">
+                            <p class="article">Артикул: SCOT1267234561339</p>
+                            <p class="extra">Доп. комплект: сепаратор </p>
+                            <p class="dimensions">Габариты: 16 × 15.5 × 12 mm</p>
+                            <div class="product-details">
+                              <p class="type">Тип: Скутер</p>
+                              <p class="brand">Бренд: Stels, Yamaha</p>
+                              <p class="model">Модели: Benelli (Stels), Aerox (Yamaha), Axis (Yamaha), BWS 100 (Yamaha), BWS 50 (Yamaha), Gear (Yamaha), Jog Poche (Yamaha), Jog (Yamaha), Slider (Yamaha), Vino (Yamaha), Zuma (Yamaha)</p>
+                            </div>
+                            <p class="tags">Метки: 1 год</p>
+                        </div>
+                    </div>
+                    
                   <div class="product-card" data-id="1" data-stock="23">
                     <img src="image/product/171_engine.jpg" alt="Коленвал на китайский скутер 125/150 кубов">
                     <div class="details">
